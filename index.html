@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DL Barber Club — Barbearia Premium · Curitiba</title>
+<meta name="description" content="A barbearia premium que redefine estilo, exclusividade e personalidade em Curitiba.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --gold: #C9A96E;
+  --gold-l: #E8CC9A;
+  --gold-d: #8B6B35;
+  --gold-glow: rgba(201,169,110,0.18);
+  --gold-subtle: rgba(201,169,110,0.07);
+  --bg: #080808;
+  --bg1: #0D0D0D;
+  --bg2: #121212;
+  --bg3: #181818;
+  --bg4: #1E1E1E;
+  --bg5: #262626;
+  --white: #F7F3EC;
+  --muted: #9A9590;
+  --faint: #5C5850;
+  --ghost: #2E2B26;
+  --border: rgba(201,169,110,0.12);
+  --border2: rgba(255,255,255,0.06);
+  --green: #22C55E;
+  --red: #EF4444;
+  --blue: #3B82F6;
+  --purple: #A855F7;
+  --radius: 10px;
+  --radius-lg: 18px;
+  --shadow: 0 24px 64px rgba(0,0,0,0.7);
+  --shadow-gold: 0 8px 40px rgba(201,169,110,0.2);
+  --ease: cubic-bezier(0.4,0,0.2,1);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--white); overflow-x:hidden; line-height:1.6; }
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--gold); border-radius:2px; }
+img { display:block; max-width:100%; }
+button { font-family:'Inter',sans-serif; cursor:pointer; }
+
+#loader { position:fixed; inset:0; z-index:99999; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; transition:opacity 0.8s var(--ease), visibility 0.8s; }
+#loader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+.ldr-logo { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold); letter-spacing:6px; }
+.ldr-sub { font-size:0.6rem; letter-spacing:5px; text-transform:uppercase; color:var(--muted); }
+.ldr-progress { width:160px; height:1px; background:var(--bg5); border-radius:1px; overflow:hidden; }
+.ldr-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-l)); animation:ldrFill 2.2s ease forwards; }
+@keyframes ldrFill { from{width:0} to{width:100%} }
+
+#navbar { position:fixed; top:0; left:0; right:0; z-index:1000; height:70px; display:flex; align-items:center; justify-content:space-between; padding:0 40px; transition:background 0.4s, box-shadow 0.4s; }
+#navbar.scrolled { background:rgba(8,8,8,0.97); backdrop-filter:blur(20px) saturate(180%); box-shadow:0 1px 0 var(--border); }
+.nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.nav-brand-text { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:var(--gold); letter-spacing:4px; }
+.nav-brand-text span { color:var(--white); font-weight:300; }
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a { font-size:0.72rem; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.3s; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--gold); transition:width 0.3s; }
+.nav-links a:hover { color:var(--white); }
+.nav-links a:hover::after { width:100%; }
+.nav-actions { display:flex; align-items:center; gap:10px; }
+.nav-btn { display:inline-flex; align-items:center; gap:8px; padding:9px 20px; border-radius:6px; font-size:0.72rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; border:none; cursor:pointer; transition:all 0.3s var(--ease); text-decoration:none; white-space:nowrap; }
+.nav-btn.solid { background:var(--gold); color:#000; }
+.nav-btn.solid:hover { background:var(--gold-l); transform:translateY(-1px); box-shadow:var(--shadow-gold); }
+.nav-btn.wa { background:#25D366; color:#fff; }
+.nav-btn.wa:hover { background:#20BD5A; }
+.ham-btn { display:none; flex-direction:column; gap:4.5px; background:none; border:none; padding:6px; cursor:pointer; }
+.ham-btn span { display:block; width:21px; height:1.5px; background:var(--gold); transition:all 0.3s; border-radius:2px; }
+.mobile-nav { display:none; position:fixed; top:70px; left:0; right:0; background:rgba(8,8,8,0.98); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:20px; z-index:999; animation:slideDown 0.3s ease; }
+.mobile-nav.open { display:block; }
+.mobile-nav ul { list-style:none; display:flex; flex-direction:column; gap:4px; margin-bottom:16px; }
+.mobile-nav a { display:block; padding:10px 8px; font-size:0.8rem; letter-spacing:1px; text-transform:uppercase; color:var(--muted); text-decoration:none; border-radius:6px; transition:all 0.2s; }
+.mobile-nav a:hover { color:var(--gold); background:var(--gold-subtle); }
+.mobile-nav-actions { display:flex; flex-direction:column; gap:8px; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+
+#hero { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:100px 40px 60px; }
+.hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 55%), radial-gradient(ellipse 50% 70% at 90% 100%, rgba(201,169,110,0.04) 0%, transparent 50%), linear-gradient(175deg, #090909 0%, #080808 60%, #0A0A0A 100%); }
+.hero-grain { position:absolute; inset:0; pointer-events:none; opacity:0.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:256px; }
+.hero-grid-lines { position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(rgba(201,169,110,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,0.025) 1px, transparent 1px); background-size:64px 64px; }
+.hero-content { position:relative; z-index:1; text-align:center; max-width:860px; }
+.hero-badge { display:inline-flex; align-items:center; gap:10px; padding:6px 18px; border:1px solid var(--border); border-radius:100px; font-size:0.62rem; letter-spacing:4px; text-transform:uppercase; color:var(--gold); background:var(--gold-subtle); margin-bottom:36px; animation:fadeUp 0.9s 0.4s both; }
+.hero-title { font-family:'Playfair Display',serif; font-size:clamp(3rem,9vw,8rem); font-weight:900; line-height:0.9; margin-bottom:10px; animation:fadeUp 0.9s 0.6s both; }
+.hero-title .row1 { display:block; color:var(--white); }
+.hero-title .row2 { display:block; color:var(--gold); font-style:italic; }
+.hero-sub { font-size:1rem; color:var(--muted); line-height:1.8; max-width:500px; margin:28px auto 0; animation:fadeUp 0.9s 0.8s both; }
+.hero-cta-wrap { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:40px; animation:fadeUp 0.9s 1s both; }
+.hero-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 36px; border-radius:8px; font-size:0.82rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; border:none; transition:all 0.35s var(--ease); position:relative; overflow:hidden; text-decoration:none; }
+.hero-btn.primary { background:linear-gradient(135deg, var(--gold), var(--gold-d)); color:#000; box-shadow:0 4px 24px rgba(201,169,110,0.35); }
+.hero-btn.primary:hover { transform:translateY(-3px); box-shadow:0 12px 48px rgba(201,169,110,0.5); }
+.hero-btn.whatsapp { background:linear-gradient(135deg, #25D366, #1FAF54); color:#fff; box-shadow:0 4px 24px rgba(37,211,102,0.3); }
+.hero-btn.whatsapp:hover { transform:translateY(-3px); box-shadow:0 12px 48px rgba(37,211,102,0.45); }
+.hero-btn.ghost { background:transparent; color:var(--white); border:1px solid var(--border2); }
+.hero-btn.ghost:hover { border-color:var(--border); background:rgba(255,255,255,0.04); }
+.ripple { position:absolute; border-radius:50%; background:rgba(255,255,255,0.3); transform:scale(0); animation:rippleAnim 0.6s linear; pointer-events:none; }
+@keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
+.hero-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:72px; padding-top:48px; border-top:1px solid var(--border2); animation:fadeUp 0.9s 1.2s both; }
+.hero-stat { text-align:center; padding:0 20px; border-right:1px solid var(--border2); }
+.hero-stat:last-child { border-right:none; }
+.stat-num { font-family:'Playfair Display',serif; font-size:2.6rem; font-weight:700; color:var(--gold); line-height:1; display:block; }
+.stat-lab { font-size:0.6rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--faint); margin-top:6px; display:block; }
+.scroll-indicator { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--faint); font-size:0.58rem; letter-spacing:3px; text-transform:uppercase; animation:scrollBob 2.5s ease-in-out infinite; }
+.scroll-line { width:1px; height:40px; background:linear-gradient(180deg,var(--gold),transparent); }
+@keyframes scrollBob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+.section { padding:100px 40px; }
+.section.alt { background:var(--bg1); }
+.section-tag { font-size:0.6rem; letter-spacing:4px; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:8px; }
+.section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:700; line-height:1.05; }
+.section-title em { color:var(--gold); font-style:italic; }
+.section-bar { width:36px; height:1px; background:var(--gold); margin-top:16px; }
+.section-sub { color:var(--muted); font-size:0.88rem; line-height:1.8; margin-top:12px; }
+.reveal { opacity:0; transform:translateY(40px); transition:opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.visible { opacity:1; transform:none; }
+
+.services-header { display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:56px; flex-wrap:wrap; }
+.services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.svc-card { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:28px; position:relative; overflow:hidden; cursor:default; transition:all 0.4s var(--ease); }
+.svc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); transform:scaleX(0); transform-origin:center; transition:transform 0.5s; }
+.svc-card:hover { border-color:var(--border); transform:translateY(-5px); box-shadow:var(--shadow); }
+.svc-card:hover::before { transform:scaleX(1); }
+.svc-idx { font-family:'Playfair Display',serif; font-size:4rem; font-weight:900; color:rgba(201,169,110,0.05); position:absolute; top:12px; right:18px; line-height:1; }
+.svc-icon-wrap { width:46px; height:46px; background:var(--gold-subtle); border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1rem; margin-bottom:18px; }
+.svc-name { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:600; margin-bottom:4px; }
+.svc-meta { font-size:0.68rem; letter-spacing:1.5px; color:var(--muted); text-transform:uppercase; margin-bottom:16px; }
+.svc-price { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold); display:block; margin-bottom:20px; line-height:1; }
+
+.barbers-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:56px; }
+.barber-card { background:linear-gradient(135deg, var(--bg2), var(--bg3)); border:1px solid var(--border2); border-radius:var(--radius-lg); overflow:hidden; transition:all 0.4s var(--ease); cursor:pointer; }
+.barber-card:hover { border-color:var(--gold); transform:translateY(-8px); box-shadow:var(--shadow-gold); }
+.barber-card-head { height:200px; background:linear-gradient(135deg, rgba(201,169,110,0.1), rgba(201,169,110,0.05)); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.barber-avatar { width:100px; height:100px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:#000; box-shadow:0 8px 32px rgba(201,169,110,0.3); }
+.barber-card-body { padding:20px; }
+.barber-name { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; margin-bottom:4px; }
+.barber-spec { font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; max-width:1100px; margin:0 auto; }
+.about-visual-wrap { position:relative; }
+.about-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:60px 40px; text-align:center; position:relative; overflow:hidden; }
+.about-card::before { content:'DL'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:12rem; font-weight:900; color:rgba(201,169,110,0.03); pointer-events:none; }
+.about-icon { font-size:4.5rem; color:var(--gold); position:relative; z-index:1; }
+.about-badge-tag { position:absolute; bottom:-1px; right:-1px; background:var(--gold); color:#000; padding:16px 20px; border-radius:var(--radius-lg) 0 var(--radius-lg) 0; font-family:'Playfair Display',serif; font-weight:700; font-size:1.1rem; line-height:1.1; text-align:center; }
+.about-text p { color:var(--muted); line-height:1.9; font-size:0.88rem; margin-bottom:14px; }
+.value-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:28px; }
+.value-card { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius); padding:16px; transition:border-color 0.3s; }
+.value-card:hover { border-color:var(--border); }
+.value-card i { color:var(--gold); font-size:0.9rem; margin-bottom:8px; display:block; }
+.value-card h4 { font-size:0.82rem; font-weight:600; margin-bottom:3px; }
+.value-card p { font-size:0.72rem; color:var(--muted); line-height:1.4; }
+
+.gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:200px; gap:10px; margin-top:56px; }
+.gallery-item { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius); overflow:hidden; position:relative; cursor:pointer; transition:all 0.35s var(--ease); }
+.gallery-item:hover { border-color:var(--border); transform:scale(1.02); z-index:2; }
+.gallery-item:nth-child(1) { grid-column:span 2; grid-row:span 2; }
+.gal-content { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px; }
+.gal-ico { font-size:2rem; color:rgba(201,169,110,0.15); }
+.gal-text { font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:rgba(201,169,110,0.12); }
+.gal-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.75),transparent); opacity:0; transition:opacity 0.3s; display:flex; align-items:flex-end; padding:14px 16px; }
+.gallery-item:hover .gal-overlay { opacity:1; }
+.gal-label { font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); }
+
+.reviews-header { display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:56px; flex-wrap:wrap; }
+.rating-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px 48px; text-align:center; }
+.rating-big { font-family:'Playfair Display',serif; font-size:4rem; font-weight:700; color:var(--gold); line-height:1; }
+.rating-stars { display:flex; gap:4px; justify-content:center; margin:8px 0 4px; }
+.rating-stars i { color:var(--gold); font-size:0.82rem; }
+.rating-count { font-size:0.68rem; letter-spacing:1.5px; color:var(--muted); text-transform:uppercase; }
+.reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.review-card { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:24px; transition:border-color 0.3s; }
+.review-card:hover { border-color:var(--border); }
+.review-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.review-avatar { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; color:#000; flex-shrink:0; }
+.review-name { font-size:0.85rem; font-weight:600; margin-bottom:3px; }
+.review-stars { display:flex; gap:2px; }
+.review-stars i { color:var(--gold); font-size:0.62rem; }
+.review-text { color:var(--muted); font-size:0.8rem; line-height:1.7; font-style:italic; }
+
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; max-width:1100px; margin:56px auto 0; align-items:start; }
+.contact-item { display:flex; align-items:flex-start; gap:14px; padding-bottom:20px; margin-bottom:20px; border-bottom:1px solid var(--border2); }
+.contact-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.contact-icon { width:42px; height:42px; background:var(--gold-subtle); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:0.9rem; flex-shrink:0; }
+.contact-label { font-size:0.62rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+.contact-value { font-size:0.88rem; line-height:1.5; }
+.map-box { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-lg); height:280px; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:14px; }
+.map-placeholder { text-align:center; color:var(--muted); }
+.map-placeholder i { font-size:2.5rem; color:var(--ghost); display:block; margin-bottom:10px; }
+.contact-buttons { display:flex; flex-direction:column; gap:10px; }
+.contact-btn { display:flex; align-items:center; justify-content:center; gap:10px; padding:14px; border-radius:8px; font-size:0.75rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; border:none; cursor:pointer; transition:all 0.3s var(--ease); text-decoration:none; }
+.contact-btn.green { background:#25D366; color:#fff; }
+.contact-btn.green:hover { background:#20BD5A; transform:translateY(-2px); }
+.contact-btn.dark { background:var(--bg3); color:var(--white); border:1px solid var(--border2); }
+.contact-btn.dark:hover { border-color:var(--border); color:var(--gold); }
+
+footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60px 40px 28px; }
+.footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; margin-bottom:40px; }
+.footer-logo { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--gold); letter-spacing:4px; margin-bottom:10px; }
+.footer-logo span { color:var(--white); font-weight:300; }
+.footer-desc { font-size:0.8rem; color:var(--muted); line-height:1.7; margin-bottom:20px; }
+.footer-social { display:flex; gap:8px; }
+.social-link { width:42px; height:42px; border:1.5px solid var(--border2); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:1.1rem; text-decoration:none; transition:all 0.3s; background:rgba(255,255,255,0.02); }
+.social-link:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+.social-link[href*="instagram"] { color:#E4405F; border-color:#E4405F; background:rgba(228,64,95,0.08); }
+.social-link[href*="wa.me"] { color:#25D366; border-color:#25D366; background:rgba(37,211,102,0.08); }
+.footer-col h5 { font-size:0.6rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.footer-col a { font-size:0.8rem; color:var(--faint); text-decoration:none; transition:color 0.3s; }
+.footer-col a:hover { color:var(--gold); }
+.footer-bottom { border-top:1px solid var(--border2); padding-top:22px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.footer-copy { font-size:0.7rem; color:var(--faint); }
+
+.wa-float { position:fixed; bottom:26px; right:26px; z-index:3000; width:54px; height:54px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.4rem; text-decoration:none; box-shadow:0 8px 28px rgba(37,211,102,0.45); transition:all 0.3s; animation:waPulse 3s ease-in-out infinite; }
+.wa-float:hover { transform:scale(1.1); box-shadow:0 12px 40px rgba(37,211,102,0.6); }
+@keyframes waPulse { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
+/* Responsive */
+@media (max-width:1100px) {
+  .services-grid { grid-template-columns:repeat(2,1fr); }
+  .reviews-grid { grid-template-columns:repeat(2,1fr); }
+  .about-grid { grid-template-columns:1fr; gap:40px; }
+  .contact-grid { grid-template-columns:1fr; }
+  .gallery-grid { grid-template-columns:repeat(2,1fr); }
+  .gallery-item:nth-child(1) { grid-column:span 1; grid-row:span 1; }
+  .footer-top { grid-template-columns:1fr 1fr; }
+  .barbers-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:768px) {
+  #navbar { padding:0 18px; }
+  .nav-links, .nav-actions { display:none; }
+  .ham-btn { display:flex; }
+  .section { padding:72px 18px; }
+  .services-grid { grid-template-columns:1fr; }
+  .reviews-grid { grid-template-columns:1fr; }
+  .gallery-grid { grid-template-columns:1fr 1fr; }
+  .hero-stats { grid-template-columns:repeat(2,1fr); }
+  .hero-stat { border-right:none; border-bottom:1px solid var(--border2); padding:14px 0; }
+  .hero-stat:nth-child(2n) { border-right:none; }
+  .hero-stat:last-child, .hero-stat:nth-last-child(2) { border-bottom:none; }
+  .footer-top { grid-template-columns:1fr; }
+  #hero { padding:90px 18px 50px; }
+  .barbers-grid { grid-template-columns:1fr; }
+  .hero-cta-wrap { flex-direction:column; align-items:stretch; }
+  .hero-btn { justify-content:center; }
+  .services-header { flex-direction:column; }
+}
+@media (max-width:480px) {
+  .hero-title { font-size:clamp(2.5rem,11vw,4rem); }
+  .gallery-grid { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="ldr-logo">DL BARBER CLUB</div>
+  <div class="ldr-sub">Premium Barbershop · Curitiba</div>
+  <div class="ldr-progress"><div class="ldr-fill"></div></div>
+</div>
+
+<a class="wa-float" href="https://wa.me/5541997878695?text=Olá!%20Gostaria%20de%20conhecer%20mais%20sobre%20a%20DL%20Barber%20Club." target="_blank" title="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<nav id="navbar">
+  <a class="nav-brand" href="#hero">
+    <div class="nav-brand-text">DL <span>BARBER</span> CLUB</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Serviços</a></li>
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#gallery">Galeria</a></li>
+    <li><a href="#reviews">Avaliações</a></li>
+    <li><a href="#contact">Contato</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a class="nav-btn wa" href="https://wa.me/5541997878695" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  </div>
+  <button class="ham-btn" onclick="toggleMob()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#services" onclick="closeMob()">Serviços</a></li>
+    <li><a href="#about" onclick="closeMob()">Sobre</a></li>
+    <li><a href="#gallery" onclick="closeMob()">Galeria</a></li>
+    <li><a href="#reviews" onclick="closeMob()">Avaliações</a></li>
+    <li><a href="#contact" onclick="closeMob()">Contato</a></li>
+  </ul>
+  <div class="mobile-nav-actions">
+    <a class="hero-btn whatsapp" href="https://wa.me/5541997878695" target="_blank" onclick="closeMob()"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  </div>
+</div>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-crown"></i> Premium Barbershop &nbsp;·&nbsp; Curitiba, Paraná</div>
+    <h1 class="hero-title">
+      <span class="row1">Mais que um corte.</span>
+      <span class="row2">Uma experiência.</span>
+    </h1>
+    <p class="hero-sub">A barbearia premium que redefine estilo, exclusividade e personalidade. Onde cada detalhe é uma obra de arte.</p>
+    <div class="hero-cta-wrap">
+      <a class="hero-btn whatsapp" href="https://wa.me/5541997878695?text=Olá!%20Quero%20agendar%20um%20horário%20na%20DL%20Barber%20Club." target="_blank"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+      <a class="hero-btn ghost" href="#services"><i class="fas fa-scissors"></i> Ver Serviços</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="stat-num">4.4★</span><span class="stat-lab">Avaliação Google</span></div>
+      <div class="hero-stat"><span class="stat-num">500+</span><span class="stat-lab">Clientes Atendidos</span></div>
+      <div class="hero-stat"><span class="stat-num">5+</span><span class="stat-lab">Anos de Excelência</span></div>
+      <div class="hero-stat"><span class="stat-num">4</span><span class="stat-lab">Especialistas</span></div>
+    </div>
+  </div>
+  <div class="scroll-indicator"><div class="scroll-line"></div>scroll</div>
+</section>
+
+<section class="section alt" id="services">
+  <div class="services-header reveal">
+    <div>
+      <span class="section-tag">O que oferecemos</span>
+      <h2 class="section-title">Serviços <em>Premium</em></h2>
+      <div class="section-bar"></div>
+    </div>
+    <p class="section-sub" style="max-width:340px">Cada serviço executado com precisão e produtos selecionados de alta performance.</p>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card reveal">
+      <div class="svc-idx">01</div>
+      <div class="svc-icon-wrap"><i class="fas fa-cut"></i></div>
+      <div class="svc-name">Corte Masculino</div>
+      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>30 min &nbsp;·&nbsp; Cortes</div>
+      <span class="svc-price">R$ 40,00</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-idx">02</div>
+      <div class="svc-icon-wrap"><i class="fas fa-cut"></i></div>
+      <div class="svc-name">Corte (Uma Máquina)</div>
+      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>30 min &nbsp;·&nbsp; Cortes</div>
+      <span class="svc-price">R$ 35,00</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-idx">03</div>
+      <div class="svc-icon-wrap"><i class="fas fa-user"></i></div>
+      <div class="svc-name">Barba Premium</div>
+      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>30 min &nbsp;·&nbsp; Barba</div>
+      <span class="svc-price">R$ 35,00</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-idx">04</div>
+      <div class="svc-icon-wrap"><i class="fas fa-star"></i></div>
+      <div class="svc-name">Corte + Barba</div>
+      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>60 min &nbsp;·&nbsp; Combo</div>
+      <span class="svc-price">R$ 70,00</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-idx">05</div>
+      <div class="svc-icon-wrap"><i class="fas fa-eye"></i></div>
+      <div class="svc-name">Sobrancelha</div>
+      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>10 min &nbsp;·&nbsp; Estética</div>
+      <span class="svc-price">R$ 10,00</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-idx">06</div>
+      <div class="svc-icon-wrap"><i class="fas fa-paint-brush"></i></div>
+      <div class="svc-name">Pigmentação</div>
+      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>60 min &nbsp;·&nbsp; Química</div>
+      <span class="svc-price">R$ 80,00</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-idx">07</div>
+      <div class="svc-icon-wrap"><i class="fas fa-crown"></i></div>
+      <div class="svc-name">Combo VIP</div>
+      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>75 min &nbsp;·&nbsp; Combo</div>
+      <span class="svc-price">R$ 75,00</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-idx">08</div>
+      <div class="svc-icon-wrap"><i class="fas fa-tint"></i></div>
+      <div class="svc-name">Hidratação</div>
+      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>20 min &nbsp;·&nbsp; Estética</div>
+      <span class="svc-price">R$ 15,00</span>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="barbers">
+  <div class="services-header reveal">
+    <div>
+      <span class="section-tag">Nossa Equipe</span>
+      <h2 class="section-title">Conheça nossos <em>Barbeiros</em></h2>
+      <div class="section-bar"></div>
+    </div>
+    <p class="section-sub" style="max-width:340px">Especialistas em estilo, qualidade e satisfação do cliente.</p>
+  </div>
+  <div class="barbers-grid">
+    <div class="barber-card reveal">
+      <div class="barber-card-head">
+        <div class="barber-avatar">DL</div>
+      </div>
+      <div class="barber-card-body">
+        <div class="barber-name">David Leal</div>
+        <div class="barber-spec">Cortes & Barba</div>
+      </div>
+    </div>
+    <div class="barber-card reveal">
+      <div class="barber-card-head">
+        <div class="barber-avatar">KM</div>
+      </div>
+      <div class="barber-card-body">
+        <div class="barber-name">Kauan Martins</div>
+        <div class="barber-spec">Degradê & Química</div>
+      </div>
+    </div>
+    <div class="barber-card reveal">
+      <div class="barber-card-head">
+        <div class="barber-avatar">LG</div>
+      </div>
+      <div class="barber-card-body">
+        <div class="barber-name">Luiz Gustavo</div>
+        <div class="barber-spec">Estética & Coloração</div>
+      </div>
+    </div>
+    <div class="barber-card reveal">
+      <div class="barber-card-head">
+        <div class="barber-avatar">GU</div>
+      </div>
+      <div class="barber-card-body">
+        <div class="barber-name">Guilherme</div>
+        <div class="barber-spec">Estilo & Modernidade</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="about-visual-wrap reveal">
+      <div class="about-card">
+        <div class="about-icon"><i class="fas fa-cut"></i></div>
+        <div class="about-badge-tag">5+<br><small style="font-size:0.65rem;font-weight:400">Anos</small></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="section-tag">Nossa História</span>
+      <h2 class="section-title">Sobre a <em>DL Barber Club</em></h2>
+      <div class="section-bar"></div>
+      <div style="margin-top:22px">
+        <p class="about-text">A DL Barber Club nasceu da paixão por transformar cuidados masculinos em experiências memoráveis. Localizada na Av. Anita Garibaldi, em Curitiba, somos referência em qualidade e exclusividade.</p>
+        <p class="about-text" style="margin-top:10px">Cada cliente recebe atenção personalizada desde o primeiro corte até os tratamentos mais sofisticados. Nossa equipe está em constante evolução.</p>
+      </div>
+      <div class="value-grid">
+        <div class="value-card"><i class="fas fa-award"></i><h4>Profissionais certificados</h4><p>Treinamento contínuo e técnicas avançadas</p></div>
+        <div class="value-card"><i class="fas fa-clock"></i><h4>Pontualidade garantida</h4><p>Respeitamos seu tempo em cada visita</p></div>
+        <div class="value-card"><i class="fas fa-leaf"></i><h4>Produtos premium</h4><p>Cosméticos de alta performance</p></div>
+        <div class="value-card"><i class="fas fa-star"></i><h4>4.4 no Google</h4><p>Avaliação baseada em 23 clientes reais</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="gallery">
+  <div style="text-align:center" class="reveal">
+    <span class="section-tag">Nosso Trabalho</span>
+    <h2 class="section-title">Galeria <em>Editorial</em></h2>
+    <div class="section-bar" style="margin:16px auto 0"></div>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item" style="background:linear-gradient(135deg,#141410,#0c0c0a)"><div class="gal-content"><i class="gal-ico fas fa-cut"></i><span class="gal-text">Degradê Premium</span></div><div class="gal-overlay"><span class="gal-label">Degradê · 45min</span></div></div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#181814,#101010)"><div class="gal-content"><i class="gal-ico fas fa-user-tie"></i><span class="gal-text">Corte Clássico</span></div><div class="gal-overlay"><span class="gal-label">Clássico · 30min</span></div></div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#121212,#0a0a08)"><div class="gal-content"><i class="gal-ico fas fa-spa"></i><span class="gal-text">Barba Perfeita</span></div><div class="gal-overlay"><span class="gal-label">Barba · 30min</span></div></div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#161612,#0e0e0c)"><div class="gal-content"><i class="gal-ico fas fa-magic"></i><span class="gal-text">Pigmentação</span></div><div class="gal-overlay"><span class="gal-label">Pigmentação · 60min</span></div></div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#1a1a14,#111111)"><div class="gal-content"><i class="gal-ico fas fa-crown"></i><span class="gal-text">Combo VIP</span></div><div class="gal-overlay"><span class="gal-label">Combo VIP · 75min</span></div></div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="reviews-header reveal">
+    <div>
+      <span class="section-tag">Quem nos escolhe</span>
+      <h2 class="section-title">Avaliações <em>Reais</em></h2>
+      <div class="section-bar"></div>
+    </div>
+    <div class="rating-card">
+      <div class="rating-big">4.4</div>
+      <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+      <div class="rating-count">23 avaliações no Google</div>
+    </div>
+  </div>
+  <div class="reviews-grid reveal">
+    <div class="review-card"><div class="review-head"><div class="review-avatar">LM</div><div><div class="review-name">Lucas Mendes</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div><p class="review-text">Melhor barbearia de Curitiba. O David é incrível, meu cabelo ficou exatamente como eu queria. Ambiente premium e preço muito justo!</p></div>
+    <div class="review-card"><div class="review-head"><div class="review-avatar">RS</div><div><div class="review-name">Rafael Santos</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div><p class="review-text">Atendimento impecável! Fiz o pacote corte + barba e saí se sentindo outra pessoa. Virei cliente fixo da DL Barber!</p></div>
+    <div class="review-card"><div class="review-head"><div class="review-avatar">MP</div><div><div class="review-name">Marcos Pereira</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div></div><p class="review-text">No plano mensal há 6 meses e não troco por nada. Excelente custo-benefício e qualidade sempre consistente. Top!</p></div>
+    <div class="review-card"><div class="review-head"><div class="review-avatar">JC</div><div><div class="review-name">João Carlos</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div><p class="review-text">Levei meu filho para o primeiro corte. Atendimento incrível, cuidadoso e com preço especial. Muito recomendado!</p></div>
+    <div class="review-card"><div class="review-head"><div class="review-avatar">GO</div><div><div class="review-name">Gabriel Oliveira</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div><p class="review-text">Fiz a progressiva + corte e ficou perfeito! Profissional explicou tudo e o resultado superou minhas expectativas!</p></div>
+    <div class="review-card"><div class="review-head"><div class="review-avatar">AV</div><div><div class="review-name">André Vieira</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div></div></div><p class="review-text">Ótimo ambiente, profissionais qualificados e pontualidade exemplar. Barba ficou excelente. Voltarei com certeza!</p></div>
+  </div>
+</section>
+
+<section class="section alt" id="contact">
+  <div class="reveal" style="text-align:center">
+    <span class="section-tag">Fale Conosco</span>
+    <h2 class="section-title">Entre em <em>Contato</em></h2>
+    <div class="section-bar" style="margin:16px auto 0"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-item"><div class="contact-icon"><i class="fab fa-whatsapp"></i></div><div><div class="contact-label">WhatsApp</div><div class="contact-value">(41) 99787-8695</div></div></div>
+      <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="contact-label">Endereço</div><div class="contact-value">Av. Anita Garibaldi, 5320 — Loja 2<br>Barreirinha, Curitiba — PR</div></div></div>
+      <div class="contact-item"><div class="contact-icon"><i class="fas fa-clock"></i></div><div><div class="contact-label">Funcionamento</div><div class="contact-value">Seg – Sex: 10h às 20h<br>Sábado: 09h às 19h<br>Domingo: Fechado</div></div></div>
+      <div class="contact-item"><div class="contact-icon"><i class="fab fa-instagram"></i></div><div><div class="contact-label">Instagram</div><div class="contact-value">@DlBarber.Club</div></div></div>
+    </div>
+    <div class="reveal">
+      <div class="map-box"><div class="map-placeholder"><i class="fas fa-map-marked-alt"></i><p>Av. Anita Garibaldi, 5320<br><small style="font-size:0.72rem">Barreirinha — Curitiba, PR</small></p></div></div>
+      <div class="contact-buttons">
+        <a class="contact-btn green" href="https://wa.me/5541997878695?text=Olá!%20Quero%20agendar%20um%20horário." target="_blank"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+        <a class="contact-btn dark" href="https://maps.google.com/?q=Av.+Anita+Garibaldi+5320+Curitiba+PR" target="_blank"><i class="fas fa-map-marked-alt"></i> Como Chegar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">DL <span>BARBER</span> CLUB</div>
+      <p class="footer-desc">A barbearia premium que redefine estilo, exclusividade e personalidade em Curitiba. Av. Anita Garibaldi, 5320 — Barreirinha.</p>
+      <div class="footer-social">
+        <a class="social-link" href="https://instagram.com/DlBarber.Club" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a class="social-link" href="https://wa.me/5541997878695" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Serviços</h5><ul><li><a href="#services">Corte Masculino</a></li><li><a href="#services">Barba Premium</a></li><li><a href="#services">Corte + Barba</a></li><li><a href="#services">Pigmentação</a></li><li><a href="#services">Combo VIP</a></li></ul></div>
+    <div class="footer-col"><h5>Navegação</h5><ul><li><a href="#about">Sobre nós</a></li><li><a href="#gallery">Galeria</a></li><li><a href="#reviews">Avaliações</a></li><li><a href="#contact">Contato</a></li></ul></div>
+    <div class="footer-col"><h5>Horários</h5><ul><li><a href="#">Seg–Sex: 10h–20h</a></li><li><a href="#">Sábado: 09h–19h</a></li><li><a href="#" style="color:var(--red)">Domingo: Fechado</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 DL Barber Club. Todos os direitos reservados.</span>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+// Loader
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2500);
+});
+
+// Navbar scroll effect
+let navScrolled = false;
+window.addEventListener('scroll', () => {
+  const s = window.scrollY > 60;
+  if (s !== navScrolled) { 
+    document.getElementById('navbar').classList.toggle('scrolled', s); 
+    navScrolled = s; 
+  }
+}, {passive: true});
+
+// Mobile menu
+function toggleMob() { 
+  document.getElementById('mobileNav').classList.toggle('open'); 
+}
+function closeMob() { 
+  document.getElementById('mobileNav').classList.remove('open'); 
+}
+
+// Reveal animation on scroll
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { 
+    if (e.isIntersecting) e.target.classList.add('visible'); 
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+</body>
+</html>

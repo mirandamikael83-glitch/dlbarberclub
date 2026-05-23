@@ -3,48 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DL Barber Club — Barbearia Premium · Curitiba</title>
-<meta name="description" content="A barbearia premium que redefine estilo, exclusividade e personalidade em Curitiba.">
+<title>DL Barber Club — Premium</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
-  --gold: #C9A96E;
-  --gold-l: #E8CC9A;
-  --gold-d: #8B6B35;
-  --gold-glow: rgba(201,169,110,0.18);
-  --gold-subtle: rgba(201,169,110,0.07);
-  --bg: #080808;
-  --bg1: #0D0D0D;
-  --bg2: #121212;
-  --bg3: #181818;
-  --bg4: #1E1E1E;
-  --bg5: #262626;
-  --white: #F7F3EC;
-  --muted: #9A9590;
-  --faint: #5C5850;
-  --ghost: #2E2B26;
-  --border: rgba(201,169,110,0.12);
-  --border2: rgba(255,255,255,0.06);
-  --green: #22C55E;
-  --red: #EF4444;
-  --blue: #3B82F6;
-  --purple: #A855F7;
-  --radius: 10px;
-  --radius-lg: 18px;
-  --shadow: 0 24px 64px rgba(0,0,0,0.7);
-  --shadow-gold: 0 8px 40px rgba(201,169,110,0.2);
-  --ease: cubic-bezier(0.4,0,0.2,1);
+  --gold:#C9A96E; --gold-l:#E8CC9A; --gold-d:#8B6B35;
+  --gold-glow:rgba(201,169,110,0.18); --gold-subtle:rgba(201,169,110,0.07);
+  --bg:#080808; --bg1:#0D0D0D; --bg2:#121212; --bg3:#181818; --bg4:#1E1E1E; --bg5:#262626;
+  --white:#F7F3EC; --muted:#9A9590; --faint:#5C5850; --ghost:#2E2B26;
+  --border:rgba(201,169,110,0.12); --border2:rgba(255,255,255,0.06);
+  --green:#22C55E; --red:#EF4444; --blue:#3B82F6; --purple:#A855F7;
+  --radius:10px; --radius-lg:18px;
+  --shadow:0 24px 64px rgba(0,0,0,0.7);
+  --shadow-gold:0 8px 40px rgba(201,169,110,0.2);
+  --ease:cubic-bezier(0.4,0,0.2,1);
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior:smooth; font-size:16px; }
 body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--white); overflow-x:hidden; line-height:1.6; }
 ::-webkit-scrollbar { width:4px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
 ::-webkit-scrollbar-thumb { background:var(--gold); border-radius:2px; }
-img { display:block; max-width:100%; }
 button { font-family:'Inter',sans-serif; cursor:pointer; }
+input, select, textarea { font-family:'Inter',sans-serif; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes slideDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+@keyframes scrollBob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+@keyframes rippleAnim { to{transform:scale(4);opacity:0} }
+@keyframes successPop { 0%{transform:scale(0)} 60%{transform:scale(1.1)} 100%{transform:scale(1)} }
+@keyframes modalFadeIn { from{opacity:0} to{opacity:1} }
+@keyframes modalSlideUp { from{transform:translateY(20px);opacity:0} to{transform:none;opacity:1} }
+@keyframes panelIn { from{opacity:0;transform:translateX(10px)} to{opacity:1;transform:none} }
+@keyframes sectionFade { from{opacity:0} to{opacity:1} }
+@keyframes dotBlink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+@keyframes waPulse { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes glowPulse { 0%,100%{box-shadow:0 0 30px rgba(201,169,110,0.3),inset 0 0 20px rgba(201,169,110,0.05)} 50%{box-shadow:0 0 50px rgba(201,169,110,0.5),inset 0 0 20px rgba(201,169,110,0.1)} }
+@keyframes ldrFill { from{width:0} to{width:100%} }
+@keyframes barberSwitch { from{opacity:0;transform:scale(0.95)} to{opacity:1;transform:scale(1)} }
+@keyframes successOverlayFade { 0%{opacity:0;backdrop-filter:blur(0)} 15%{opacity:1;backdrop-filter:blur(12px)} 85%{opacity:1;backdrop-filter:blur(12px)} 100%{opacity:0;backdrop-filter:blur(0)} }
+@keyframes successCircleIn { 0%{transform:scale(0) rotate(-90deg);opacity:0} 60%{transform:scale(1.15) rotate(0);opacity:1} 100%{transform:scale(1) rotate(0);opacity:1} }
+@keyframes successCheckDraw { from{stroke-dashoffset:60} to{stroke-dashoffset:0} }
+@keyframes successRingPulse { 0%{transform:scale(0.5);opacity:1} 100%{transform:scale(2.5);opacity:0} }
+@keyframes successTextRise { 0%{opacity:0;transform:translateY(20px)} 30%{opacity:1;transform:translateY(0)} 80%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-10px)} }
+@keyframes confettiFall { 0%{transform:translateY(-30px) rotate(0);opacity:1} 100%{transform:translateY(120px) rotate(720deg);opacity:0} }
 
 #loader { position:fixed; inset:0; z-index:99999; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; transition:opacity 0.8s var(--ease), visibility 0.8s; }
 #loader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
@@ -52,7 +58,6 @@ button { font-family:'Inter',sans-serif; cursor:pointer; }
 .ldr-sub { font-size:0.6rem; letter-spacing:5px; text-transform:uppercase; color:var(--muted); }
 .ldr-progress { width:160px; height:1px; background:var(--bg5); border-radius:1px; overflow:hidden; }
 .ldr-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-l)); animation:ldrFill 2.2s ease forwards; }
-@keyframes ldrFill { from{width:0} to{width:100%} }
 
 #navbar { position:fixed; top:0; left:0; right:0; z-index:1000; height:70px; display:flex; align-items:center; justify-content:space-between; padding:0 40px; transition:background 0.4s, box-shadow 0.4s; }
 #navbar.scrolled { background:rgba(8,8,8,0.97); backdrop-filter:blur(20px) saturate(180%); box-shadow:0 1px 0 var(--border); }
@@ -78,12 +83,10 @@ button { font-family:'Inter',sans-serif; cursor:pointer; }
 .mobile-nav a { display:block; padding:10px 8px; font-size:0.8rem; letter-spacing:1px; text-transform:uppercase; color:var(--muted); text-decoration:none; border-radius:6px; transition:all 0.2s; }
 .mobile-nav a:hover { color:var(--gold); background:var(--gold-subtle); }
 .mobile-nav-actions { display:flex; flex-direction:column; gap:8px; }
-@keyframes slideDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
 
 #hero { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:100px 40px 60px; }
-.hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 55%), radial-gradient(ellipse 50% 70% at 90% 100%, rgba(201,169,110,0.04) 0%, transparent 50%), linear-gradient(175deg, #090909 0%, #080808 60%, #0A0A0A 100%); }
-.hero-grain { position:absolute; inset:0; pointer-events:none; opacity:0.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:256px; }
-.hero-grid-lines { position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(rgba(201,169,110,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,0.025) 1px, transparent 1px); background-size:64px 64px; }
+.hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,169,110,0.08) 0%,transparent 55%),radial-gradient(ellipse 50% 70% at 90% 100%,rgba(201,169,110,0.04) 0%,transparent 50%),linear-gradient(175deg,#090909 0%,#080808 60%,#0A0A0A 100%); }
+.hero-grid-lines { position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(rgba(201,169,110,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,0.025) 1px,transparent 1px); background-size:64px 64px; }
 .hero-content { position:relative; z-index:1; text-align:center; max-width:860px; }
 .hero-badge { display:inline-flex; align-items:center; gap:10px; padding:6px 18px; border:1px solid var(--border); border-radius:100px; font-size:0.62rem; letter-spacing:4px; text-transform:uppercase; color:var(--gold); background:var(--gold-subtle); margin-bottom:36px; animation:fadeUp 0.9s 0.4s both; }
 .hero-title { font-family:'Playfair Display',serif; font-size:clamp(3rem,9vw,8rem); font-weight:900; line-height:0.9; margin-bottom:10px; animation:fadeUp 0.9s 0.6s both; }
@@ -92,14 +95,12 @@ button { font-family:'Inter',sans-serif; cursor:pointer; }
 .hero-sub { font-size:1rem; color:var(--muted); line-height:1.8; max-width:500px; margin:28px auto 0; animation:fadeUp 0.9s 0.8s both; }
 .hero-cta-wrap { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:40px; animation:fadeUp 0.9s 1s both; }
 .hero-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 36px; border-radius:8px; font-size:0.82rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; border:none; transition:all 0.35s var(--ease); position:relative; overflow:hidden; text-decoration:none; }
-.hero-btn.primary { background:linear-gradient(135deg, var(--gold), var(--gold-d)); color:#000; box-shadow:0 4px 24px rgba(201,169,110,0.35); }
+.hero-btn.primary { background:linear-gradient(135deg,var(--gold),var(--gold-d)); color:#000; box-shadow:0 4px 24px rgba(201,169,110,0.35); }
 .hero-btn.primary:hover { transform:translateY(-3px); box-shadow:0 12px 48px rgba(201,169,110,0.5); }
-.hero-btn.whatsapp { background:linear-gradient(135deg, #25D366, #1FAF54); color:#fff; box-shadow:0 4px 24px rgba(37,211,102,0.3); }
+.hero-btn.whatsapp { background:linear-gradient(135deg,#25D366,#1FAF54); color:#fff; box-shadow:0 4px 24px rgba(37,211,102,0.3); }
 .hero-btn.whatsapp:hover { transform:translateY(-3px); box-shadow:0 12px 48px rgba(37,211,102,0.45); }
 .hero-btn.ghost { background:transparent; color:var(--white); border:1px solid var(--border2); }
 .hero-btn.ghost:hover { border-color:var(--border); background:rgba(255,255,255,0.04); }
-.ripple { position:absolute; border-radius:50%; background:rgba(255,255,255,0.3); transform:scale(0); animation:rippleAnim 0.6s linear; pointer-events:none; }
-@keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
 .hero-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:72px; padding-top:48px; border-top:1px solid var(--border2); animation:fadeUp 0.9s 1.2s both; }
 .hero-stat { text-align:center; padding:0 20px; border-right:1px solid var(--border2); }
 .hero-stat:last-child { border-right:none; }
@@ -107,7 +108,6 @@ button { font-family:'Inter',sans-serif; cursor:pointer; }
 .stat-lab { font-size:0.6rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--faint); margin-top:6px; display:block; }
 .scroll-indicator { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--faint); font-size:0.58rem; letter-spacing:3px; text-transform:uppercase; animation:scrollBob 2.5s ease-in-out infinite; }
 .scroll-line { width:1px; height:40px; background:linear-gradient(180deg,var(--gold),transparent); }
-@keyframes scrollBob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
 
 .section { padding:100px 40px; }
 .section.alt { background:var(--bg1); }
@@ -118,11 +118,10 @@ button { font-family:'Inter',sans-serif; cursor:pointer; }
 .section-sub { color:var(--muted); font-size:0.88rem; line-height:1.8; margin-top:12px; }
 .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.7s var(--ease), transform 0.7s var(--ease); }
 .reveal.visible { opacity:1; transform:none; }
-
 .services-header { display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:56px; flex-wrap:wrap; }
 .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.svc-card { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:28px; position:relative; overflow:hidden; cursor:default; transition:all 0.4s var(--ease); }
-.svc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); transform:scaleX(0); transform-origin:center; transition:transform 0.5s; }
+.svc-card { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:28px; position:relative; overflow:hidden; transition:all 0.4s var(--ease); }
+.svc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); transform:scaleX(0); transition:transform 0.5s; }
 .svc-card:hover { border-color:var(--border); transform:translateY(-5px); box-shadow:var(--shadow); }
 .svc-card:hover::before { transform:scaleX(1); }
 .svc-idx { font-family:'Playfair Display',serif; font-size:4rem; font-weight:900; color:rgba(201,169,110,0.05); position:absolute; top:12px; right:18px; line-height:1; }
@@ -130,72 +129,18 @@ button { font-family:'Inter',sans-serif; cursor:pointer; }
 .svc-name { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:600; margin-bottom:4px; }
 .svc-meta { font-size:0.68rem; letter-spacing:1.5px; color:var(--muted); text-transform:uppercase; margin-bottom:16px; }
 .svc-price { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold); display:block; margin-bottom:20px; line-height:1; }
-
+.svc-action { width:100%; padding:10px; background:transparent; border:1px solid var(--border); border-radius:7px; color:var(--muted); font-size:0.7rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; transition:all 0.3s; }
+.svc-action:hover { background:var(--gold); color:#000; border-color:var(--gold); }
 .barbers-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:56px; }
-.barber-card { background:linear-gradient(135deg, var(--bg2), var(--bg3)); border:1px solid var(--border2); border-radius:var(--radius-lg); overflow:hidden; transition:all 0.4s var(--ease); cursor:pointer; }
+.barber-card { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border2); border-radius:var(--radius-lg); overflow:hidden; transition:all 0.4s var(--ease); cursor:pointer; }
 .barber-card:hover { border-color:var(--gold); transform:translateY(-8px); box-shadow:var(--shadow-gold); }
-.barber-card-head { height:200px; background:linear-gradient(135deg, rgba(201,169,110,0.1), rgba(201,169,110,0.05)); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.barber-card-head { height:200px; background:linear-gradient(135deg,rgba(201,169,110,0.1),rgba(201,169,110,0.05)); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
 .barber-avatar { width:100px; height:100px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:#000; box-shadow:0 8px 32px rgba(201,169,110,0.3); }
 .barber-card-body { padding:20px; }
 .barber-name { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; margin-bottom:4px; }
 .barber-spec { font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
-
-.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; max-width:1100px; margin:0 auto; }
-.about-visual-wrap { position:relative; }
-.about-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:60px 40px; text-align:center; position:relative; overflow:hidden; }
-.about-card::before { content:'DL'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:12rem; font-weight:900; color:rgba(201,169,110,0.03); pointer-events:none; }
-.about-icon { font-size:4.5rem; color:var(--gold); position:relative; z-index:1; }
-.about-badge-tag { position:absolute; bottom:-1px; right:-1px; background:var(--gold); color:#000; padding:16px 20px; border-radius:var(--radius-lg) 0 var(--radius-lg) 0; font-family:'Playfair Display',serif; font-weight:700; font-size:1.1rem; line-height:1.1; text-align:center; }
-.about-text p { color:var(--muted); line-height:1.9; font-size:0.88rem; margin-bottom:14px; }
-.value-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:28px; }
-.value-card { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius); padding:16px; transition:border-color 0.3s; }
-.value-card:hover { border-color:var(--border); }
-.value-card i { color:var(--gold); font-size:0.9rem; margin-bottom:8px; display:block; }
-.value-card h4 { font-size:0.82rem; font-weight:600; margin-bottom:3px; }
-.value-card p { font-size:0.72rem; color:var(--muted); line-height:1.4; }
-
-.gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:200px; gap:10px; margin-top:56px; }
-.gallery-item { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius); overflow:hidden; position:relative; cursor:pointer; transition:all 0.35s var(--ease); }
-.gallery-item:hover { border-color:var(--border); transform:scale(1.02); z-index:2; }
-.gallery-item:nth-child(1) { grid-column:span 2; grid-row:span 2; }
-.gal-content { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px; }
-.gal-ico { font-size:2rem; color:rgba(201,169,110,0.15); }
-.gal-text { font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:rgba(201,169,110,0.12); }
-.gal-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.75),transparent); opacity:0; transition:opacity 0.3s; display:flex; align-items:flex-end; padding:14px 16px; }
-.gallery-item:hover .gal-overlay { opacity:1; }
-.gal-label { font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); }
-
-.reviews-header { display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:56px; flex-wrap:wrap; }
-.rating-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px 48px; text-align:center; }
-.rating-big { font-family:'Playfair Display',serif; font-size:4rem; font-weight:700; color:var(--gold); line-height:1; }
-.rating-stars { display:flex; gap:4px; justify-content:center; margin:8px 0 4px; }
-.rating-stars i { color:var(--gold); font-size:0.82rem; }
-.rating-count { font-size:0.68rem; letter-spacing:1.5px; color:var(--muted); text-transform:uppercase; }
-.reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.review-card { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:24px; transition:border-color 0.3s; }
-.review-card:hover { border-color:var(--border); }
-.review-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
-.review-avatar { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; color:#000; flex-shrink:0; }
-.review-name { font-size:0.85rem; font-weight:600; margin-bottom:3px; }
-.review-stars { display:flex; gap:2px; }
-.review-stars i { color:var(--gold); font-size:0.62rem; }
-.review-text { color:var(--muted); font-size:0.8rem; line-height:1.7; font-style:italic; }
-
-.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; max-width:1100px; margin:56px auto 0; align-items:start; }
-.contact-item { display:flex; align-items:flex-start; gap:14px; padding-bottom:20px; margin-bottom:20px; border-bottom:1px solid var(--border2); }
-.contact-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
-.contact-icon { width:42px; height:42px; background:var(--gold-subtle); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:0.9rem; flex-shrink:0; }
-.contact-label { font-size:0.62rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
-.contact-value { font-size:0.88rem; line-height:1.5; }
-.map-box { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-lg); height:280px; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:14px; }
-.map-placeholder { text-align:center; color:var(--muted); }
-.map-placeholder i { font-size:2.5rem; color:var(--ghost); display:block; margin-bottom:10px; }
-.contact-buttons { display:flex; flex-direction:column; gap:10px; }
-.contact-btn { display:flex; align-items:center; justify-content:center; gap:10px; padding:14px; border-radius:8px; font-size:0.75rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; border:none; cursor:pointer; transition:all 0.3s var(--ease); text-decoration:none; }
-.contact-btn.green { background:#25D366; color:#fff; }
-.contact-btn.green:hover { background:#20BD5A; transform:translateY(-2px); }
-.contact-btn.dark { background:var(--bg3); color:var(--white); border:1px solid var(--border2); }
-.contact-btn.dark:hover { border-color:var(--border); color:var(--gold); }
+.barber-btn { width:100%; padding:10px; background:var(--gold); border:none; border-radius:8px; color:#000; font-size:0.72rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
+.barber-btn:hover { background:var(--gold-l); transform:translateY(-2px); }
 
 footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60px 40px 28px; }
 .footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; margin-bottom:40px; }
@@ -209,26 +154,360 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 .social-link[href*="wa.me"] { color:#25D366; border-color:#25D366; background:rgba(37,211,102,0.08); }
 .footer-col h5 { font-size:0.6rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
 .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
-.footer-col a { font-size:0.8rem; color:var(--faint); text-decoration:none; transition:color 0.3s; }
+.footer-col a { font-size:0.8rem; color:var(--faint); text-decoration:none; transition:color 0.3s; cursor:pointer; }
 .footer-col a:hover { color:var(--gold); }
 .footer-bottom { border-top:1px solid var(--border2); padding-top:22px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
 .footer-copy { font-size:0.7rem; color:var(--faint); }
 
 .wa-float { position:fixed; bottom:26px; right:26px; z-index:3000; width:54px; height:54px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.4rem; text-decoration:none; box-shadow:0 8px 28px rgba(37,211,102,0.45); transition:all 0.3s; animation:waPulse 3s ease-in-out infinite; }
 .wa-float:hover { transform:scale(1.1); box-shadow:0 12px 40px rgba(37,211,102,0.6); }
-@keyframes waPulse { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
 
-/* Responsive */
+/* ============== BOOKING MODAL ============== */
+.modal-overlay { display:none; position:fixed; inset:0; z-index:5000; background:rgba(0,0,0,0.88); backdrop-filter:blur(12px); align-items:center; justify-content:center; padding:16px; }
+.modal-overlay.open { display:flex; animation:modalFadeIn 0.3s ease; }
+.modal-window { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); width:100%; max-width:560px; max-height:92vh; display:flex; flex-direction:column; box-shadow:var(--shadow); animation:modalSlideUp 0.35s var(--ease); overflow:hidden; }
+.modal-header { padding:22px 26px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border2); flex-shrink:0; }
+.modal-title { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; }
+.modal-title em { color:var(--gold); }
+.modal-close { width:32px; height:32px; background:var(--bg4); border:1px solid var(--border2); border-radius:7px; color:var(--muted); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.9rem; transition:all 0.2s; }
+.modal-close:hover { background:var(--red); color:#fff; border-color:var(--red); }
+.modal-steps { display:flex; align-items:center; padding:16px 26px; border-bottom:1px solid var(--border2); flex-shrink:0; position:relative; }
+.modal-steps::before { content:''; position:absolute; top:50%; left:44px; right:44px; height:1px; background:var(--border2); z-index:0; }
+.step-item { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; position:relative; z-index:1; }
+.step-circle { width:28px; height:28px; border-radius:50%; border:1px solid var(--border2); background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:600; color:var(--muted); transition:all 0.3s; }
+.step-item.active .step-circle { background:var(--gold); border-color:var(--gold); color:#000; box-shadow:0 0 0 3px var(--gold-glow); }
+.step-item.done .step-circle { border-color:var(--gold); color:var(--gold); }
+.step-item.done .step-circle::before { content:'✓'; font-size:0.72rem; }
+.step-label { font-size:0.56rem; letter-spacing:1px; text-transform:uppercase; color:var(--faint); }
+.step-item.active .step-label { color:var(--gold); }
+.modal-chips { display:flex; flex-wrap:wrap; gap:6px; padding:10px 26px 0; flex-shrink:0; }
+.chip { display:inline-flex; align-items:center; gap:5px; padding:4px 10px; background:var(--gold-subtle); border:1px solid rgba(201,169,110,0.2); border-radius:100px; font-size:0.65rem; color:var(--gold); }
+.modal-body { flex:1; overflow-y:auto; padding:20px 26px 26px; }
+.booking-panel { display:none; animation:panelIn 0.3s ease; }
+.booking-panel.active { display:block; }
+.panel-title { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:600; margin-bottom:3px; }
+.panel-title em { color:var(--gold); }
+.panel-subtitle { font-size:0.75rem; color:var(--muted); margin-bottom:16px; }
+.pick-list { display:flex; flex-direction:column; gap:7px; }
+.pick-row { display:flex; align-items:center; gap:12px; padding:12px 14px; background:var(--bg3); border:1px solid var(--border2); border-radius:var(--radius); cursor:pointer; transition:all 0.25s; }
+.pick-row:hover, .pick-row.selected { border-color:var(--gold); background:var(--gold-subtle); }
+.pick-row-selected-mark { width:18px; height:18px; border:1px solid var(--border2); border-radius:50%; margin-left:auto; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.6rem; transition:all 0.2s; }
+.pick-row.selected .pick-row-selected-mark { background:var(--gold); border-color:var(--gold); color:#000; }
+.pick-row-icon { width:36px; height:36px; background:var(--gold-subtle); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:0.85rem; flex-shrink:0; }
+.pick-row-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.78rem; color:#000; flex-shrink:0; }
+.pick-row-info { flex:1; min-width:0; }
+.pick-row-name { font-size:0.85rem; font-weight:600; margin-bottom:2px; }
+.pick-row-meta { font-size:0.7rem; color:var(--muted); }
+.pick-row-price { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--gold); flex-shrink:0; }
+.calendar-widget { background:var(--bg3); border:1px solid var(--border2); border-radius:var(--radius); overflow:hidden; }
+.cal-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--border2); }
+.cal-month-label { font-family:'Playfair Display',serif; font-size:1rem; font-weight:600; }
+.cal-nav-btn { width:28px; height:28px; border-radius:6px; border:1px solid var(--border2); background:var(--bg4); color:var(--muted); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s; font-size:0.75rem; }
+.cal-nav-btn:hover { border-color:var(--border); color:var(--gold); }
+.cal-body { padding:12px; }
+.cal-weekdays { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:6px; }
+.cal-weekday { text-align:center; font-size:0.58rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--faint); padding:4px 0; }
+.cal-days-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+.cal-day-cell { aspect-ratio:1; display:flex; align-items:center; justify-content:center; border-radius:6px; font-size:0.78rem; font-weight:500; cursor:pointer; border:1px solid transparent; transition:all 0.2s; min-width:0; }
+.cal-day-cell.empty { cursor:default; }
+.cal-day-cell.disabled { color:var(--ghost); cursor:not-allowed; }
+.cal-day-cell.sunday { color:var(--ghost); cursor:not-allowed; }
+.cal-day-cell.today { border-color:rgba(201,169,110,0.3); color:var(--gold); }
+.cal-day-cell.available:hover { background:var(--gold-subtle); border-color:rgba(201,169,110,0.3); color:var(--gold); }
+.cal-day-cell.selected { background:var(--gold); border-color:var(--gold); color:#000; font-weight:700; }
+.time-section { margin-top:16px; }
+.time-section-title { font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+.time-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
+.time-cell { padding:10px 6px; text-align:center; background:var(--bg3); border:1px solid var(--border2); border-radius:7px; font-size:0.78rem; font-weight:500; cursor:pointer; transition:all 0.2s; line-height:1.2; }
+.time-cell:hover { border-color:var(--gold); color:var(--gold); }
+.time-cell.selected { background:var(--gold); border-color:var(--gold); color:#000; font-weight:700; }
+.time-cell.taken { color:var(--ghost); cursor:not-allowed; border-color:transparent; background:rgba(255,255,255,0.015); }
+.time-cell.lunch { color:var(--ghost); cursor:not-allowed; border-style:dashed; font-size:0.65rem; }
+.form-group { margin-bottom:13px; }
+.form-label { display:block; font-size:0.62rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.form-input { width:100%; background:var(--bg3); border:1px solid var(--border2); border-radius:7px; padding:11px 14px; color:var(--white); font-size:0.85rem; outline:none; transition:border-color 0.2s; }
+.form-input:focus { border-color:var(--gold); }
+.form-input::placeholder { color:var(--ghost); }
+.confirm-summary { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:16px; }
+.confirm-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--border2); font-size:0.8rem; }
+.confirm-row:last-child { border-bottom:none; }
+.confirm-label { color:var(--muted); }
+.confirm-value { font-weight:600; }
+.confirm-value.gold { color:var(--gold); font-family:'Playfair Display',serif; font-size:1rem; }
+.success-panel { text-align:center; padding:12px 0; }
+.success-ring { width:72px; height:72px; border:2px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.8rem; color:var(--gold); background:var(--gold-subtle); margin:0 auto 18px; animation:successPop 0.5s var(--ease); }
+.success-title { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; margin-bottom:8px; }
+.success-title em { color:var(--gold); }
+.panel-nav { display:flex; gap:8px; margin-top:16px; }
+.btn-back { flex:1; padding:11px; background:transparent; border:1px solid var(--border2); border-radius:7px; color:var(--muted); font-size:0.72rem; font-weight:600; cursor:pointer; transition:all 0.25s; }
+.btn-back:hover { border-color:var(--muted); color:var(--white); }
+.btn-next { flex:2; padding:11px; background:var(--gold); border:none; border-radius:7px; color:#000; font-size:0.72rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:all 0.25s; }
+.btn-next:hover { background:var(--gold-l); transform:translateY(-1px); }
+.btn-next:disabled { opacity:0.35; cursor:not-allowed; transform:none; }
+.btn-full { width:100%; padding:13px; border:none; border-radius:7px; font-size:0.75rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; }
+.btn-full.wa { background:#25D366; color:#fff; margin-bottom:8px; }
+.btn-full.wa:hover { background:#20BD5A; }
+.btn-full.ghost { background:transparent; border:1px solid var(--border2); color:var(--muted); }
+.btn-full.ghost:hover { border-color:var(--border); color:var(--white); }
+
+/* ============== PAYMENT MODAL ============== */
+.payment-modal-overlay { display:none; position:fixed; inset:0; z-index:8500; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px) saturate(1.2); align-items:center; justify-content:center; padding:16px; }
+.payment-modal-overlay.open { display:flex; animation:modalFadeIn 0.3s ease; }
+.payment-modal-window { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1.5px solid var(--gold); border-radius:var(--radius-lg); width:100%; max-width:540px; padding:34px; box-shadow:0 25px 80px rgba(201,169,110,0.35); animation:modalSlideUp 0.4s var(--ease); position:relative; overflow:hidden; max-height:92vh; overflow-y:auto; }
+.payment-modal-window::-webkit-scrollbar { width:3px; }
+.payment-modal-window::-webkit-scrollbar-thumb { background:var(--gold); }
+.payment-modal-window::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+.payment-modal-header { display:flex; justify-content:space-between; align-items:start; margin-bottom:6px; }
+.payment-modal-title { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--white); display:flex; align-items:center; gap:10px; }
+.payment-modal-title i { color:var(--gold); }
+.payment-modal-title em { color:var(--gold); font-style:italic; }
+.payment-modal-close { width:32px; height:32px; background:var(--bg4); border:1px solid var(--border2); border-radius:7px; color:var(--muted); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s; }
+.payment-modal-close:hover { background:var(--red); color:#fff; border-color:var(--red); }
+.payment-modal-subtitle { font-size:0.72rem; color:var(--muted); margin-bottom:22px; letter-spacing:1.5px; text-transform:uppercase; }
+.payment-client-info { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:14px 16px; margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+.payment-client-info-avatar { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.95rem; color:#000; flex-shrink:0; }
+.payment-client-info-text { flex:1; }
+.payment-client-info-name { font-size:0.85rem; font-weight:600; margin-bottom:2px; }
+.payment-client-info-svc { font-size:0.7rem; color:var(--muted); }
+.payment-step-label { font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; font-weight:700; display:flex; align-items:center; gap:6px; }
+.payment-step-label::before { content:''; width:14px; height:14px; border-radius:50%; background:var(--gold); color:#000; display:inline-flex; align-items:center; justify-content:center; font-size:0.55rem; font-weight:700; }
+.payment-step-label[data-step="1"]::before { content:'1'; }
+.payment-step-label[data-step="2"]::before { content:'2'; }
+.payment-methods { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:24px; }
+.payment-btn { padding:18px 12px; background:var(--bg3); border:1.5px solid var(--border2); border-radius:var(--radius); color:var(--white); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; cursor:pointer; transition:all 0.3s var(--ease); font-size:0.74rem; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; position:relative; overflow:hidden; }
+.payment-btn::before { content:''; position:absolute; inset:0; background:radial-gradient(circle,rgba(201,169,110,0.15),transparent); opacity:0; transition:opacity 0.3s; }
+.payment-btn:hover { border-color:var(--gold); background:rgba(201,169,110,0.08); transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,169,110,0.15); }
+.payment-btn:hover::before { opacity:1; }
+.payment-btn i { font-size:1.7rem; color:var(--gold); transition:transform 0.3s; }
+.payment-btn:hover i { transform:scale(1.15); }
+.payment-btn.selected { border-color:var(--gold); background:var(--gold-subtle); box-shadow:0 0 20px rgba(201,169,110,0.25); }
+.payment-btn.subscription { background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(168,85,247,0.04)); border-color:rgba(168,85,247,0.4); grid-column:span 2; }
+.payment-btn.subscription:hover { border-color:var(--purple); box-shadow:0 8px 24px rgba(168,85,247,0.2); }
+.payment-btn.subscription i { color:var(--purple); }
+.payment-btn.subscription.selected { border-color:var(--purple); background:rgba(168,85,247,0.18); }
+.payment-value-input-wrap { position:relative; margin-bottom:24px; }
+.payment-value-input { width:100%; background:var(--bg3); border:1.5px solid var(--border2); border-radius:var(--radius); padding:18px 18px 18px 56px; color:var(--gold); font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; outline:none; transition:all 0.25s; }
+.payment-value-input:focus { border-color:var(--gold); background:var(--gold-subtle); box-shadow:0 0 0 3px var(--gold-glow); }
+.payment-value-input.readonly-sub { color:var(--purple); border-color:rgba(168,85,247,0.4); background:rgba(168,85,247,0.05); }
+.payment-value-prefix { position:absolute; left:18px; top:50%; transform:translateY(-50%); font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--muted); font-weight:600; }
+.payment-actions { display:flex; gap:10px; }
+.payment-actions button { flex:1; padding:14px; border:none; border-radius:8px; font-size:0.76rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
+.payment-actions .btn-cancel { background:transparent; border:1px solid var(--border2); color:var(--muted); }
+.payment-actions .btn-cancel:hover { border-color:var(--red); color:var(--red); background:rgba(239,68,68,0.05); }
+.payment-actions .btn-confirm { background:linear-gradient(135deg,var(--gold),var(--gold-d)); color:#000; }
+.payment-actions .btn-confirm:hover { transform:translateY(-2px); box-shadow:0 12px 36px rgba(201,169,110,0.4); }
+.payment-actions .btn-confirm:disabled { opacity:0.4; cursor:not-allowed; transform:none; background:var(--bg3); color:var(--ghost); }
+.sub-info-box { background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(168,85,247,0.04)); border:1px solid rgba(168,85,247,0.3); border-radius:var(--radius); padding:14px; margin-bottom:20px; display:none; }
+.sub-info-box.show { display:block; animation:fadeIn 0.3s; }
+.sub-info-box h4 { color:var(--purple); font-size:0.78rem; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+.sub-info-box p { font-size:0.72rem; color:var(--muted); line-height:1.5; }
+.sub-info-box .visit-counter { display:inline-block; padding:3px 10px; background:rgba(168,85,247,0.2); border-radius:100px; color:var(--purple); font-weight:700; font-size:0.7rem; margin-top:6px; }
+
+/* ============== LOGIN PREMIUM ============== */
+.admin-login-overlay { display:none; position:fixed; inset:0; z-index:9000; background:radial-gradient(ellipse at center,#0d0d0d,#050505); align-items:center; justify-content:center; padding:20px; overflow:hidden; }
+.admin-login-overlay.open { display:flex; animation:fadeIn 0.4s; }
+.login-bg-orbs { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.login-orb { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.4; }
+.login-orb.o1 { width:500px; height:500px; background:radial-gradient(circle,var(--gold),transparent 70%); top:-200px; left:-150px; }
+.login-orb.o2 { width:400px; height:400px; background:radial-gradient(circle,#A855F7,transparent 70%); bottom:-150px; right:-100px; opacity:0.2; }
+.admin-login-box { background:linear-gradient(145deg,rgba(20,20,20,0.95),rgba(15,15,15,0.95)); backdrop-filter:blur(30px); border:1px solid var(--border); border-radius:24px; padding:48px 40px; width:100%; max-width:440px; position:relative; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.7),0 0 100px rgba(201,169,110,0.08); z-index:1; }
+.admin-login-box::before { content:''; position:absolute; top:0; left:20%; right:20%; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+.login-brand-circle { width:90px; height:90px; margin:0 auto 22px; background:linear-gradient(135deg,var(--gold-l),var(--gold),var(--gold-d)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:900; color:#000; box-shadow:0 15px 40px rgba(201,169,110,0.5),inset 0 -4px 12px rgba(0,0,0,0.3); animation:glowPulse 3s ease-in-out infinite; position:relative; }
+.login-brand-circle::after { content:''; position:absolute; inset:-3px; border-radius:50%; border:1px solid rgba(201,169,110,0.3); }
+.login-brand { text-align:center; margin-bottom:32px; }
+.login-brand-name { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:900; background:linear-gradient(135deg,var(--gold-l),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing:6px; }
+.login-brand-name span { color:var(--white); font-weight:300; -webkit-text-fill-color:var(--white); }
+.login-brand-sub { font-size:0.58rem; letter-spacing:5px; text-transform:uppercase; color:var(--muted); margin-top:8px; font-weight:600; }
+.login-form-group { margin-bottom:18px; position:relative; }
+.login-form-label { display:block; font-size:0.6rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; font-weight:700; }
+.login-input-wrap { position:relative; }
+.login-input { width:100%; background:rgba(8,8,8,0.6); border:1.5px solid var(--border2); border-radius:12px; padding:16px 18px 16px 50px; color:var(--white); font-size:0.95rem; outline:none; transition:all 0.3s var(--ease); font-family:'Inter',sans-serif; }
+.login-input:focus { border-color:var(--gold); background:rgba(8,8,8,0.9); box-shadow:0 0 0 4px var(--gold-glow); transform:translateY(-1px); }
+.login-input::placeholder { color:var(--ghost); }
+.login-input-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:1rem; transition:color 0.3s; pointer-events:none; }
+.login-input:focus + .login-input-icon, .login-input-wrap:focus-within .login-input-icon { color:var(--gold); }
+.login-error { display:none; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); color:#FCA5A5; font-size:0.78rem; padding:11px 14px; border-radius:10px; margin-bottom:16px; text-align:center; animation:fadeIn 0.3s; }
+.login-error.show { display:flex; align-items:center; justify-content:center; gap:8px; }
+.login-btn { width:100%; padding:16px; background:linear-gradient(135deg,var(--gold),var(--gold-d)); color:#000; border:none; border-radius:12px; font-size:0.82rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s var(--ease); display:flex; align-items:center; justify-content:center; gap:10px; font-family:'Inter',sans-serif; box-shadow:0 8px 24px rgba(201,169,110,0.3); }
+.login-btn:hover { transform:translateY(-2px); box-shadow:0 14px 36px rgba(201,169,110,0.5); }
+.login-btn:active { transform:translateY(0); }
+.login-cancel { width:100%; padding:12px; background:transparent; border:1px solid var(--border2); color:var(--muted); border-radius:10px; font-size:0.74rem; font-weight:600; cursor:pointer; margin-top:10px; transition:all 0.25s; letter-spacing:1px; }
+.login-cancel:hover { border-color:var(--red); color:var(--red); }
+.login-hint { text-align:center; font-size:0.7rem; color:var(--faint); margin-top:18px; letter-spacing:0.5px; }
+.login-hint code { background:var(--gold-subtle); color:var(--gold); padding:2px 8px; border-radius:5px; font-weight:600; }
+
+/* ============== ADMIN PANEL ============== */
+.admin-panel { display:none; position:fixed; inset:0; z-index:8000; background:var(--bg); flex-direction:row; overflow:hidden; }
+.admin-panel.open { display:flex; }
+.admin-sidebar { width:270px; flex-shrink:0; background:linear-gradient(180deg,var(--bg1),var(--bg2)); border-right:1px solid var(--border2); display:flex; flex-direction:column; overflow-y:auto; }
+.sidebar-logo { padding:24px 20px; border-bottom:1px solid var(--border2); }
+.sidebar-logo-text { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--gold); letter-spacing:3px; }
+.sidebar-logo-text span { color:var(--white); font-weight:300; }
+.sidebar-logo-sub { font-size:0.55rem; letter-spacing:3px; text-transform:uppercase; color:var(--faint); margin-top:3px; }
+
+/* SELETOR DE BARBEIRO — INVESTMENT PROFESSIONAL */
+.barber-switcher-wrap { margin:16px 14px; padding:18px 16px; background:linear-gradient(145deg,rgba(16,185,129,0.12),rgba(8,8,8,0.6) 60%); border:1px solid rgba(16,185,129,0.28); border-radius:14px; position:relative; overflow:hidden; box-shadow:0 8px 28px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04); }
+.barber-switcher-wrap::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,#10B981,transparent); }
+.barber-switcher-wrap::after { content:''; position:absolute; top:-30%; right:-30%; width:140px; height:140px; background:radial-gradient(circle,rgba(16,185,129,0.18),transparent 70%); pointer-events:none; }
+.bsw-label { font-size:0.56rem; letter-spacing:3px; text-transform:uppercase; color:#34D399; font-weight:800; text-align:center; margin-bottom:14px; display:flex; align-items:center; justify-content:center; gap:7px; position:relative; z-index:1; }
+.bsw-label i { color:#10B981; font-size:0.7rem; }
+.bsw-current { display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:14px; animation:barberSwitch 0.4s ease; position:relative; z-index:1; }
+.bsw-avatar { width:62px; height:62px; border-radius:50%; background:linear-gradient(135deg,var(--gold-l),var(--gold) 50%,var(--gold-d)); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:900; font-size:1.3rem; color:#000; box-shadow:0 10px 24px rgba(201,169,110,0.45),inset 0 -3px 8px rgba(0,0,0,0.3),0 0 0 3px rgba(16,185,129,0.3); border:2px solid rgba(16,185,129,0.5); position:relative; }
+.bsw-avatar::after { content:''; position:absolute; bottom:-2px; right:-2px; width:14px; height:14px; background:#10B981; border:2.5px solid #0D0D0D; border-radius:50%; box-shadow:0 0 12px rgba(16,185,129,0.7); animation:dotBlink 2s ease-in-out infinite; }
+.bsw-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--white); text-align:center; letter-spacing:0.3px; }
+.bsw-spec { font-size:0.58rem; color:#34D399; letter-spacing:2px; text-transform:uppercase; text-align:center; font-weight:600; }
+.bsw-select { width:100%; background:rgba(5,5,5,0.85); border:1.5px solid rgba(16,185,129,0.4); border-radius:10px; padding:12px 14px; color:var(--white); font-size:0.82rem; font-weight:600; outline:none; cursor:pointer; font-family:'Inter',sans-serif; transition:all 0.25s ease; appearance:none; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2310B981"><path d="M7 10l5 5 5-5z"/></svg>'); background-repeat:no-repeat; background-position:right 10px center; background-size:18px; padding-right:34px; position:relative; z-index:1; letter-spacing:0.3px; }
+.bsw-select:hover, .bsw-select:focus { border-color:#10B981; background-color:rgba(16,185,129,0.1); box-shadow:0 0 0 3px rgba(16,185,129,0.25); transform:translateY(-1px); }
+.bsw-select option { background:#0A0A0A; color:#F7F3EC; padding:12px; font-weight:600; font-size:0.85rem; }
+.sidebar-nav { padding:8px 12px; flex:1; }
+.nav-group { margin-bottom:24px; }
+.nav-group-label { font-size:0.52rem; letter-spacing:3px; text-transform:uppercase; color:var(--faint); padding:0 8px 10px; display:block; }
+.nav-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; color:var(--muted); font-size:0.76rem; font-weight:500; cursor:pointer; transition:all 0.25s; margin-bottom:3px; border:none; background:none; width:100%; text-align:left; letter-spacing:0.3px; }
+.nav-item i { width:15px; font-size:0.8rem; flex-shrink:0; }
+.nav-item:hover { background:rgba(201,169,110,0.08); color:var(--white); }
+.nav-item.active { background:var(--gold-subtle); color:var(--gold); border:1px solid rgba(201,169,110,0.2); }
+.sidebar-footer { padding:16px 12px; border-top:1px solid var(--border2); }
+
+.admin-main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+.admin-topbar { height:64px; background:var(--bg1); border-bottom:1px solid var(--border2); display:flex; align-items:center; justify-content:space-between; padding:0 32px; flex-shrink:0; }
+.admin-page-title { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:600; display:flex; align-items:center; gap:12px; }
+.admin-page-title em { color:var(--gold); font-style:italic; font-size:0.85rem; font-weight:400; }
+.admin-topbar-right { display:flex; align-items:center; gap:14px; }
+.online-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25); border-radius:100px; font-size:0.65rem; color:var(--green); font-weight:500; }
+.online-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:dotBlink 2s ease-in-out infinite; }
+.btn-logout { background:none; border:1px solid var(--border2); color:var(--muted); padding:7px 16px; border-radius:7px; font-size:0.68rem; font-weight:500; cursor:pointer; letter-spacing:0.5px; transition:all 0.25s; }
+.btn-logout:hover { border-color:var(--red); color:var(--red); background:rgba(239,68,68,0.05); }
+.admin-content { flex:1; overflow-y:auto; padding:28px 32px; }
+.admin-section { display:none; }
+.admin-section.active { display:block; animation:sectionFade 0.3s ease; }
+
+/* CONTEXT BANNER (mostra qual barbeiro tá vendo) */
+.context-banner { background:linear-gradient(135deg,rgba(201,169,110,0.12),rgba(201,169,110,0.03)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px 24px; margin-bottom:24px; display:flex; align-items:center; gap:18px; position:relative; overflow:hidden; }
+.context-banner::before { content:''; position:absolute; top:0; left:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--gold),var(--gold-d)); }
+.ctx-avatar { width:54px; height:54px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--gold-d)); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:900; font-size:1.2rem; color:#000; flex-shrink:0; box-shadow:0 6px 18px rgba(201,169,110,0.35); }
+.ctx-info { flex:1; min-width:0; }
+.ctx-label { font-size:0.62rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); font-weight:600; }
+.ctx-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:var(--white); margin-top:2px; }
+.ctx-spec { font-size:0.72rem; color:var(--gold); margin-top:2px; }
+
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px; }
+.stat-box { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; position:relative; overflow:hidden; transition:all 0.35s; }
+.stat-box:hover { border-color:var(--gold); transform:translateY(-2px); box-shadow:0 8px 32px rgba(201,169,110,0.15); }
+.stat-icon-wrap { width:40px; height:40px; background:var(--gold-subtle); border:1px solid rgba(201,169,110,0.2); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:0.9rem; margin-bottom:14px; }
+.stat-value { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--white); line-height:1; display:block; margin-bottom:4px; }
+.stat-label { font-size:0.65rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--faint); }
+.stat-delta { font-size:0.68rem; color:var(--green); margin-top:8px; font-weight:500; }
+.admin-card { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:24px; margin-bottom:18px; transition:border-color 0.3s; }
+.admin-card:hover { border-color:var(--border); }
+.admin-card-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:10px; }
+.admin-card-header h3 { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:600; }
+.admin-card-header .meta-label { font-size:0.7rem; color:var(--muted); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.premium-table { width:100%; border-collapse:collapse; }
+.premium-table th { text-align:left; font-size:0.62rem; letter-spacing:2px; text-transform:uppercase; color:var(--faint); padding:12px; border-bottom:1px solid var(--border2); white-space:nowrap; font-weight:600; }
+.premium-table td { padding:14px 12px; border-bottom:1px solid rgba(255,255,255,0.015); font-size:0.8rem; vertical-align:middle; }
+.premium-table tr:hover td { background:rgba(201,169,110,0.04); }
+.premium-table tr:last-child td { border-bottom:none; }
+.badge-tag { display:inline-block; padding:4px 10px; border-radius:6px; font-size:0.62rem; letter-spacing:1.2px; text-transform:uppercase; font-weight:600; }
+.badge-pending { background:rgba(201,169,110,0.15); color:var(--gold); }
+.badge-done { background:rgba(34,197,94,0.15); color:var(--green); }
+.badge-cancelled { background:rgba(239,68,68,0.15); color:var(--red); }
+.badge-sub { background:rgba(168,85,247,0.15); color:var(--purple); display:inline-flex; align-items:center; gap:4px; }
+.table-btn { background:none; border:1px solid var(--border2); color:var(--muted); padding:5px 10px; border-radius:6px; font-size:0.68rem; cursor:pointer; transition:all 0.25s; margin-right:4px; }
+.table-btn:hover { border-color:var(--gold); color:var(--gold); background:rgba(201,169,110,0.08); }
+.table-btn.danger:hover { border-color:var(--red); color:var(--red); background:rgba(239,68,68,0.08); }
+.bar-chart { display:flex; align-items:flex-end; gap:8px; height:160px; padding:16px 12px 0; }
+.bar-item { display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; }
+.bar-fill { width:100%; border-radius:4px 4px 0 0; background:linear-gradient(180deg,var(--gold),rgba(201,169,110,0.4)); min-height:4px; transition:height 0.6s var(--ease); cursor:pointer; }
+.bar-label { font-size:0.58rem; color:var(--faint); text-align:center; letter-spacing:0.5px; }
+.empty-state { text-align:center; padding:48px 24px; color:var(--muted); }
+.empty-state i { font-size:2.4rem; display:block; margin-bottom:12px; color:var(--ghost); }
+.empty-state p { font-size:0.85rem; }
+.progress-bar { height:4px; background:var(--bg4); border-radius:2px; overflow:hidden; margin-top:8px; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-l)); border-radius:2px; transition:width 0.8s var(--ease); }
+
+/* ============== FINANCIAL ============== */
+.finance-hero { background:linear-gradient(135deg,rgba(201,169,110,0.12),rgba(201,169,110,0.04)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; margin-bottom:24px; position:relative; overflow:hidden; }
+.finance-hero::before { content:''; position:absolute; top:-50%; right:-20%; width:60%; height:200%; background:radial-gradient(circle,rgba(201,169,110,0.15),transparent 60%); pointer-events:none; }
+.finance-hero-content { position:relative; z-index:1; display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:20px; }
+.finance-hero-title { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:var(--white); margin-bottom:8px; }
+.finance-hero-title em { color:var(--gold); font-style:italic; }
+.finance-hero-subtitle { font-size:0.72rem; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; }
+.finance-period-pill { display:inline-flex; align-items:center; gap:8px; padding:8px 18px; background:rgba(201,169,110,0.1); border:1px solid var(--gold); border-radius:100px; font-size:0.7rem; color:var(--gold); font-weight:600; letter-spacing:1px; }
+.fin-filters { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:20px; margin-bottom:20px; display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:12px; align-items:end; }
+.fin-filter-group { display:flex; flex-direction:column; gap:6px; }
+.fin-filter-label { font-size:0.6rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); font-weight:600; }
+.fin-filter-input { background:var(--bg3); border:1px solid var(--border2); border-radius:8px; padding:11px 14px; color:var(--white); font-size:0.82rem; outline:none; transition:border-color 0.2s; font-family:'Inter',sans-serif; }
+.fin-filter-input:focus { border-color:var(--gold); }
+.fin-clear-btn { background:transparent; border:1px solid var(--border2); color:var(--muted); padding:11px 16px; border-radius:8px; font-size:0.72rem; font-weight:600; cursor:pointer; transition:all 0.2s; letter-spacing:1px; text-transform:uppercase; }
+.fin-clear-btn:hover { border-color:var(--red); color:var(--red); }
+.finance-overview-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+.fin-stat-card { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:22px; position:relative; overflow:hidden; transition:all 0.35s; }
+.fin-stat-card:hover { border-color:var(--gold); transform:translateY(-3px); box-shadow:0 12px 32px rgba(201,169,110,0.12); }
+.fin-stat-icon { width:42px; height:42px; background:var(--gold-subtle); border:1px solid rgba(201,169,110,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1rem; margin-bottom:14px; }
+.fin-stat-card.green .fin-stat-icon { background:rgba(34,197,94,0.1); color:var(--green); border-color:rgba(34,197,94,0.25); }
+.fin-stat-card.blue .fin-stat-icon { background:rgba(59,130,246,0.1); color:var(--blue); border-color:rgba(59,130,246,0.25); }
+.fin-stat-card.purple .fin-stat-icon { background:rgba(168,85,247,0.1); color:var(--purple); border-color:rgba(168,85,247,0.25); }
+.fin-stat-value { font-family:'Playfair Display',serif; font-size:1.9rem; font-weight:700; color:var(--white); line-height:1; }
+.fin-stat-label { font-size:0.62rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--faint); margin-top:6px; }
+.fin-stat-trend { font-size:0.7rem; margin-top:8px; color:var(--green); display:flex; align-items:center; gap:4px; }
+.payment-methods-summary { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:24px; }
+.pm-card { background:var(--bg3); border:1px solid var(--border2); border-radius:var(--radius); padding:18px 14px; text-align:center; transition:all 0.3s; cursor:default; }
+.pm-card:hover { transform:translateY(-2px); }
+.pm-card.pix:hover { border-color:#7071D3; box-shadow:0 4px 16px rgba(112,111,211,0.2); }
+.pm-card.credito:hover { border-color:var(--blue); box-shadow:0 4px 16px rgba(59,130,246,0.2); }
+.pm-card.debito:hover { border-color:var(--green); box-shadow:0 4px 16px rgba(34,197,94,0.2); }
+.pm-card.dinheiro:hover { border-color:var(--gold); box-shadow:0 4px 16px rgba(201,169,110,0.2); }
+.pm-card.subscription:hover { border-color:var(--purple); box-shadow:0 4px 16px rgba(168,85,247,0.2); }
+.pm-icon { font-size:1.5rem; margin-bottom:6px; display:block; }
+.pm-card.pix .pm-icon { color:#7071D3; }
+.pm-card.credito .pm-icon { color:var(--blue); }
+.pm-card.debito .pm-icon { color:var(--green); }
+.pm-card.dinheiro .pm-icon { color:var(--gold); }
+.pm-card.subscription .pm-icon { color:var(--purple); }
+.pm-value { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--white); line-height:1.1; }
+.pm-count { font-size:0.62rem; color:var(--faint); margin-top:4px; letter-spacing:0.5px; }
+.payment-method-badge { display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:6px; font-size:0.65rem; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; }
+.payment-method-badge i { font-size:0.65rem; }
+.payment-method-badge.pix { background:rgba(112,111,211,0.15); color:#7071D3; }
+.payment-method-badge.credito { background:rgba(59,130,246,0.15); color:var(--blue); }
+.payment-method-badge.debito { background:rgba(34,197,94,0.15); color:var(--green); }
+.payment-method-badge.dinheiro { background:rgba(201,169,110,0.15); color:var(--gold); }
+.payment-method-badge.subscription { background:rgba(168,85,247,0.15); color:var(--purple); }
+
+/* TOAST */
+.toast-c { position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,var(--gold),var(--gold-d)); color:#000; padding:14px 28px; border-radius:8px; font-weight:700; font-size:0.85rem; z-index:99999; box-shadow:0 12px 40px rgba(201,169,110,0.5); animation:fadeUp 0.4s ease; }
+
+/* ANIMAÇÃO DE CONFIRMAÇÃO PREMIUM */
+.success-overlay { position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.5); pointer-events:none; }
+.success-overlay.show { display:flex; animation:successOverlayFade 2.2s ease forwards; }
+.success-content { position:relative; display:flex; flex-direction:column; align-items:center; gap:24px; }
+.success-circle-wrap { position:relative; width:140px; height:140px; display:flex; align-items:center; justify-content:center; }
+.success-circle { width:120px; height:120px; border-radius:50%; background:linear-gradient(135deg,#10B981,#059669); display:flex; align-items:center; justify-content:center; box-shadow:0 20px 60px rgba(16,185,129,0.6),0 0 0 6px rgba(16,185,129,0.15),inset 0 -4px 12px rgba(0,0,0,0.2); animation:successCircleIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both; position:relative; z-index:2; }
+.success-check { stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; fill:none; stroke-dasharray:60; stroke-dashoffset:60; animation:successCheckDraw 0.5s 0.5s cubic-bezier(0.65,0,0.45,1) forwards; }
+.success-ring { position:absolute; inset:0; border-radius:50%; border:2.5px solid #10B981; opacity:0; }
+.success-ring.r1 { animation:successRingPulse 1.6s 0.3s ease-out forwards; }
+.success-ring.r2 { animation:successRingPulse 1.6s 0.5s ease-out forwards; }
+.success-ring.r3 { animation:successRingPulse 1.6s 0.7s ease-out forwards; }
+.success-text { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#fff; text-align:center; animation:successTextRise 2s 0.4s ease both; letter-spacing:0.5px; text-shadow:0 4px 20px rgba(0,0,0,0.6); }
+.success-text em { color:#34D399; font-style:italic; }
+.success-subtext { font-size:0.78rem; color:rgba(255,255,255,0.7); letter-spacing:2px; text-transform:uppercase; font-weight:600; animation:successTextRise 2s 0.6s ease both; text-align:center; margin-top:8px; }
+.confetti { position:absolute; width:8px; height:8px; pointer-events:none; opacity:0; }
+.confetti.c1 { background:#10B981; left:20%; top:30%; animation:confettiFall 1.5s 0.6s ease-in forwards; }
+.confetti.c2 { background:#C9A96E; left:80%; top:25%; animation:confettiFall 1.7s 0.7s ease-in forwards; }
+.confetti.c3 { background:#34D399; left:15%; top:60%; animation:confettiFall 1.6s 0.8s ease-in forwards; }
+.confetti.c4 { background:#E8CC9A; left:85%; top:55%; animation:confettiFall 1.8s 0.9s ease-in forwards; }
+.confetti.c5 { background:#10B981; left:50%; top:20%; animation:confettiFall 1.5s 0.5s ease-in forwards; }
+/* RESPONSIVE */
 @media (max-width:1100px) {
   .services-grid { grid-template-columns:repeat(2,1fr); }
-  .reviews-grid { grid-template-columns:repeat(2,1fr); }
-  .about-grid { grid-template-columns:1fr; gap:40px; }
-  .contact-grid { grid-template-columns:1fr; }
-  .gallery-grid { grid-template-columns:repeat(2,1fr); }
-  .gallery-item:nth-child(1) { grid-column:span 1; grid-row:span 1; }
+  .stats-grid { grid-template-columns:repeat(2,1fr); }
   .footer-top { grid-template-columns:1fr 1fr; }
+  .grid-2 { grid-template-columns:1fr; }
   .barbers-grid { grid-template-columns:repeat(2,1fr); }
+  .finance-overview-grid { grid-template-columns:repeat(2,1fr); }
+  .payment-methods-summary { grid-template-columns:repeat(3,1fr); }
+  .fin-filters { grid-template-columns:1fr 1fr; }
 }
 @media (max-width:768px) {
   #navbar { padding:0 18px; }
@@ -236,23 +515,31 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
   .ham-btn { display:flex; }
   .section { padding:72px 18px; }
   .services-grid { grid-template-columns:1fr; }
-  .reviews-grid { grid-template-columns:1fr; }
-  .gallery-grid { grid-template-columns:1fr 1fr; }
   .hero-stats { grid-template-columns:repeat(2,1fr); }
   .hero-stat { border-right:none; border-bottom:1px solid var(--border2); padding:14px 0; }
-  .hero-stat:nth-child(2n) { border-right:none; }
   .hero-stat:last-child, .hero-stat:nth-last-child(2) { border-bottom:none; }
   .footer-top { grid-template-columns:1fr; }
+  .admin-sidebar { width:240px; }
+  .admin-content { padding:18px 20px; }
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .admin-topbar { padding:0 18px; height:56px; }
+  .hero-cta-wrap { flex-direction:column; align-items:stretch; }
   #hero { padding:90px 18px 50px; }
   .barbers-grid { grid-template-columns:1fr; }
-  .hero-cta-wrap { flex-direction:column; align-items:stretch; }
-  .hero-btn { justify-content:center; }
-  .services-header { flex-direction:column; }
+  .payment-methods-summary { grid-template-columns:repeat(2,1fr); }
+  .payment-methods { grid-template-columns:1fr; }
+  .payment-btn.subscription { grid-column:span 1; }
+  .fin-filters { grid-template-columns:1fr; }
 }
 @media (max-width:480px) {
   .hero-title { font-size:clamp(2.5rem,11vw,4rem); }
-  .gallery-grid { grid-template-columns:1fr; }
-  .footer-top { grid-template-columns:1fr; }
+  .stats-grid { grid-template-columns:1fr; }
+  .admin-sidebar { display:none; }
+  .admin-panel.open { flex-direction:column; }
+  .grid-2 { grid-template-columns:1fr; }
+  .finance-overview-grid { grid-template-columns:1fr; }
+  .payment-methods-summary { grid-template-columns:1fr; }
+  .payment-modal-window { padding:24px; }
 }
 </style>
 </head>
@@ -264,61 +551,53 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
   <div class="ldr-progress"><div class="ldr-fill"></div></div>
 </div>
 
-<a class="wa-float" href="https://wa.me/5541997878695?text=Olá!%20Gostaria%20de%20conhecer%20mais%20sobre%20a%20DL%20Barber%20Club." target="_blank" title="WhatsApp">
-  <i class="fab fa-whatsapp"></i>
-</a>
+<a class="wa-float" href="https://wa.me/5541997878695" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
 <nav id="navbar">
-  <a class="nav-brand" href="#hero">
-    <div class="nav-brand-text">DL <span>BARBER</span> CLUB</div>
-  </a>
+  <a class="nav-brand" href="#hero"><div class="nav-brand-text">DL <span>BARBER</span> CLUB</div></a>
   <ul class="nav-links">
     <li><a href="#services">Serviços</a></li>
-    <li><a href="#about">Sobre</a></li>
-    <li><a href="#gallery">Galeria</a></li>
-    <li><a href="#reviews">Avaliações</a></li>
+    <li><a href="#barbers">Barbeiros</a></li>
     <li><a href="#contact">Contato</a></li>
   </ul>
   <div class="nav-actions">
     <a class="nav-btn wa" href="https://wa.me/5541997878695" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <button class="nav-btn solid" onclick="openBooking()"><i class="fas fa-calendar-alt"></i> Agendar</button>
   </div>
-  <button class="ham-btn" onclick="toggleMob()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="ham-btn" onclick="toggleMob()"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-nav" id="mobileNav">
   <ul>
     <li><a href="#services" onclick="closeMob()">Serviços</a></li>
-    <li><a href="#about" onclick="closeMob()">Sobre</a></li>
-    <li><a href="#gallery" onclick="closeMob()">Galeria</a></li>
-    <li><a href="#reviews" onclick="closeMob()">Avaliações</a></li>
+    <li><a href="#barbers" onclick="closeMob()">Barbeiros</a></li>
     <li><a href="#contact" onclick="closeMob()">Contato</a></li>
   </ul>
   <div class="mobile-nav-actions">
     <a class="hero-btn whatsapp" href="https://wa.me/5541997878695" target="_blank" onclick="closeMob()"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <button class="hero-btn primary" onclick="openBooking();closeMob()"><i class="fas fa-calendar-alt"></i> Agendar</button>
   </div>
 </div>
 
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grain"></div>
   <div class="hero-grid-lines"></div>
   <div class="hero-content">
-    <div class="hero-badge"><i class="fas fa-crown"></i> Premium Barbershop &nbsp;·&nbsp; Curitiba, Paraná</div>
+    <div class="hero-badge"><i class="fas fa-crown"></i> Premium Barbershop · Curitiba, Paraná</div>
     <h1 class="hero-title">
       <span class="row1">Mais que um corte.</span>
       <span class="row2">Uma experiência.</span>
     </h1>
-    <p class="hero-sub">A barbearia premium que redefine estilo, exclusividade e personalidade. Onde cada detalhe é uma obra de arte.</p>
+    <p class="hero-sub">A barbearia premium que redefine estilo, exclusividade e personalidade.</p>
     <div class="hero-cta-wrap">
-      <a class="hero-btn whatsapp" href="https://wa.me/5541997878695?text=Olá!%20Quero%20agendar%20um%20horário%20na%20DL%20Barber%20Club." target="_blank"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+      <button class="hero-btn primary" onclick="openBooking()"><i class="fas fa-calendar-alt"></i> Agendar Horário</button>
+      <a class="hero-btn whatsapp" href="https://wa.me/5541997878695" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
       <a class="hero-btn ghost" href="#services"><i class="fas fa-scissors"></i> Ver Serviços</a>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><span class="stat-num">4.4★</span><span class="stat-lab">Avaliação Google</span></div>
-      <div class="hero-stat"><span class="stat-num">500+</span><span class="stat-lab">Clientes Atendidos</span></div>
-      <div class="hero-stat"><span class="stat-num">5+</span><span class="stat-lab">Anos de Excelência</span></div>
-      <div class="hero-stat"><span class="stat-num">4</span><span class="stat-lab">Especialistas</span></div>
+      <div class="hero-stat"><span class="stat-num">4.4★</span><span class="stat-lab">Avaliação</span></div>
+      <div class="hero-stat"><span class="stat-num">500+</span><span class="stat-lab">Clientes</span></div>
+      <div class="hero-stat"><span class="stat-num">5+</span><span class="stat-lab">Anos</span></div>
+      <div class="hero-stat"><span class="stat-num" id="heroBarberCount">4</span><span class="stat-lab">Barbeiros</span></div>
     </div>
   </div>
   <div class="scroll-indicator"><div class="scroll-line"></div>scroll</div>
@@ -331,66 +610,9 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
       <h2 class="section-title">Serviços <em>Premium</em></h2>
       <div class="section-bar"></div>
     </div>
-    <p class="section-sub" style="max-width:340px">Cada serviço executado com precisão e produtos selecionados de alta performance.</p>
+    <p class="section-sub" style="max-width:340px">Cada serviço executado com precisão e produtos selecionados.</p>
   </div>
-  <div class="services-grid">
-    <div class="svc-card reveal">
-      <div class="svc-idx">01</div>
-      <div class="svc-icon-wrap"><i class="fas fa-cut"></i></div>
-      <div class="svc-name">Corte Masculino</div>
-      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>30 min &nbsp;·&nbsp; Cortes</div>
-      <span class="svc-price">R$ 40,00</span>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-idx">02</div>
-      <div class="svc-icon-wrap"><i class="fas fa-cut"></i></div>
-      <div class="svc-name">Corte (Uma Máquina)</div>
-      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>30 min &nbsp;·&nbsp; Cortes</div>
-      <span class="svc-price">R$ 35,00</span>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-idx">03</div>
-      <div class="svc-icon-wrap"><i class="fas fa-user"></i></div>
-      <div class="svc-name">Barba Premium</div>
-      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>30 min &nbsp;·&nbsp; Barba</div>
-      <span class="svc-price">R$ 35,00</span>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-idx">04</div>
-      <div class="svc-icon-wrap"><i class="fas fa-star"></i></div>
-      <div class="svc-name">Corte + Barba</div>
-      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>60 min &nbsp;·&nbsp; Combo</div>
-      <span class="svc-price">R$ 70,00</span>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-idx">05</div>
-      <div class="svc-icon-wrap"><i class="fas fa-eye"></i></div>
-      <div class="svc-name">Sobrancelha</div>
-      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>10 min &nbsp;·&nbsp; Estética</div>
-      <span class="svc-price">R$ 10,00</span>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-idx">06</div>
-      <div class="svc-icon-wrap"><i class="fas fa-paint-brush"></i></div>
-      <div class="svc-name">Pigmentação</div>
-      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>60 min &nbsp;·&nbsp; Química</div>
-      <span class="svc-price">R$ 80,00</span>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-idx">07</div>
-      <div class="svc-icon-wrap"><i class="fas fa-crown"></i></div>
-      <div class="svc-name">Combo VIP</div>
-      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>75 min &nbsp;·&nbsp; Combo</div>
-      <span class="svc-price">R$ 75,00</span>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-idx">08</div>
-      <div class="svc-icon-wrap"><i class="fas fa-tint"></i></div>
-      <div class="svc-name">Hidratação</div>
-      <div class="svc-meta"><i class="fas fa-clock" style="margin-right:4px;font-size:0.6rem"></i>20 min &nbsp;·&nbsp; Estética</div>
-      <span class="svc-price">R$ 15,00</span>
-    </div>
-  </div>
+  <div class="services-grid" id="servicesGrid"></div>
 </section>
 
 <section class="section alt" id="barbers">
@@ -400,131 +622,20 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
       <h2 class="section-title">Conheça nossos <em>Barbeiros</em></h2>
       <div class="section-bar"></div>
     </div>
-    <p class="section-sub" style="max-width:340px">Especialistas em estilo, qualidade e satisfação do cliente.</p>
   </div>
-  <div class="barbers-grid">
-    <div class="barber-card reveal">
-      <div class="barber-card-head">
-        <div class="barber-avatar">DL</div>
-      </div>
-      <div class="barber-card-body">
-        <div class="barber-name">David Leal</div>
-        <div class="barber-spec">Cortes & Barba</div>
-      </div>
-    </div>
-    <div class="barber-card reveal">
-      <div class="barber-card-head">
-        <div class="barber-avatar">KM</div>
-      </div>
-      <div class="barber-card-body">
-        <div class="barber-name">Kauan Martins</div>
-        <div class="barber-spec">Degradê & Química</div>
-      </div>
-    </div>
-    <div class="barber-card reveal">
-      <div class="barber-card-head">
-        <div class="barber-avatar">LG</div>
-      </div>
-      <div class="barber-card-body">
-        <div class="barber-name">Luiz Gustavo</div>
-        <div class="barber-spec">Estética & Coloração</div>
-      </div>
-    </div>
-    <div class="barber-card reveal">
-      <div class="barber-card-head">
-        <div class="barber-avatar">GU</div>
-      </div>
-      <div class="barber-card-body">
-        <div class="barber-name">Guilherme</div>
-        <div class="barber-spec">Estilo & Modernidade</div>
-      </div>
-    </div>
-  </div>
+  <div class="barbers-grid" id="barbersGrid"></div>
 </section>
 
-<section class="section" id="about">
-  <div class="about-grid">
-    <div class="about-visual-wrap reveal">
-      <div class="about-card">
-        <div class="about-icon"><i class="fas fa-cut"></i></div>
-        <div class="about-badge-tag">5+<br><small style="font-size:0.65rem;font-weight:400">Anos</small></div>
-      </div>
-    </div>
-    <div class="reveal">
-      <span class="section-tag">Nossa História</span>
-      <h2 class="section-title">Sobre a <em>DL Barber Club</em></h2>
-      <div class="section-bar"></div>
-      <div style="margin-top:22px">
-        <p class="about-text">A DL Barber Club nasceu da paixão por transformar cuidados masculinos em experiências memoráveis. Localizada na Av. Anita Garibaldi, em Curitiba, somos referência em qualidade e exclusividade.</p>
-        <p class="about-text" style="margin-top:10px">Cada cliente recebe atenção personalizada desde o primeiro corte até os tratamentos mais sofisticados. Nossa equipe está em constante evolução.</p>
-      </div>
-      <div class="value-grid">
-        <div class="value-card"><i class="fas fa-award"></i><h4>Profissionais certificados</h4><p>Treinamento contínuo e técnicas avançadas</p></div>
-        <div class="value-card"><i class="fas fa-clock"></i><h4>Pontualidade garantida</h4><p>Respeitamos seu tempo em cada visita</p></div>
-        <div class="value-card"><i class="fas fa-leaf"></i><h4>Produtos premium</h4><p>Cosméticos de alta performance</p></div>
-        <div class="value-card"><i class="fas fa-star"></i><h4>4.4 no Google</h4><p>Avaliação baseada em 23 clientes reais</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section alt" id="gallery">
-  <div style="text-align:center" class="reveal">
-    <span class="section-tag">Nosso Trabalho</span>
-    <h2 class="section-title">Galeria <em>Editorial</em></h2>
-    <div class="section-bar" style="margin:16px auto 0"></div>
-  </div>
-  <div class="gallery-grid reveal">
-    <div class="gallery-item" style="background:linear-gradient(135deg,#141410,#0c0c0a)"><div class="gal-content"><i class="gal-ico fas fa-cut"></i><span class="gal-text">Degradê Premium</span></div><div class="gal-overlay"><span class="gal-label">Degradê · 45min</span></div></div>
-    <div class="gallery-item" style="background:linear-gradient(135deg,#181814,#101010)"><div class="gal-content"><i class="gal-ico fas fa-user-tie"></i><span class="gal-text">Corte Clássico</span></div><div class="gal-overlay"><span class="gal-label">Clássico · 30min</span></div></div>
-    <div class="gallery-item" style="background:linear-gradient(135deg,#121212,#0a0a08)"><div class="gal-content"><i class="gal-ico fas fa-spa"></i><span class="gal-text">Barba Perfeita</span></div><div class="gal-overlay"><span class="gal-label">Barba · 30min</span></div></div>
-    <div class="gallery-item" style="background:linear-gradient(135deg,#161612,#0e0e0c)"><div class="gal-content"><i class="gal-ico fas fa-magic"></i><span class="gal-text">Pigmentação</span></div><div class="gal-overlay"><span class="gal-label">Pigmentação · 60min</span></div></div>
-    <div class="gallery-item" style="background:linear-gradient(135deg,#1a1a14,#111111)"><div class="gal-content"><i class="gal-ico fas fa-crown"></i><span class="gal-text">Combo VIP</span></div><div class="gal-overlay"><span class="gal-label">Combo VIP · 75min</span></div></div>
-  </div>
-</section>
-
-<section class="section" id="reviews">
-  <div class="reviews-header reveal">
-    <div>
-      <span class="section-tag">Quem nos escolhe</span>
-      <h2 class="section-title">Avaliações <em>Reais</em></h2>
-      <div class="section-bar"></div>
-    </div>
-    <div class="rating-card">
-      <div class="rating-big">4.4</div>
-      <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-      <div class="rating-count">23 avaliações no Google</div>
-    </div>
-  </div>
-  <div class="reviews-grid reveal">
-    <div class="review-card"><div class="review-head"><div class="review-avatar">LM</div><div><div class="review-name">Lucas Mendes</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div><p class="review-text">Melhor barbearia de Curitiba. O David é incrível, meu cabelo ficou exatamente como eu queria. Ambiente premium e preço muito justo!</p></div>
-    <div class="review-card"><div class="review-head"><div class="review-avatar">RS</div><div><div class="review-name">Rafael Santos</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div><p class="review-text">Atendimento impecável! Fiz o pacote corte + barba e saí se sentindo outra pessoa. Virei cliente fixo da DL Barber!</p></div>
-    <div class="review-card"><div class="review-head"><div class="review-avatar">MP</div><div><div class="review-name">Marcos Pereira</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div></div><p class="review-text">No plano mensal há 6 meses e não troco por nada. Excelente custo-benefício e qualidade sempre consistente. Top!</p></div>
-    <div class="review-card"><div class="review-head"><div class="review-avatar">JC</div><div><div class="review-name">João Carlos</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div><p class="review-text">Levei meu filho para o primeiro corte. Atendimento incrível, cuidadoso e com preço especial. Muito recomendado!</p></div>
-    <div class="review-card"><div class="review-head"><div class="review-avatar">GO</div><div><div class="review-name">Gabriel Oliveira</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div><p class="review-text">Fiz a progressiva + corte e ficou perfeito! Profissional explicou tudo e o resultado superou minhas expectativas!</p></div>
-    <div class="review-card"><div class="review-head"><div class="review-avatar">AV</div><div><div class="review-name">André Vieira</div><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div></div></div><p class="review-text">Ótimo ambiente, profissionais qualificados e pontualidade exemplar. Barba ficou excelente. Voltarei com certeza!</p></div>
-  </div>
-</section>
-
-<section class="section alt" id="contact">
+<section class="section" id="contact">
   <div class="reveal" style="text-align:center">
     <span class="section-tag">Fale Conosco</span>
     <h2 class="section-title">Entre em <em>Contato</em></h2>
     <div class="section-bar" style="margin:16px auto 0"></div>
-  </div>
-  <div class="contact-grid">
-    <div class="reveal">
-      <div class="contact-item"><div class="contact-icon"><i class="fab fa-whatsapp"></i></div><div><div class="contact-label">WhatsApp</div><div class="contact-value">(41) 99787-8695</div></div></div>
-      <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="contact-label">Endereço</div><div class="contact-value">Av. Anita Garibaldi, 5320 — Loja 2<br>Barreirinha, Curitiba — PR</div></div></div>
-      <div class="contact-item"><div class="contact-icon"><i class="fas fa-clock"></i></div><div><div class="contact-label">Funcionamento</div><div class="contact-value">Seg – Sex: 10h às 20h<br>Sábado: 09h às 19h<br>Domingo: Fechado</div></div></div>
-      <div class="contact-item"><div class="contact-icon"><i class="fab fa-instagram"></i></div><div><div class="contact-label">Instagram</div><div class="contact-value">@DlBarber.Club</div></div></div>
-    </div>
-    <div class="reveal">
-      <div class="map-box"><div class="map-placeholder"><i class="fas fa-map-marked-alt"></i><p>Av. Anita Garibaldi, 5320<br><small style="font-size:0.72rem">Barreirinha — Curitiba, PR</small></p></div></div>
-      <div class="contact-buttons">
-        <a class="contact-btn green" href="https://wa.me/5541997878695?text=Olá!%20Quero%20agendar%20um%20horário." target="_blank"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
-        <a class="contact-btn dark" href="https://maps.google.com/?q=Av.+Anita+Garibaldi+5320+Curitiba+PR" target="_blank"><i class="fas fa-map-marked-alt"></i> Como Chegar</a>
-      </div>
+    <div style="max-width:500px;margin:40px auto 0;display:flex;flex-direction:column;gap:14px">
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:20px"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:8px"></i><strong>(41) 99787-8695</strong></div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:20px"><i class="fas fa-map-marker-alt" style="color:var(--gold);margin-right:8px"></i>Av. Anita Garibaldi, 5320 · Barreirinha, Curitiba/PR</div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:20px"><i class="fas fa-clock" style="color:var(--gold);margin-right:8px"></i>Seg–Sex: 10h–20h · Sáb: 09h–19h · Dom: Fechado</div>
+      <a class="hero-btn whatsapp" href="https://wa.me/5541997878695" target="_blank"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
     </div>
   </div>
 </section>
@@ -533,55 +644,1012 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
   <div class="footer-top">
     <div>
       <div class="footer-logo">DL <span>BARBER</span> CLUB</div>
-      <p class="footer-desc">A barbearia premium que redefine estilo, exclusividade e personalidade em Curitiba. Av. Anita Garibaldi, 5320 — Barreirinha.</p>
+      <p class="footer-desc">A barbearia premium em Curitiba. Av. Anita Garibaldi, 5320 — Barreirinha.</p>
       <div class="footer-social">
         <a class="social-link" href="https://instagram.com/DlBarber.Club" target="_blank"><i class="fab fa-instagram"></i></a>
         <a class="social-link" href="https://wa.me/5541997878695" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <button class="social-link" onclick="openAdminLogin()" title="Painel" style="cursor:pointer;border:1.5px solid var(--gold);color:var(--gold);background:rgba(201,169,110,0.12);font-size:1.1rem"><i class="fas fa-lock"></i></button>
       </div>
     </div>
-    <div class="footer-col"><h5>Serviços</h5><ul><li><a href="#services">Corte Masculino</a></li><li><a href="#services">Barba Premium</a></li><li><a href="#services">Corte + Barba</a></li><li><a href="#services">Pigmentação</a></li><li><a href="#services">Combo VIP</a></li></ul></div>
-    <div class="footer-col"><h5>Navegação</h5><ul><li><a href="#about">Sobre nós</a></li><li><a href="#gallery">Galeria</a></li><li><a href="#reviews">Avaliações</a></li><li><a href="#contact">Contato</a></li></ul></div>
-    <div class="footer-col"><h5>Horários</h5><ul><li><a href="#">Seg–Sex: 10h–20h</a></li><li><a href="#">Sábado: 09h–19h</a></li><li><a href="#" style="color:var(--red)">Domingo: Fechado</a></li></ul></div>
+    <div class="footer-col"><h5>Serviços</h5><ul id="footerServicesList"></ul></div>
+    <div class="footer-col"><h5>Navegação</h5><ul><li><a onclick="document.getElementById('barbers').scrollIntoView({behavior:'smooth'})">Barbeiros</a></li><li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contato</a></li></ul></div>
+    <div class="footer-col"><h5>Horários</h5><ul><li><a>Seg–Sex: 10h–20h</a></li><li><a>Sábado: 09h–19h</a></li><li><a style="color:var(--red)">Domingo: Fechado</a></li></ul></div>
   </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 DL Barber Club. Todos os direitos reservados.</span>
-  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 DL Barber Club. Todos os direitos reservados.</span></div>
 </footer>
+
+<!-- OVERLAY DE CONFIRMAÇÃO PREMIUM -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-content">
+    <div class="success-circle-wrap">
+      <div class="success-ring r1"></div>
+      <div class="success-ring r2"></div>
+      <div class="success-ring r3"></div>
+      <div class="success-circle">
+        <svg width="60" height="60" viewBox="0 0 60 60">
+          <polyline class="success-check" points="14,30 26,42 46,18"/>
+        </svg>
+      </div>
+      <div class="confetti c1"></div>
+      <div class="confetti c2"></div>
+      <div class="confetti c3"></div>
+      <div class="confetti c4"></div>
+      <div class="confetti c5"></div>
+    </div>
+    <div>
+      <div class="success-text">Pagamento <em>Confirmado!</em></div>
+      <div class="success-subtext" id="successSubtext"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== PAYMENT MODAL ============== -->
+<div class="payment-modal-overlay" id="paymentModal">
+  <div class="payment-modal-window">
+    <div class="payment-modal-header">
+      <div>
+        <div class="payment-modal-title"><i class="fas fa-credit-card"></i>Registrar <em>Pagamento</em></div>
+        <div class="payment-modal-subtitle">Finalizar atendimento</div>
+      </div>
+      <button class="payment-modal-close" onclick="closePaymentModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="payment-client-info" id="paymentClientInfo"></div>
+    <div class="sub-info-box" id="subInfoBox">
+      <h4><i class="fas fa-gem"></i> Cliente Assinante</h4>
+      <p>Plano: 4 cortes/mês · R$130,00 total · <strong style="color:var(--purple)">R$32,50 por corte</strong></p>
+      <div class="visit-counter" id="visitCounter"></div>
+    </div>
+    <div class="payment-step-label" data-step="1">Forma de Pagamento</div>
+    <div class="payment-methods">
+      <button class="payment-btn" data-method="pix" onclick="selectPaymentMethod('pix', event)"><i class="fas fa-bolt"></i>Pix</button>
+      <button class="payment-btn" data-method="credito" onclick="selectPaymentMethod('credito', event)"><i class="fas fa-credit-card"></i>Crédito</button>
+      <button class="payment-btn" data-method="debito" onclick="selectPaymentMethod('debito', event)"><i class="fas fa-money-check-alt"></i>Débito</button>
+      <button class="payment-btn" data-method="dinheiro" onclick="selectPaymentMethod('dinheiro', event)"><i class="fas fa-money-bill-wave"></i>Dinheiro</button>
+      <button class="payment-btn subscription" data-method="subscription" onclick="selectPaymentMethod('subscription', event)"><i class="fas fa-gem"></i>Assinante</button>
+    </div>
+    <div class="payment-step-label" data-step="2">Valor</div>
+    <div class="payment-value-input-wrap">
+      <span class="payment-value-prefix">R$</span>
+      <input type="number" class="payment-value-input" id="paymentValueInput" placeholder="0,00" step="0.01" min="0" oninput="updatePaymentConfirmBtn()">
+    </div>
+    <div class="payment-actions">
+      <button class="btn-cancel" onclick="closePaymentModal()">Cancelar</button>
+      <button class="btn-confirm" id="confirmPaymentBtn" onclick="confirmPayment()" disabled><i class="fas fa-check"></i> Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== BOOKING MODAL ============== -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-window">
+    <div class="modal-header">
+      <div class="modal-title">Agendar <em>Horário</em></div>
+      <button class="modal-close" onclick="closeBooking()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-steps">
+      <div class="step-item active" id="step1"><div class="step-circle">1</div><span class="step-label">Serviço</span></div>
+      <div class="step-item" id="step2"><div class="step-circle">2</div><span class="step-label">Barbeiro</span></div>
+      <div class="step-item" id="step3"><div class="step-circle">3</div><span class="step-label">Data</span></div>
+      <div class="step-item" id="step4"><div class="step-circle">4</div><span class="step-label">Horário</span></div>
+      <div class="step-item" id="step5"><div class="step-circle">5</div><span class="step-label">Dados</span></div>
+      <div class="step-item" id="step6"><div class="step-circle">6</div><span class="step-label">Confirmar</span></div>
+    </div>
+    <div class="modal-chips" id="bookingChips"></div>
+    <div class="modal-body">
+      <div class="booking-panel active" id="panel1">
+        <div class="panel-title">Escolha o <em>Serviço</em></div>
+        <p class="panel-subtitle">Selecione o serviço desejado</p>
+        <div class="pick-list" id="svcPickList"></div>
+        <div class="panel-nav"><button class="btn-next" id="nextBtn1" onclick="goStep(2)" disabled>Próximo →</button></div>
+      </div>
+      <div class="booking-panel" id="panel2">
+        <div class="panel-title">Escolha o <em>Barbeiro</em></div>
+        <p class="panel-subtitle">Quem vai te atender?</p>
+        <div class="pick-list" id="barberPickList"></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(1)">← Voltar</button><button class="btn-next" id="nextBtn2" onclick="goStep(3)" disabled>Próximo →</button></div>
+      </div>
+      <div class="booking-panel" id="panel3">
+        <div class="panel-title">Escolha a <em>Data</em></div>
+        <p class="panel-subtitle">Apenas dias disponíveis</p>
+        <div class="calendar-widget"><div class="cal-header"><button class="cal-nav-btn" disabled><i class="fas fa-chevron-left"></i></button><span class="cal-month-label" id="calMonthLabel"></span><button class="cal-nav-btn" disabled><i class="fas fa-chevron-right"></i></button></div><div class="cal-body"><div class="cal-weekdays" id="calWeekdays"></div><div class="cal-days-grid" id="calDaysGrid"></div></div></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(2)">← Voltar</button><button class="btn-next" id="nextBtn3" onclick="goStep(4)" disabled>Próximo →</button></div>
+      </div>
+      <div class="booking-panel" id="panel4">
+        <div class="panel-title">Escolha o <em>Horário</em></div>
+        <p class="panel-subtitle" id="panel4sub"></p>
+        <div class="time-section"><div class="time-section-title">Selecione um horário</div><div class="time-grid" id="timeSlotsGrid"></div></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(3)">← Voltar</button><button class="btn-next" id="nextBtn4" onclick="goStep(5)" disabled>Próximo →</button></div>
+      </div>
+      <div class="booking-panel" id="panel5">
+        <div class="panel-title">Seus <em>Dados</em></div>
+        <p class="panel-subtitle">Preencha para confirmar</p>
+        <div class="form-group"><label class="form-label">Nome completo *</label><input class="form-input" id="clientName" type="text" placeholder="Digite seu nome completo..."></div>
+        <div class="form-group"><label class="form-label">WhatsApp (opcional)</label><input class="form-input" id="clientPhone" type="text" placeholder="(41) 9 9999-9999"></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(4)">← Voltar</button><button class="btn-next" onclick="proceedToConfirm()">Revisar →</button></div>
+      </div>
+      <div class="booking-panel" id="panel6">
+        <div class="panel-title">Confirmar <em>Agendamento</em></div>
+        <p class="panel-subtitle">Revise os detalhes</p>
+        <div class="confirm-summary" id="confirmSummaryBox"></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(5)">← Voltar</button><button class="btn-next" onclick="finalizeBooking()"><i class="fas fa-check"></i> Confirmar</button></div>
+      </div>
+      <div class="booking-panel" id="panel7">
+        <div class="success-panel">
+          <div class="success-ring"><i class="fas fa-check"></i></div>
+          <div class="success-title">Agendado com <em>Sucesso!</em></div>
+          <p style="color:var(--muted);font-size:0.82rem;margin-bottom:24px;line-height:1.7" id="successMessage"></p>
+          <a class="btn-full wa" id="successWaBtn" href="#" target="_blank"><i class="fab fa-whatsapp"></i> Confirmar no WhatsApp</a>
+          <button class="btn-full ghost" onclick="closeBooking()">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== LOGIN PREMIUM ============== -->
+<div class="admin-login-overlay" id="adminLoginOverlay">
+  <div class="login-bg-orbs">
+    <div class="login-orb o1"></div>
+    <div class="login-orb o2"></div>
+  </div>
+  <div class="admin-login-box">
+    <div class="login-brand-circle">DL</div>
+    <div class="login-brand">
+      <div class="login-brand-name">DL <span>BARBER</span></div>
+      <div class="login-brand-sub">Painel Profissional</div>
+    </div>
+    <div class="login-error" id="loginError"><i class="fas fa-exclamation-circle"></i> Usuário ou senha incorretos</div>
+    <div class="login-form-group">
+      <label class="login-form-label">Usuário</label>
+      <div class="login-input-wrap">
+        <input class="login-input" id="loginUser" type="text" placeholder="Seu usuário" autocomplete="username">
+        <i class="login-input-icon fas fa-user"></i>
+      </div>
+    </div>
+    <div class="login-form-group">
+      <label class="login-form-label">Senha</label>
+      <div class="login-input-wrap">
+        <input class="login-input" id="loginPass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doAdminLogin()">
+        <i class="login-input-icon fas fa-lock"></i>
+      </div>
+    </div>
+    <button class="login-btn" onclick="doAdminLogin()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+    <button class="login-cancel" onclick="closeAdminLogin()">Cancelar</button>
+    <div class="login-hint">Acesso exclusivo da gerência</div>
+  </div>
+</div>
+
+<!-- ============== ADMIN PANEL ============== -->
+<div class="admin-panel" id="adminPanel">
+  <aside class="admin-sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-text">DL <span>BARBER</span></div>
+      <div class="sidebar-logo-sub">Área Profissional</div>
+    </div>
+    
+    <!-- SELETOR DE BARBEIRO (DENTRO DO PAINEL) -->
+    <div class="barber-switcher-wrap">
+      <div class="bsw-label"><i class="fas fa-exchange-alt"></i> Visualizando</div>
+      <div class="bsw-current" id="bswCurrent"></div>
+      <select class="bsw-select" id="bswSelect" onchange="switchBarber(this.value)"></select>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <span class="nav-group-label">Painel</span>
+        <button class="nav-item active" onclick="switchAdminSection('dashboard',this)"><i class="fas fa-chart-line"></i> Dashboard</button>
+        <button class="nav-item" onclick="switchAdminSection('appointments',this)"><i class="fas fa-calendar-check"></i> Agendamentos</button>
+        <button class="nav-item" onclick="switchAdminSection('clients',this)"><i class="fas fa-users"></i> Clientes</button>
+        <button class="nav-item" onclick="switchAdminSection('finance',this)"><i class="fas fa-coins"></i> Financeiro</button>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="nav-item" style="color:var(--red)" onclick="closeAdmin()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="admin-page-title"><span id="adminPageTitle">Dashboard</span> <em id="adminBarberTitle"></em></div>
+      <div class="admin-topbar-right">
+        <div class="online-badge"><div class="online-dot"></div> Online</div>
+        <button class="btn-logout" onclick="closeAdmin()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+      </div>
+    </div>
+    <div class="admin-content">
+      
+      <!-- BANNER DE CONTEXTO (mostra qual barbeiro tá vendo) -->
+      <div class="context-banner" id="contextBanner"></div>
+      
+      <div class="admin-section active" id="adm-dashboard">
+        <div class="stats-grid" id="dashStatsGrid"></div>
+        <div class="grid-2">
+          <div class="admin-card">
+            <div class="admin-card-header"><h3>Faturamento — 7 dias</h3><span class="meta-label" id="chartPeriod"></span></div>
+            <div class="bar-chart" id="revenueChart"></div>
+          </div>
+          <div class="admin-card">
+            <div class="admin-card-header"><h3>Serviços Mais Solicitados</h3></div>
+            <div id="topServicesChart"></div>
+          </div>
+        </div>
+        <div class="admin-card" style="margin-top:18px">
+          <div class="admin-card-header"><h3>Agendamentos Recentes</h3></div>
+          <div id="recentApptsTable"></div>
+        </div>
+      </div>
+
+      <div class="admin-section" id="adm-appointments">
+        <div class="admin-card">
+          <div class="admin-card-header"><h3>Todos os Agendamentos</h3></div>
+          <div id="allApptsTable"></div>
+        </div>
+      </div>
+
+      <div class="admin-section" id="adm-clients">
+        <div class="admin-card">
+          <div class="admin-card-header"><h3>Clientes</h3></div>
+          <div id="clientsTable"></div>
+        </div>
+      </div>
+
+      <div class="admin-section" id="adm-finance">
+        <div class="finance-hero">
+          <div class="finance-hero-content">
+            <div>
+              <div class="finance-hero-title">Controle <em>Financeiro</em></div>
+              <div class="finance-hero-subtitle" id="financeSubtitle">Histórico de pagamentos</div>
+            </div>
+            <div class="finance-period-pill"><i class="fas fa-calendar-alt"></i> <span id="currentMonthName"></span></div>
+          </div>
+        </div>
+        
+        <div class="fin-filters">
+          <div class="fin-filter-group">
+            <label class="fin-filter-label">Buscar Cliente</label>
+            <input type="text" class="fin-filter-input" id="fSearch" placeholder="Nome do cliente..." oninput="renderFinance()">
+          </div>
+          <div class="fin-filter-group">
+            <label class="fin-filter-label">Forma de Pagamento</label>
+            <select class="fin-filter-input" id="fMethod" onchange="renderFinance()">
+              <option value="">Todas</option>
+              <option value="pix">Pix</option>
+              <option value="credito">Crédito</option>
+              <option value="debito">Débito</option>
+              <option value="dinheiro">Dinheiro</option>
+              <option value="subscription">Assinante</option>
+            </select>
+          </div>
+          <div class="fin-filter-group">
+            <label class="fin-filter-label">Período</label>
+            <select class="fin-filter-input" id="fPeriod" onchange="renderFinance()">
+              <option value="today">Hoje</option>
+              <option value="week">Últimos 7 dias</option>
+              <option value="month" selected>Mês Atual</option>
+              <option value="prev">Mês Anterior</option>
+              <option value="all">Todos</option>
+            </select>
+          </div>
+          <button class="fin-clear-btn" onclick="clearFinFilters()">Limpar</button>
+        </div>
+        
+        <div id="financeContent"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 'use strict';
 
-// Loader
+/* ════════════════════════════════════════════════════════════════════
+   DADOS PRINCIPAIS
+   ════════════════════════════════════════════════════════════════════ */
+const SERVICES = [
+  {id:1,name:'Corte Masculino',price:40,time:'30 min',icon:'fa-cut',cat:'Cortes'},
+  {id:2,name:'Corte (Uma Máquina)',price:35,time:'30 min',icon:'fa-cut',cat:'Cortes'},
+  {id:3,name:'Barba Premium',price:35,time:'30 min',icon:'fa-user',cat:'Barba'},
+  {id:4,name:'Corte + Barba',price:70,time:'60 min',icon:'fa-star',cat:'Combo'},
+  {id:5,name:'Sobrancelha',price:10,time:'10 min',icon:'fa-eye',cat:'Estética'},
+  {id:6,name:'Pigmentação',price:80,time:'60 min',icon:'fa-paint-brush',cat:'Química'},
+  {id:7,name:'Combo VIP',price:75,time:'75 min',icon:'fa-crown',cat:'Combo'},
+  {id:8,name:'Hidratação',price:15,time:'20 min',icon:'fa-tint',cat:'Estética'}
+];
+
+const BARBERS = [
+  {id:1, name:'David Leal',     spec:'Cortes & Barba',          ini:'DL'},
+  {id:2, name:'Kauan Martins',  spec:'Degradê & Química',       ini:'KM'},
+  {id:3, name:'Luiz Gustavo',   spec:'Estética & Coloração',    ini:'LG'},
+  {id:4, name:'Guilherme',      spec:'Estilo & Modernidade',    ini:'GU'}
+];
+
+/* LOGIN ÚNICO DO PAINEL */
+const ADMIN_USER = 'barbearia';
+const ADMIN_PASS = 'dlbarber';
+
+const SUBSCRIPTION_PLAN = { monthlyPrice:130, cutsPerMonth:4, pricePerCut:32.50 };
+
+let APPOINTMENTS = JSON.parse(sessionStorage.getItem('dlbc_appts') || '[]');
+let PAYMENTS = JSON.parse(sessionStorage.getItem('dlbc_payments') || '[]');
+let SUBSCRIBERS = JSON.parse(sessionStorage.getItem('dlbc_subs') || '[]');
+let currentBarber = null;
+
+const CONFIG = {
+  weekday: {open:10, close:20, lunchStart:12, lunchEnd:13},
+  saturday: {open:9, close:19, lunchStart:12, lunchEnd:13}
+};
+
+const MONTHS_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const DAYS_PT = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+const PAYMENT_METHODS = {
+  pix:           {label:'Pix',       icon:'fa-bolt',            color:'#7071D3'},
+  credito:       {label:'Crédito',   icon:'fa-credit-card',     color:'#3B82F6'},
+  debito:        {label:'Débito',    icon:'fa-money-check-alt', color:'#22C55E'},
+  dinheiro:      {label:'Dinheiro',  icon:'fa-money-bill-wave', color:'#C9A96E'},
+  subscription:  {label:'Assinante', icon:'fa-gem',             color:'#A855F7'}
+};
+
+function saveAppts(){ sessionStorage.setItem('dlbc_appts', JSON.stringify(APPOINTMENTS)); }
+function savePayments(){ sessionStorage.setItem('dlbc_payments', JSON.stringify(PAYMENTS)); }
+function saveSubs(){ sessionStorage.setItem('dlbc_subs', JSON.stringify(SUBSCRIBERS)); }
+
+function isSubscriber(name){ return SUBSCRIBERS.some(s => s.toLowerCase() === name.toLowerCase()); }
+function toggleSubscriber(name){
+  const idx = SUBSCRIBERS.findIndex(s => s.toLowerCase() === name.toLowerCase());
+  if (idx >= 0) SUBSCRIBERS.splice(idx, 1); else SUBSCRIBERS.push(name);
+  saveSubs();
+}
+function countMonthlyVisits(name, barberId){
+  const now = new Date();
+  return PAYMENTS.filter(p => {
+    if (p.method !== 'subscription') return false;
+    if (p.clientName.toLowerCase() !== name.toLowerCase()) return false;
+    if (barberId && p.barberId !== barberId) return false;
+    const d = new Date(p.date);
+    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+  }).length;
+}
+
 window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2500);
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2000);
+  const counter = document.getElementById('heroBarberCount');
+  if (counter) counter.textContent = BARBERS.length;
+  renderServicesGrid();
+  renderPublicBarbers();
 });
 
-// Navbar scroll effect
 let navScrolled = false;
 window.addEventListener('scroll', () => {
   const s = window.scrollY > 60;
-  if (s !== navScrolled) { 
-    document.getElementById('navbar').classList.toggle('scrolled', s); 
-    navScrolled = s; 
-  }
-}, {passive: true});
+  if (s !== navScrolled){ document.getElementById('navbar').classList.toggle('scrolled', s); navScrolled = s; }
+});
 
-// Mobile menu
-function toggleMob() { 
-  document.getElementById('mobileNav').classList.toggle('open'); 
-}
-function closeMob() { 
-  document.getElementById('mobileNav').classList.remove('open'); 
-}
+function toggleMob(){ document.getElementById('mobileNav').classList.toggle('open'); }
+function closeMob(){ document.getElementById('mobileNav').classList.remove('open'); }
 
-// Reveal animation on scroll
 const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { 
-    if (e.isIntersecting) e.target.classList.add('visible'); 
-  });
-}, { threshold: 0.08 });
-
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+function renderServicesGrid(){
+  document.getElementById('servicesGrid').innerHTML = SERVICES.map((s,i) => `
+    <div class="svc-card reveal">
+      <div class="svc-idx">0${i+1}</div>
+      <div class="svc-icon-wrap"><i class="fas ${s.icon}"></i></div>
+      <div class="svc-name">${s.name}</div>
+      <div class="svc-meta"><i class="fas fa-clock"></i> ${s.time} · ${s.cat}</div>
+      <span class="svc-price">R$ ${s.price.toFixed(2).replace('.',',')}</span>
+      <button class="svc-action" onclick="openBookingWithService(${s.id})">Agendar</button>
+    </div>`).join('');
+  document.querySelectorAll('.svc-card').forEach(el => revealObs.observe(el));
+  document.getElementById('footerServicesList').innerHTML = SERVICES.slice(0,5).map(s => `<li><a>${s.name}</a></li>`).join('');
+}
+
+function renderPublicBarbers(){
+  document.getElementById('barbersGrid').innerHTML = BARBERS.map(b => `
+    <div class="barber-card reveal">
+      <div class="barber-card-head"><div class="barber-avatar">${b.ini}</div></div>
+      <div class="barber-card-body">
+        <div class="barber-name">${b.name}</div>
+        <div class="barber-spec">${b.spec}</div>
+        <button class="barber-btn" onclick="openBookingWithBarber(${b.id})"><i class="fas fa-calendar-alt"></i> Agendar</button>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('.barber-card').forEach(el => revealObs.observe(el));
+}
+
+/* BOOKING */
+let bk = {step:1, service:null, barber:null, date:null, time:null};
+function openBooking(){ resetBooking(); document.getElementById('bookingModal').classList.add('open'); document.body.style.overflow='hidden'; }
+function openBookingWithService(id){ openBooking(); selectService(id); if (bk.service) setTimeout(() => goStep(2), 80); }
+function openBookingWithBarber(id){ openBooking(); setTimeout(() => { goStep(2); selectBarber(id); }, 100); }
+function closeBooking(){ document.getElementById('bookingModal').classList.remove('open'); document.body.style.overflow=''; }
+function resetBooking(){ bk={step:1,service:null,barber:null,date:null,time:null}; renderServiceList(); renderBarberList(); buildCalendar(); updateChips(); goStep(1,true); }
+
+function goStep(n, silent){
+  for (let i=1;i<=7;i++){
+    const p = document.getElementById('panel'+i);
+    if (p) p.classList.toggle('active', i===n);
+    const s = document.getElementById('step'+i);
+    if (s && i<=6){
+      s.classList.remove('active','done');
+      if (i===n) s.classList.add('active');
+      else if (i<n) s.classList.add('done');
+    }
+  }
+  bk.step = n;
+  if (!silent) updateChips();
+  if (n===4) renderTimeSlots();
+}
+
+function updateChips(){
+  const c = document.getElementById('bookingChips');
+  const items = [];
+  if (bk.service) items.push(`<span class="chip"><i class="fas fa-cut"></i>${bk.service.name}</span>`);
+  if (bk.barber) items.push(`<span class="chip"><i class="fas fa-user"></i>${bk.barber.name}</span>`);
+  if (bk.date) items.push(`<span class="chip"><i class="fas fa-calendar"></i>${formatDate(bk.date)}</span>`);
+  if (bk.time) items.push(`<span class="chip"><i class="fas fa-clock"></i>${bk.time}</span>`);
+  c.innerHTML = items.join('');
+}
+
+function renderServiceList(){
+  document.getElementById('svcPickList').innerHTML = SERVICES.map(s => `
+    <div class="pick-row ${bk.service && bk.service.id===s.id ? 'selected':''}" onclick="selectService(${s.id})">
+      <div class="pick-row-icon"><i class="fas ${s.icon}"></i></div>
+      <div class="pick-row-info"><div class="pick-row-name">${s.name}</div><div class="pick-row-meta"><i class="fas fa-clock"></i> ${s.time}</div></div>
+      <div class="pick-row-price">R$ ${s.price.toFixed(2).replace('.',',')}</div>
+      <div class="pick-row-selected-mark">${bk.service && bk.service.id===s.id ? '✓':''}</div>
+    </div>`).join('');
+}
+function selectService(id){ bk.service = SERVICES.find(s=>s.id===id); renderServiceList(); document.getElementById('nextBtn1').disabled = false; }
+
+function renderBarberList(){
+  document.getElementById('barberPickList').innerHTML = BARBERS.map(b => `
+    <div class="pick-row ${bk.barber && bk.barber.id===b.id ? 'selected':''}" onclick="selectBarber(${b.id})">
+      <div class="pick-row-avatar">${b.ini}</div>
+      <div class="pick-row-info"><div class="pick-row-name">${b.name}</div><div class="pick-row-meta">${b.spec}</div></div>
+      <div class="pick-row-selected-mark">${bk.barber && bk.barber.id===b.id ? '✓':''}</div>
+    </div>`).join('');
+}
+function selectBarber(id){ bk.barber = BARBERS.find(b=>b.id===id); renderBarberList(); document.getElementById('nextBtn2').disabled = false; }
+
+function buildCalendar(){
+  const now = new Date(), y=now.getFullYear(), m=now.getMonth();
+  document.getElementById('calMonthLabel').textContent = `${MONTHS_PT[m]} ${y}`;
+  document.getElementById('calWeekdays').innerHTML = DAYS_PT.map(d => `<div class="cal-weekday">${d}</div>`).join('');
+  const grid = document.getElementById('calDaysGrid');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const firstDow = new Date(y,m,1).getDay(), days = new Date(y,m+1,0).getDate();
+  let html = '';
+  for (let i=0;i<firstDow;i++) html += `<div class="cal-day-cell empty"></div>`;
+  for (let d=1;d<=days;d++){
+    const dt = new Date(y,m,d), dow = dt.getDay(), past = dt<today, sun = dow===0;
+    const isToday = dt.getTime()===today.getTime();
+    const sel = bk.date && dt.toDateString()===bk.date.toDateString();
+    let cls = 'cal-day-cell';
+    if (sel) cls += ' selected';
+    else if (sun) cls += ' sunday';
+    else if (past) cls += ' disabled';
+    else { cls += ' available'; if (isToday) cls += ' today'; }
+    const clickable = !past && !sun;
+    html += `<div class="${cls}" ${clickable ? `onclick="selectDate(${y},${m},${d})"`:''}>${d}</div>`;
+  }
+  grid.innerHTML = html;
+}
+function selectDate(y,m,d){ bk.date = new Date(y,m,d); bk.time = null; buildCalendar(); document.getElementById('nextBtn3').disabled = false; }
+
+function renderTimeSlots(){
+  const grid = document.getElementById('timeSlotsGrid');
+  document.getElementById('panel4sub').textContent = `${formatDate(bk.date)} · ${bk.barber.name}`;
+  const isSat = bk.date.getDay()===6;
+  const cfg = isSat ? CONFIG.saturday : CONFIG.weekday;
+  const dk = `${bk.date.getFullYear()}-${bk.date.getMonth()}-${bk.date.getDate()}`;
+  const taken = APPOINTMENTS.filter(a => a.dateKey===dk && a.barberId===bk.barber.id && a.status!=='cancelled').map(a => a.time);
+  
+  // VERIFICA SE A DATA SELECIONADA É HOJE
+  const now = new Date();
+  const isToday = bk.date.toDateString() === now.toDateString();
+  const currentHour = now.getHours();
+  const currentMinute = now.getMinutes();
+  
+  const slots = [];
+  for (let h=cfg.open;h<cfg.close;h++){
+    for (const min of [0,30]){
+      if (h===cfg.close-1 && min===30) continue;
+      const t = `${String(h).padStart(2,'0')}:${String(min).padStart(2,'0')}`;
+      
+      // VERIFICA SE O HORÁRIO JÁ PASSOU (apenas se for hoje)
+      let isPast = false;
+      if (isToday){
+        if (h < currentHour) isPast = true;
+        else if (h === currentHour && min <= currentMinute) isPast = true;
+      }
+      
+      slots.push({
+        t, 
+        lunch: h>=cfg.lunchStart && h<cfg.lunchEnd, 
+        taken: taken.includes(t),
+        past: isPast
+      });
+    }
+  }
+  
+  grid.innerHTML = slots.map(s => {
+    if (s.lunch) return `<div class="time-cell lunch"><i class="fas fa-utensils" style="display:block;font-size:0.7rem;margin-bottom:2px"></i>Almoço</div>`;
+    if (s.past) return `<div class="time-cell taken" style="opacity:0.4">${s.t}<br><span style="font-size:0.55rem">Passou</span></div>`;
+    if (s.taken) return `<div class="time-cell taken">${s.t}<br><span style="font-size:0.55rem">Ocupado</span></div>`;
+    const sel = bk.time===s.t;
+    return `<div class="time-cell ${sel?'selected':''}" onclick="selectTime('${s.t}')">${s.t}</div>`;
+  }).join('');
+}
+function selectTime(t){ bk.time = t; renderTimeSlots(); document.getElementById('nextBtn4').disabled = false; }
+
+function proceedToConfirm(){
+  const name = document.getElementById('clientName').value.trim();
+  if (!name){ alert('Por favor, informe seu nome.'); document.getElementById('clientName').focus(); return; }
+  renderConfirmSummary();
+  goStep(6);
+}
+function renderConfirmSummary(){
+  const name = document.getElementById('clientName').value.trim();
+  const phone = document.getElementById('clientPhone').value.trim();
+  document.getElementById('confirmSummaryBox').innerHTML = `
+    <div class="confirm-row"><span class="confirm-label">Cliente</span><span class="confirm-value">${name}</span></div>
+    <div class="confirm-row"><span class="confirm-label">Serviço</span><span class="confirm-value">${bk.service.name}</span></div>
+    <div class="confirm-row"><span class="confirm-label">Barbeiro</span><span class="confirm-value">${bk.barber.name}</span></div>
+    <div class="confirm-row"><span class="confirm-label">Data</span><span class="confirm-value">${formatDate(bk.date)}</span></div>
+    <div class="confirm-row"><span class="confirm-label">Horário</span><span class="confirm-value">${bk.time}</span></div>
+    ${phone ? `<div class="confirm-row"><span class="confirm-label">WhatsApp</span><span class="confirm-value">${phone}</span></div>`:''}
+    <div class="confirm-row"><span class="confirm-label">Valor</span><span class="confirm-value gold">R$ ${bk.service.price.toFixed(2).replace('.',',')}</span></div>`;
+}
+
+function finalizeBooking(){
+  const name = document.getElementById('clientName').value.trim();
+  const phone = document.getElementById('clientPhone').value.trim();
+  const appt = {
+    id: Date.now(), name, phone,
+    serviceId: bk.service.id, service: bk.service.name, price: bk.service.price,
+    barberId: bk.barber.id, barber: bk.barber.name,
+    date: bk.date.toISOString(),
+    dateKey: `${bk.date.getFullYear()}-${bk.date.getMonth()}-${bk.date.getDate()}`,
+    time: bk.time, status:'pending', createdAt: new Date().toISOString()
+  };
+  APPOINTMENTS.push(appt); saveAppts();
+  const msg = `Olá! Acabei de agendar.\n*Nome:* ${name}\n*Serviço:* ${appt.service}\n*Barbeiro:* ${appt.barber}\n*Data:* ${formatDate(bk.date)}\n*Horário:* ${bk.time}`;
+  document.getElementById('successMessage').textContent = `${name}, seu agendamento foi registrado!`;
+  document.getElementById('successWaBtn').href = `https://wa.me/5541997878695?text=${encodeURIComponent(msg)}`;
+  goStep(7);
+}
+
+function formatDate(d){ if (!d) return ''; return `${DAYS_PT[d.getDay()]}, ${d.getDate()} ${MONTHS_PT[d.getMonth()].substring(0,3)}`; }
+function fmtMoney(v){ return `R$ ${v.toFixed(2).replace('.',',')}`; }
+
+/* PAYMENT MODAL */
+let selectedPaymentApptId = null;
+let selectedPaymentMethod = null;
+
+function openPaymentModal(apptId){
+  selectedPaymentApptId = apptId;
+  selectedPaymentMethod = null;
+  const appt = APPOINTMENTS.find(a => a.id===apptId);
+  if (!appt) return;
+  const ini = appt.name.trim().split(/\s+/).map(p=>p[0]).join('').substring(0,2).toUpperCase();
+  document.getElementById('paymentClientInfo').innerHTML = `
+    <div class="payment-client-info-avatar">${ini}</div>
+    <div class="payment-client-info-text">
+      <div class="payment-client-info-name">${appt.name} ${isSubscriber(appt.name) ? '<i class="fas fa-gem" style="color:var(--purple);font-size:0.7rem;margin-left:4px"></i>':''}</div>
+      <div class="payment-client-info-svc">${appt.service} · ${appt.barber} · ${appt.time}</div>
+    </div>`;
+  const subBox = document.getElementById('subInfoBox');
+  if (isSubscriber(appt.name)){
+    const visits = countMonthlyVisits(appt.name, appt.barberId);
+    subBox.classList.add('show');
+    document.getElementById('visitCounter').textContent = `Visita ${visits + 1} de ${SUBSCRIPTION_PLAN.cutsPerMonth} este mês`;
+  } else subBox.classList.remove('show');
+  document.getElementById('paymentValueInput').value = appt.price.toFixed(2);
+  document.getElementById('paymentValueInput').classList.remove('readonly-sub');
+  document.getElementById('paymentValueInput').readOnly = false;
+  document.getElementById('paymentModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.querySelectorAll('.payment-btn').forEach(b => b.classList.remove('selected'));
+  updatePaymentConfirmBtn();
+}
+
+function closePaymentModal(){
+  document.getElementById('paymentModal').classList.remove('open');
+  document.body.style.overflow = '';
+  selectedPaymentApptId = null;
+  selectedPaymentMethod = null;
+}
+
+function selectPaymentMethod(method, ev){
+  selectedPaymentMethod = method;
+  document.querySelectorAll('.payment-btn').forEach(b => b.classList.remove('selected'));
+  if (ev) ev.currentTarget.classList.add('selected');
+  const valueInput = document.getElementById('paymentValueInput');
+  const appt = APPOINTMENTS.find(a => a.id===selectedPaymentApptId);
+  if (method === 'subscription'){
+    valueInput.value = SUBSCRIPTION_PLAN.pricePerCut.toFixed(2);
+    valueInput.classList.add('readonly-sub');
+    valueInput.readOnly = true;
+    if (appt && !isSubscriber(appt.name)){ SUBSCRIBERS.push(appt.name); saveSubs(); }
+    if (appt){
+      const visits = countMonthlyVisits(appt.name, appt.barberId);
+      document.getElementById('subInfoBox').classList.add('show');
+      document.getElementById('visitCounter').textContent = `Visita ${visits + 1} de ${SUBSCRIPTION_PLAN.cutsPerMonth} este mês`;
+    }
+  } else {
+    valueInput.classList.remove('readonly-sub');
+    valueInput.readOnly = false;
+    if (appt) valueInput.value = appt.price.toFixed(2);
+  }
+  updatePaymentConfirmBtn();
+}
+
+function updatePaymentConfirmBtn(){
+  const v = parseFloat(document.getElementById('paymentValueInput').value);
+  document.getElementById('confirmPaymentBtn').disabled = !(selectedPaymentMethod && !isNaN(v) && v > 0);
+}
+
+function confirmPayment(){
+  if (!selectedPaymentApptId || !selectedPaymentMethod) return;
+  const value = parseFloat(document.getElementById('paymentValueInput').value);
+  if (isNaN(value) || value <= 0){ alert('Valor inválido'); return; }
+  const appt = APPOINTMENTS.find(a => a.id===selectedPaymentApptId);
+  if (!appt) return;
+  PAYMENTS.push({
+    id: Date.now(), apptId: appt.id, clientName: appt.name,
+    barberId: appt.barberId, barber: appt.barber, service: appt.service,
+    originalPrice: appt.price, amount: value, method: selectedPaymentMethod,
+    isSubscriber: selectedPaymentMethod === 'subscription' || isSubscriber(appt.name),
+    date: new Date().toISOString(), apptDate: appt.date, apptTime: appt.time
+  });
+  savePayments();
+  const method = PAYMENT_METHODS[selectedPaymentMethod].label;
+  const formattedValue = `R$ ${value.toFixed(2).replace('.',',')}`;
+  const clientName = appt.name;
+  closePaymentModal();
+  showSuccessAnimation(clientName, method, formattedValue);
+  renderAdminDashboard();
+}
+
+function showSuccessAnimation(clientName, method, value){
+  const overlay = document.getElementById('successOverlay');
+  document.getElementById('successSubtext').textContent = `${clientName} · ${method} · ${value}`;
+  overlay.classList.remove('show');
+  void overlay.offsetWidth;
+  overlay.classList.add('show');
+  setTimeout(() => overlay.classList.remove('show'), 2300);
+}
+
+function showToast(msg){
+  const t = document.createElement('div');
+  t.className = 'toast-c';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity .5s'; setTimeout(()=>t.remove(),500); }, 3000);
+}
+
+/* ============== ADMIN LOGIN (ÚNICO) ============== */
+function openAdminLogin(){
+  document.getElementById('adminLoginOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('loginUser').focus(), 100);
+}
+function closeAdminLogin(){
+  document.getElementById('adminLoginOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginError').classList.remove('show');
+}
+
+function doAdminLogin(){
+  const u = document.getElementById('loginUser').value.trim().toLowerCase();
+  const p = document.getElementById('loginPass').value;
+  const err = document.getElementById('loginError');
+  
+  if (u !== ADMIN_USER || p !== ADMIN_PASS){
+    err.classList.add('show');
+    setTimeout(() => err.classList.remove('show'), 4000);
+    return;
+  }
+  
+  // Login OK - inicia com o primeiro barbeiro
+  currentBarber = BARBERS[0];
+  closeAdminLogin();
+  document.getElementById('adminPanel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  
+  initBarberSwitcher();
+  updateContext();
+  renderAdminDashboard();
+}
+
+function closeAdmin(){
+  if (!confirm('Sair do painel?')) return;
+  document.getElementById('adminPanel').classList.remove('open');
+  document.body.style.overflow = '';
+  currentBarber = null;
+}
+
+/* SELETOR DE BARBEIRO DENTRO DO PAINEL */
+function initBarberSwitcher(){
+  const sel = document.getElementById('bswSelect');
+  sel.innerHTML = BARBERS.map(b => `<option value="${b.id}" ${currentBarber && currentBarber.id===b.id?'selected':''}>${b.name}</option>`).join('');
+}
+
+function updateContext(){
+  if (!currentBarber) return;
+  // Sidebar barber card
+  document.getElementById('bswCurrent').innerHTML = `
+    <div class="bsw-avatar">${currentBarber.ini}</div>
+    <div>
+      <div class="bsw-name">${currentBarber.name}</div>
+      <div class="bsw-spec">${currentBarber.spec}</div>
+    </div>`;
+  
+  // Topbar
+  document.getElementById('adminBarberTitle').textContent = `· ${currentBarber.name}`;
+  
+  // Context banner
+  document.getElementById('contextBanner').innerHTML = `
+    <div class="ctx-avatar">${currentBarber.ini}</div>
+    <div class="ctx-info">
+      <div class="ctx-label"><i class="fas fa-eye" style="color:var(--gold);margin-right:5px"></i> Visualizando dados de</div>
+      <div class="ctx-name">${currentBarber.name}</div>
+      <div class="ctx-spec">${currentBarber.spec}</div>
+    </div>`;
+}
+
+function switchBarber(id){
+  currentBarber = BARBERS.find(b => b.id === parseInt(id));
+  updateContext();
+  // Re-renderiza a seção ativa
+  const activeSec = document.querySelector('.admin-section.active');
+  if (activeSec){
+    const sec = activeSec.id.replace('adm-','');
+    if (sec==='dashboard') renderAdminDashboard();
+    else if (sec==='appointments') renderAllAppointments();
+    else if (sec==='clients') renderClientsTable();
+    else if (sec==='finance') renderFinance();
+  }
+  showToast(`Visualizando: ${currentBarber.name}`);
+}
+
+const sectionTitles = {dashboard:'Dashboard', appointments:'Agendamentos', clients:'Clientes', finance:'Financeiro'};
+
+function switchAdminSection(sec, btn){
+  document.querySelectorAll('.admin-section').forEach(el => el.classList.remove('active'));
+  document.getElementById('adm-'+sec).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('adminPageTitle').textContent = sectionTitles[sec] || sec;
+  if (sec==='dashboard') renderAdminDashboard();
+  else if (sec==='appointments') renderAllAppointments();
+  else if (sec==='clients') renderClientsTable();
+  else if (sec==='finance') renderFinance();
+}
+
+function myAppts(){ return APPOINTMENTS.filter(a => a.barberId === currentBarber.id); }
+function myPayments(){ return PAYMENTS.filter(p => p.barberId === currentBarber.id); }
+
+function renderAdminDashboard(){
+  if (!currentBarber) return;
+  const myA = myAppts();
+  const myP = myPayments();
+  const now = new Date(), mo=now.getMonth(), yr=now.getFullYear();
+  const monthly = myA.filter(a => { const d=new Date(a.date); return d.getMonth()===mo && d.getFullYear()===yr && a.status!=='cancelled'; });
+  const monthlyRev = myP.filter(p => { const d=new Date(p.date); return d.getMonth()===mo && d.getFullYear()===yr; }).reduce((s,p)=>s+p.amount, 0);
+  const pending = myA.filter(a => a.status==='pending').length;
+  const uniqueClients = [...new Set(myA.map(a => a.name.toLowerCase()))].length;
+  
+  document.getElementById('dashStatsGrid').innerHTML = `
+    <div class="stat-box"><div class="stat-icon-wrap"><i class="fas fa-dollar-sign"></i></div><span class="stat-value">R$${Math.round(monthlyRev)}</span><div class="stat-label">Faturamento Mês</div><div class="stat-delta"><i class="fas fa-arrow-up"></i> ${monthly.length} atendimentos</div></div>
+    <div class="stat-box"><div class="stat-icon-wrap"><i class="fas fa-calendar-check"></i></div><span class="stat-value">${monthly.length}</span><div class="stat-label">Agendamentos Mês</div></div>
+    <div class="stat-box"><div class="stat-icon-wrap"><i class="fas fa-clock"></i></div><span class="stat-value">${pending}</span><div class="stat-label">Pendentes</div></div>
+    <div class="stat-box"><div class="stat-icon-wrap"><i class="fas fa-users"></i></div><span class="stat-value">${uniqueClients}</span><div class="stat-label">Clientes</div></div>`;
+  
+  const days = [], revs = [];
+  for (let i=6;i>=0;i--){
+    const d = new Date(); d.setDate(d.getDate()-i); d.setHours(0,0,0,0);
+    const dayRev = myP.filter(p => { const ad=new Date(p.date); ad.setHours(0,0,0,0); return ad.getTime()===d.getTime(); }).reduce((s,p)=>s+p.amount, 0);
+    days.push(d); revs.push(dayRev);
+  }
+  const maxRev = Math.max(...revs, 1);
+  document.getElementById('chartPeriod').textContent = `${MONTHS_PT[mo]} ${yr}`;
+  document.getElementById('revenueChart').innerHTML = days.map((d,i) => `
+    <div class="bar-item">
+      <div class="bar-fill" style="height:${Math.max((revs[i]/maxRev)*130, 4)}px" title="R$ ${revs[i].toFixed(0)}"></div>
+      <span class="bar-label">${d.getDate()}</span>
+    </div>`).join('');
+  
+  const svcMap = {};
+  myA.filter(a => a.status!=='cancelled').forEach(a => { svcMap[a.service] = (svcMap[a.service]||0)+1; });
+  const sorted = Object.entries(svcMap).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const maxC = Math.max(...sorted.map(s=>s[1]), 1);
+  document.getElementById('topServicesChart').innerHTML = sorted.length ? sorted.map(([nm,cnt]) => `
+    <div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:0.76rem">${nm}</span><span style="font-size:0.68rem;color:var(--gold)">${cnt}x</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${(cnt/maxC)*100}%"></div></div>
+    </div>`).join('') : '<div class="empty-state"><i class="fas fa-chart-bar"></i><p>Sem dados</p></div>';
+  
+  const recent = [...myA].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5);
+  document.getElementById('recentApptsTable').innerHTML = recent.length ? buildApptTable(recent, true) : '<div class="empty-state"><i class="fas fa-calendar"></i><p>Nenhum agendamento</p></div>';
+}
+
+function renderAllAppointments(){
+  const sorted = [...myAppts()].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+  document.getElementById('allApptsTable').innerHTML = sorted.length ? buildApptTable(sorted, true) : '<div class="empty-state"><i class="fas fa-calendar"></i><p>Nenhum agendamento</p></div>';
+}
+
+function buildApptTable(appts, showActions){
+  return `<div style="overflow-x:auto"><table class="premium-table"><thead><tr><th>Cliente</th><th>Serviço</th><th>Data</th><th>Horário</th><th>Valor</th><th>Status</th>${showActions?'<th>Ações</th>':''}</tr></thead><tbody>${appts.map(a => `
+    <tr>
+      <td><div style="font-weight:600">${a.name} ${isSubscriber(a.name) ? '<i class="fas fa-gem" style="color:var(--purple);font-size:0.65rem;margin-left:4px"></i>':''}</div>${a.phone?`<div style="font-size:0.68rem;color:var(--muted)">${a.phone}</div>`:''}</td>
+      <td>${a.service}</td>
+      <td>${formatDate(new Date(a.date))}</td>
+      <td>${a.time}</td>
+      <td style="color:var(--gold);font-family:'Playfair Display',serif;font-weight:700">${fmtMoney(a.price)}</td>
+      <td><span class="badge-tag ${a.status==='pending'?'badge-pending':a.status==='done'?'badge-done':'badge-cancelled'}">${a.status==='pending'?'Pendente':a.status==='done'?'Concluído':'Cancelado'}</span></td>
+      ${showActions?`<td>${a.status==='pending'?`<button class="table-btn" onclick="finishAppointment(${a.id})" title="Finalizar"><i class="fas fa-check"></i></button>`:''}<button class="table-btn danger" onclick="deleteAppt(${a.id})"><i class="fas fa-trash"></i></button></td>`:''}
+    </tr>`).join('')}</tbody></table></div>`;
+}
+
+function finishAppointment(id){
+  const appt = APPOINTMENTS.find(a => a.id===id);
+  if (!appt) return;
+  appt.status = 'done';
+  saveAppts();
+  openPaymentModal(id);
+}
+
+function deleteAppt(id){
+  if (!confirm('Excluir agendamento?')) return;
+  APPOINTMENTS = APPOINTMENTS.filter(x => x.id!==id);
+  saveAppts();
+  renderAllAppointments();
+}
+
+function renderClientsTable(){
+  const map = {};
+  myAppts().forEach(a => {
+    const k = a.name.toLowerCase();
+    if (!map[k]) map[k] = {name:a.name, phone:a.phone, visits:[]};
+    map[k].visits.push(a);
+  });
+  const clients = Object.values(map).sort((a,b)=>b.visits.length-a.visits.length);
+  
+  document.getElementById('clientsTable').innerHTML = clients.length ? `<div style="overflow-x:auto"><table class="premium-table"><thead><tr><th>Cliente</th><th>WhatsApp</th><th>Visitas</th><th>Último Serviço</th><th>Total Gasto</th><th>Tipo</th><th>Ação</th></tr></thead><tbody>${clients.map(c => {
+    const last = c.visits[c.visits.length-1];
+    const total = myPayments().filter(p => p.clientName.toLowerCase()===c.name.toLowerCase()).reduce((s,p)=>s+p.amount, 0);
+    const sub = isSubscriber(c.name);
+    return `<tr>
+      <td style="font-weight:600">${c.name}</td>
+      <td style="color:var(--muted);font-size:0.75rem">${c.phone||'—'}</td>
+      <td style="color:var(--gold);font-weight:700">${c.visits.length}x</td>
+      <td style="font-size:0.76rem">${last.service}</td>
+      <td style="color:var(--green);font-family:'Playfair Display',serif;font-weight:700">R$${Math.round(total)}</td>
+      <td>${sub ? '<span class="badge-tag badge-sub"><i class="fas fa-gem"></i> Assinante</span>':'<span style="color:var(--muted);font-size:0.7rem">Avulso</span>'}</td>
+      <td><button class="table-btn" onclick="toggleSubAndRefresh('${c.name.replace(/'/g,"\\'")}')"><i class="fas fa-gem"></i> ${sub?'Remover':'Tornar'} Assinante</button></td>
+    </tr>`;
+  }).join('')}</tbody></table></div>` : '<div class="empty-state"><i class="fas fa-users"></i><p>Nenhum cliente</p></div>';
+}
+
+function toggleSubAndRefresh(name){
+  toggleSubscriber(name);
+  renderClientsTable();
+  showToast(isSubscriber(name) ? `${name} agora é assinante` : `${name} removido dos assinantes`);
+}
+
+function clearFinFilters(){
+  document.getElementById('fSearch').value = '';
+  document.getElementById('fMethod').value = '';
+  document.getElementById('fPeriod').value = 'month';
+  renderFinance();
+}
+
+function getFilteredPayments(){
+  let pays = myPayments();
+  const search = document.getElementById('fSearch').value.trim().toLowerCase();
+  const method = document.getElementById('fMethod').value;
+  const period = document.getElementById('fPeriod').value;
+  if (search) pays = pays.filter(p => p.clientName.toLowerCase().includes(search));
+  if (method) pays = pays.filter(p => p.method === method);
+  const now = new Date();
+  if (period === 'today'){
+    pays = pays.filter(p => { const d = new Date(p.date); return d.toDateString() === now.toDateString(); });
+  } else if (period === 'week'){
+    const w = new Date(); w.setDate(w.getDate()-7);
+    pays = pays.filter(p => new Date(p.date) >= w);
+  } else if (period === 'month'){
+    pays = pays.filter(p => { const d = new Date(p.date); return d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear(); });
+  } else if (period === 'prev'){
+    let pm = now.getMonth()-1, py = now.getFullYear();
+    if (pm < 0){ pm = 11; py--; }
+    pays = pays.filter(p => { const d = new Date(p.date); return d.getMonth()===pm && d.getFullYear()===py; });
+  }
+  return pays.sort((a,b) => new Date(b.date) - new Date(a.date));
+}
+
+function renderFinance(){
+  if (!currentBarber) return;
+  const now = new Date();
+  document.getElementById('currentMonthName').textContent = `${MONTHS_PT[now.getMonth()]} ${now.getFullYear()}`;
+  document.getElementById('financeSubtitle').textContent = `${currentBarber.name} · Histórico financeiro`;
+  const payments = getFilteredPayments();
+  
+  if (payments.length === 0){
+    document.getElementById('financeContent').innerHTML = `<div class="empty-state" style="padding:60px"><i class="fas fa-receipt"></i><p>Nenhum pagamento encontrado</p></div>`;
+    return;
+  }
+  
+  const total = payments.reduce((s,p)=>s+p.amount, 0);
+  const uniqueClients = [...new Set(payments.map(p => p.clientName.toLowerCase()))].length;
+  const avgTicket = total / payments.length;
+  const subTotal = payments.filter(p => p.method === 'subscription').length;
+  const methodTotals = {pix:0, credito:0, debito:0, dinheiro:0, subscription:0};
+  const methodCounts = {pix:0, credito:0, debito:0, dinheiro:0, subscription:0};
+  payments.forEach(p => {
+    if (methodTotals.hasOwnProperty(p.method)){
+      methodTotals[p.method] += p.amount;
+      methodCounts[p.method]++;
+    }
+  });
+  
+  document.getElementById('financeContent').innerHTML = `
+    <div class="finance-overview-grid">
+      <div class="fin-stat-card green"><div class="fin-stat-icon"><i class="fas fa-dollar-sign"></i></div><div class="fin-stat-value">R$ ${total.toFixed(2).replace('.',',')}</div><div class="fin-stat-label">Total Filtrado</div><div class="fin-stat-trend"><i class="fas fa-chart-line"></i> ${payments.length} pagamentos</div></div>
+      <div class="fin-stat-card"><div class="fin-stat-icon"><i class="fas fa-cut"></i></div><div class="fin-stat-value">${payments.length}</div><div class="fin-stat-label">Atendimentos</div></div>
+      <div class="fin-stat-card blue"><div class="fin-stat-icon"><i class="fas fa-users"></i></div><div class="fin-stat-value">${uniqueClients}</div><div class="fin-stat-label">Clientes Únicos</div></div>
+      <div class="fin-stat-card purple"><div class="fin-stat-icon"><i class="fas fa-receipt"></i></div><div class="fin-stat-value">R$ ${avgTicket.toFixed(2).replace('.',',')}</div><div class="fin-stat-label">Ticket Médio</div><div class="fin-stat-trend"><i class="fas fa-gem"></i> ${subTotal} assinantes</div></div>
+    </div>
+    <div class="payment-methods-summary">
+      <div class="pm-card pix"><i class="fas fa-bolt pm-icon"></i><div class="pm-value">R$ ${methodTotals.pix.toFixed(2).replace('.',',')}</div><div class="pm-count">${methodCounts.pix} · Pix</div></div>
+      <div class="pm-card credito"><i class="fas fa-credit-card pm-icon"></i><div class="pm-value">R$ ${methodTotals.credito.toFixed(2).replace('.',',')}</div><div class="pm-count">${methodCounts.credito} · Crédito</div></div>
+      <div class="pm-card debito"><i class="fas fa-money-check-alt pm-icon"></i><div class="pm-value">R$ ${methodTotals.debito.toFixed(2).replace('.',',')}</div><div class="pm-count">${methodCounts.debito} · Débito</div></div>
+      <div class="pm-card dinheiro"><i class="fas fa-money-bill-wave pm-icon"></i><div class="pm-value">R$ ${methodTotals.dinheiro.toFixed(2).replace('.',',')}</div><div class="pm-count">${methodCounts.dinheiro} · Dinheiro</div></div>
+      <div class="pm-card subscription"><i class="fas fa-gem pm-icon"></i><div class="pm-value">R$ ${methodTotals.subscription.toFixed(2).replace('.',',')}</div><div class="pm-count">${methodCounts.subscription} · Assinante</div></div>
+    </div>
+    <div class="admin-card">
+      <div class="admin-card-header"><h3>Histórico Detalhado</h3><span class="meta-label">${payments.length} pagamento(s)</span></div>
+      <div style="overflow-x:auto">
+        <table class="premium-table">
+          <thead><tr><th>Cliente</th><th>Serviço</th><th>Data</th><th>Horário</th><th>Forma</th><th>Tipo</th><th>Valor</th><th>Ação</th></tr></thead>
+          <tbody>
+            ${payments.map(p => {
+              const pm = PAYMENT_METHODS[p.method] || PAYMENT_METHODS.dinheiro;
+              return `<tr>
+                <td style="font-weight:600">${p.clientName}</td>
+                <td>${p.service}</td>
+                <td>${formatDate(new Date(p.apptDate))}</td>
+                <td>${p.apptTime}</td>
+                <td><span class="payment-method-badge ${p.method}"><i class="fas ${pm.icon}"></i> ${pm.label}</span></td>
+                <td>${p.method==='subscription' || isSubscriber(p.clientName) ? '<span class="badge-tag badge-sub"><i class="fas fa-gem"></i> Assinante</span>' : '<span style="color:var(--muted);font-size:0.7rem">Avulso</span>'}</td>
+                <td style="font-family:'Playfair Display',serif;font-weight:<td style="font-family:'Playfair Display',serif;font-weight:700;color:${pm.color}">R$ ${p.amount.toFixed(2).replace('.',',')}</td>
+                <td><button class="table-btn danger" onclick="deletePayment(${p.id})" title="Excluir"><i class="fas fa-trash"></i></button></td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+function deletePayment(id){
+  if (!confirm('Excluir este pagamento? Esta ação não pode ser desfeita.')) return;
+  PAYMENTS = PAYMENTS.filter(p => p.id !== id);
+  savePayments();
+  renderFinance();
+  showToast('Pagamento excluído');
+}
+
+/* CLOSE BACKDROPS */
+document.getElementById('bookingModal').addEventListener('click', e => { if (e.target === document.getElementById('bookingModal')) closeBooking(); });
+document.getElementById('paymentModal').addEventListener('click', e => { if (e.target === document.getElementById('paymentModal')) closePaymentModal(); });
+document.getElementById('adminLoginOverlay').addEventListener('click', e => { if (e.target === document.getElementById('adminLoginOverlay')) closeAdminLogin(); });
 </script>
 </body>
 </html>

@@ -125,11 +125,38 @@ function fbInitListeners() {
   db.ref('subscribers').on('value', snap => {
     const val = snap.val();
     if (typeof SUBSCRIBERS !== 'undefined') {
-      SUBSCRIBERS = val
-        ? (Array.isArray(val) ? val : Object.values(val))
-        : [];
+      SUBSCRIBERS = val ? (Array.isArray(val) ? val : Object.values(val)) : [];
+      if (typeof updateSubBadge === 'function') updateSubBadge();
+      const subSec = document.getElementById('adm-subscribers');
+      if (subSec?.classList.contains('active') && typeof renderSubscribersTab === 'function') renderSubscribersTab();
     }
   }, err => console.warn('[Firebase] Listener assinantes:', err.message));
+
+  /* Preços dos serviços */
+  db.ref('servicePrices').on('value', snap => {
+    const prices = snap.val();
+    if (!prices || typeof SERVICES === 'undefined') return;
+    Object.entries(prices).forEach(([id, price]) => {
+      const svc = SERVICES.find(s => s.id === parseInt(id));
+      if (svc) svc.price = price;
+    });
+    if (typeof renderServicesGrid === 'function') renderServicesGrid();
+    const pricesSection = document.getElementById('adm-prices');
+    if (pricesSection?.classList.contains('active') && typeof renderPricesPanel === 'function') renderPricesPanel();
+  }, err => console.warn('[Firebase] Listener preços:', err.message));
+
+  /* Nomes dos serviços */
+  db.ref('serviceNames').on('value', snap => {
+    const names = snap.val();
+    if (!names || typeof SERVICES === 'undefined') return;
+    Object.entries(names).forEach(([id, name]) => {
+      const svc = SERVICES.find(s => s.id === parseInt(id));
+      if (svc) svc.name = name;
+    });
+    if (typeof renderServicesGrid === 'function') renderServicesGrid();
+    const pricesSection = document.getElementById('adm-prices');
+    if (pricesSection?.classList.contains('active') && typeof renderPricesPanel === 'function') renderPricesPanel();
+  }, err => console.warn('[Firebase] Listener nomes:', err.message));
 
   console.info('[Firebase] Listeners em tempo real ativos ✓');
 }

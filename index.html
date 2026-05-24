@@ -144,7 +144,8 @@ input, select, textarea { font-family:'Inter',sans-serif; }
 .barber-card { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border2); border-radius:var(--radius-lg); overflow:hidden; transition:all 0.4s var(--ease); cursor:pointer; }
 .barber-card:hover { border-color:var(--gold); transform:translateY(-8px); box-shadow:var(--shadow-gold); }
 .barber-card-head { height:200px; background:linear-gradient(135deg,rgba(201,169,110,0.1),rgba(201,169,110,0.05)); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-.barber-avatar { width:100px; height:100px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:#000; box-shadow:0 8px 32px rgba(201,169,110,0.3); }
+.barber-avatar { width:100px; height:100px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:#000; box-shadow:0 8px 32px rgba(201,169,110,0.3); overflow:hidden; }
+.barber-avatar img, .bsw-avatar img, .ctx-avatar img, .pick-row-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
 .barber-card-body { padding:20px; }
 .barber-name { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; margin-bottom:4px; }
 .barber-spec { font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
@@ -203,7 +204,7 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 .pick-row-selected-mark { width:18px; height:18px; border:1px solid var(--border2); border-radius:50%; margin-left:auto; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.6rem; transition:all 0.2s; }
 .pick-row.selected .pick-row-selected-mark { background:var(--gold); border-color:var(--gold); color:#000; }
 .pick-row-icon { width:36px; height:36px; background:var(--gold-subtle); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:0.85rem; flex-shrink:0; }
-.pick-row-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.78rem; color:#000; flex-shrink:0; }
+.pick-row-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#7A5C1E); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.78rem; color:#000; flex-shrink:0; overflow:hidden; }
 .pick-row-info { flex:1; min-width:0; }
 .pick-row-name { font-size:0.85rem; font-weight:600; margin-bottom:2px; }
 .pick-row-meta { font-size:0.7rem; color:var(--muted); }
@@ -361,7 +362,7 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 .bsw-label { font-size:0.56rem; letter-spacing:3px; text-transform:uppercase; color:#34D399; font-weight:800; text-align:center; margin-bottom:14px; display:flex; align-items:center; justify-content:center; gap:7px; position:relative; z-index:1; }
 .bsw-label i { color:#10B981; font-size:0.7rem; }
 .bsw-current { display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:14px; animation:barberSwitch 0.4s ease; position:relative; z-index:1; }
-.bsw-avatar { width:62px; height:62px; border-radius:50%; background:linear-gradient(135deg,var(--gold-l),var(--gold) 50%,var(--gold-d)); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:900; font-size:1.3rem; color:#000; box-shadow:0 10px 24px rgba(201,169,110,0.45),inset 0 -3px 8px rgba(0,0,0,0.3),0 0 0 3px rgba(16,185,129,0.3); border:2px solid rgba(16,185,129,0.5); position:relative; }
+.bsw-avatar { width:62px; height:62px; border-radius:50%; background:linear-gradient(135deg,var(--gold-l),var(--gold) 50%,var(--gold-d)); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:900; font-size:1.3rem; color:#000; box-shadow:0 10px 24px rgba(201,169,110,0.45),inset 0 -3px 8px rgba(0,0,0,0.3),0 0 0 3px rgba(16,185,129,0.3); border:2px solid rgba(16,185,129,0.5); position:relative; overflow:hidden; }
 .bsw-avatar::after { content:''; position:absolute; bottom:-2px; right:-2px; width:14px; height:14px; background:#10B981; border:2.5px solid #0D0D0D; border-radius:50%; box-shadow:0 0 12px rgba(16,185,129,0.7); animation:dotBlink 2s ease-in-out infinite; }
 .bsw-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--white); text-align:center; letter-spacing:0.3px; }
 .bsw-spec { font-size:0.58rem; color:#34D399; letter-spacing:2px; text-transform:uppercase; text-align:center; font-weight:600; }
@@ -390,10 +391,68 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 .admin-section { display:none; }
 .admin-section.active { display:block; animation:sectionFade 0.3s ease; }
 
+/* ===== ABA DE PREÇOS ===== */
+.prices-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; margin-top:4px; }
+.price-card { background:var(--bg3); border:1px solid var(--border2); border-radius:var(--radius); padding:20px; display:flex; align-items:center; gap:16px; transition:border-color 0.2s; }
+.price-card:hover { border-color:var(--border); }
+.price-card-icon { width:44px; height:44px; border-radius:10px; background:var(--gold-subtle); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1rem; flex-shrink:0; }
+.price-card-body { flex:1; }
+.price-card-name { font-weight:600; font-size:0.88rem; margin-bottom:2px; }
+.price-card-meta { font-size:0.7rem; color:var(--muted); margin-bottom:10px; }
+.price-input-row { display:flex; align-items:center; gap:8px; }
+.price-prefix { font-size:0.85rem; color:var(--muted); font-weight:500; }
+.price-input { background:var(--bg4); border:1px solid var(--border2); border-radius:6px; color:var(--white); padding:8px 10px; font-size:0.9rem; font-family:'Inter',sans-serif; width:90px; transition:border-color 0.2s; }
+.price-input:focus { outline:none; border-color:var(--gold); }
+.price-save-btn { padding:8px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:0.72rem; font-weight:700; letter-spacing:0.5px; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.price-save-btn:hover { background:var(--gold-l); }
+.price-notice { font-size:0.72rem; color:var(--muted); margin-top:12px; display:flex; align-items:center; gap:6px; }
+.price-name-input { width:100%; background:var(--bg4); border:1px solid var(--border2); border-radius:6px; color:var(--white); padding:7px 10px; font-size:0.82rem; font-family:'Inter',sans-serif; margin-bottom:8px; transition:border-color 0.2s; box-sizing:border-box; }
+.price-name-input:focus { outline:none; border-color:var(--gold); }
+.price-field-label { font-size:0.58rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+
+/* ===== ASSINANTES ===== */
+.nav-badge { margin-left:auto; background:var(--purple); color:#fff; border-radius:100px; padding:1px 8px; font-size:0.6rem; font-weight:700; min-width:18px; text-align:center; }
+.subs-stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px; }
+.subs-stat { background:var(--bg3); border:1px solid var(--border2); border-radius:var(--radius); padding:18px 20px; }
+.subs-stat-icon { width:36px; height:36px; border-radius:8px; background:var(--gold-subtle); display:flex; align-items:center; justify-content:center; color:var(--gold); margin-bottom:10px; }
+.subs-stat-val { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; }
+.subs-stat-lbl { font-size:0.62rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+.subs-add-bar { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.subs-add-input { flex:1; min-width:140px; background:var(--bg3); border:1px solid var(--border2); border-radius:var(--radius); padding:11px 14px; font-size:0.85rem; color:var(--white); font-family:'Inter',sans-serif; transition:border-color 0.2s; }
+.subs-add-input:focus { outline:none; border-color:var(--gold); }
+.subs-add-btn { padding:11px 20px; background:var(--gold); color:#000; border:none; border-radius:var(--radius); font-weight:700; font-size:0.75rem; letter-spacing:0.5px; cursor:pointer; white-space:nowrap; transition:background 0.2s; }
+.subs-add-btn:hover { background:var(--gold-l); }
+.subs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+.sub-card { background:var(--bg3); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:22px; position:relative; overflow:hidden; transition:border-color 0.2s; }
+.sub-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--purple),#7C3AED); }
+.sub-card:hover { border-color:rgba(168,85,247,0.3); }
+.sub-card-head { display:flex; align-items:flex-start; gap:14px; margin-bottom:16px; }
+.sub-avatar { width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,#A855F7,#7C3AED); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:900; font-size:1rem; color:#fff; flex-shrink:0; box-shadow:0 4px 14px rgba(168,85,247,0.3); }
+.sub-card-info { flex:1; min-width:0; }
+.sub-card-name { font-weight:700; font-size:0.92rem; margin-bottom:3px; }
+.sub-card-phone { font-size:0.72rem; color:var(--muted); }
+.sub-badge { position:absolute; top:14px; right:14px; background:rgba(168,85,247,0.15); border:1px solid rgba(168,85,247,0.3); border-radius:100px; padding:3px 10px; font-size:0.58rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#C084FC; display:flex; align-items:center; gap:4px; }
+.sub-meta-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+.sub-meta-item { background:var(--bg4); border-radius:7px; padding:8px 10px; }
+.sub-meta-label { font-size:0.58rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
+.sub-meta-val { font-size:0.82rem; font-weight:600; }
+.sub-progress-wrap { margin-bottom:14px; }
+.sub-progress-head { display:flex; justify-content:space-between; font-size:0.68rem; color:var(--muted); margin-bottom:6px; }
+.sub-progress-bar { height:5px; background:var(--bg5); border-radius:3px; overflow:hidden; }
+.sub-progress-fill { height:100%; background:linear-gradient(90deg,#A855F7,#C084FC); border-radius:3px; transition:width 0.5s var(--ease); }
+.sub-progress-fill.full { background:linear-gradient(90deg,var(--green),#4ADE80); }
+.sub-card-actions { display:flex; gap:8px; }
+.sub-wa-btn { flex:1; padding:9px; background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.22); border-radius:7px; color:#25D366; font-size:0.72rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; transition:all 0.2s; text-decoration:none; }
+.sub-wa-btn:hover { background:rgba(37,211,102,0.18); }
+.sub-remove-btn { padding:9px 14px; background:rgba(239,68,68,0.07); border:1px solid rgba(239,68,68,0.18); border-radius:7px; color:var(--red); font-size:0.72rem; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.sub-remove-btn:hover { background:rgba(239,68,68,0.14); }
+.subs-empty { text-align:center; padding:60px 20px; color:var(--muted); grid-column:1/-1; }
+.subs-empty i { font-size:2.5rem; color:var(--ghost); display:block; margin-bottom:14px; }
+
 /* CONTEXT BANNER (mostra qual barbeiro tá vendo) */
 .context-banner { background:linear-gradient(135deg,rgba(201,169,110,0.12),rgba(201,169,110,0.03)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px 24px; margin-bottom:24px; display:flex; align-items:center; gap:18px; position:relative; overflow:hidden; }
 .context-banner::before { content:''; position:absolute; top:0; left:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--gold),var(--gold-d)); }
-.ctx-avatar { width:54px; height:54px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--gold-d)); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:900; font-size:1.2rem; color:#000; flex-shrink:0; box-shadow:0 6px 18px rgba(201,169,110,0.35); }
+.ctx-avatar { width:54px; height:54px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--gold-d)); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:900; font-size:1.2rem; color:#000; flex-shrink:0; box-shadow:0 6px 18px rgba(201,169,110,0.35); overflow:hidden; }
 .ctx-info { flex:1; min-width:0; }
 .ctx-label { font-size:0.62rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); font-weight:600; }
 .ctx-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:var(--white); margin-top:2px; }
@@ -850,6 +909,8 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
         <button class="nav-item" onclick="switchAdminSection('appointments',this)"><i class="fas fa-calendar-check"></i> Agendamentos</button>
         <button class="nav-item" onclick="switchAdminSection('clients',this)"><i class="fas fa-users"></i> Clientes</button>
         <button class="nav-item" onclick="switchAdminSection('finance',this)"><i class="fas fa-coins"></i> Financeiro</button>
+        <button class="nav-item" onclick="switchAdminSection('subscribers',this)"><i class="fas fa-gem"></i> Assinantes <span class="nav-badge" id="subCountBadge">0</span></button>
+        <button class="nav-item" onclick="switchAdminSection('prices',this)"><i class="fas fa-tag"></i> Preços</button>
       </div>
     </nav>
     <div class="sidebar-footer">
@@ -944,6 +1005,33 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
         
         <div id="financeContent"></div>
       </div>
+
+      <div class="admin-section" id="adm-subscribers">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i class="fas fa-gem" style="color:var(--purple);margin-right:8px"></i>Plano de Assinatura</h3>
+            <span class="meta-label" id="subsCountLabel">0 ativos</span>
+          </div>
+          <div class="subs-stats-grid" id="subsStatsGrid"></div>
+          <div class="subs-add-bar">
+            <input class="subs-add-input" type="text" id="subAddName" placeholder="Nome do cliente...">
+            <input class="subs-add-input" type="tel" id="subAddPhone" placeholder="WhatsApp (ex: 41999...)" style="max-width:220px">
+            <button class="subs-add-btn" onclick="addSubscriberManual()"><i class="fas fa-plus"></i> Adicionar Assinante</button>
+          </div>
+          <div class="subs-grid" id="subsGrid"></div>
+        </div>
+      </div>
+
+      <div class="admin-section" id="adm-prices">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>Preços dos Serviços</h3>
+            <span class="meta-label">Salve para atualizar agendamentos pendentes</span>
+          </div>
+          <div class="prices-grid" id="pricesGrid"></div>
+          <p class="price-notice"><i class="fas fa-info-circle"></i> Agendamentos já confirmados e pagos não são alterados — apenas os pendentes.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -966,7 +1054,7 @@ const SERVICES = [
 ];
 
 const BARBERS = [
-  {id:1, name:'David Leal',     spec:'Cortes & Barba',          ini:'DL'},
+  {id:1, name:'David Leal',     spec:'Cortes & Barba',          ini:'DL', photo:'davi.jpg'},
   {id:2, name:'Kauan Martins',  spec:'Degradê & Química',       ini:'KM'},
   {id:3, name:'Luiz Gustavo',   spec:'Estética & Coloração',    ini:'LG'},
   {id:4, name:'Guilherme',      spec:'Estilo & Modernidade',    ini:'GU'}
@@ -1003,11 +1091,34 @@ function saveAppts(){ sessionStorage.setItem('dlbc_appts', JSON.stringify(APPOIN
 function savePayments(){ sessionStorage.setItem('dlbc_payments', JSON.stringify(PAYMENTS)); }
 function saveSubs(){ sessionStorage.setItem('dlbc_subs', JSON.stringify(SUBSCRIBERS)); fbSaveSubs(SUBSCRIBERS); }
 
-function isSubscriber(name){ return SUBSCRIBERS.some(s => s.toLowerCase() === name.toLowerCase()); }
+/* Normaliza entrada legada (string) para objeto */
+function ensureSubObj(s){ return typeof s === 'string' ? {name:s, phone:'', since:new Date().toISOString(), barberId:null} : s; }
+function subName(s){ return typeof s === 'string' ? s : s.name; }
+
+function isSubscriber(name){ return SUBSCRIBERS.some(s => subName(s).toLowerCase() === name.toLowerCase()); }
+
+function getSubObj(name){ const s = SUBSCRIBERS.find(s => subName(s).toLowerCase() === name.toLowerCase()); return s ? ensureSubObj(s) : null; }
+
+function addOrUpdateSubscriber(name, phone, barberId){
+  const idx = SUBSCRIBERS.findIndex(s => subName(s).toLowerCase() === name.toLowerCase());
+  const since = idx >= 0 ? ensureSubObj(SUBSCRIBERS[idx]).since : new Date().toISOString();
+  const obj = {name, phone: phone||'', since, barberId: barberId||null};
+  if (idx >= 0) SUBSCRIBERS[idx] = obj; else SUBSCRIBERS.push(obj);
+  saveSubs(); updateSubBadge();
+}
+
+function removeSubscriber(name){
+  SUBSCRIBERS = SUBSCRIBERS.filter(s => subName(s).toLowerCase() !== name.toLowerCase());
+  saveSubs(); updateSubBadge();
+}
+
 function toggleSubscriber(name){
-  const idx = SUBSCRIBERS.findIndex(s => s.toLowerCase() === name.toLowerCase());
-  if (idx >= 0) SUBSCRIBERS.splice(idx, 1); else SUBSCRIBERS.push(name);
-  saveSubs();
+  if (isSubscriber(name)) removeSubscriber(name); else addOrUpdateSubscriber(name,'',null);
+}
+
+function updateSubBadge(){
+  const b = document.getElementById('subCountBadge');
+  if (b) b.textContent = SUBSCRIBERS.length;
 }
 function countMonthlyVisits(name, barberId){
   const now = new Date();
@@ -1027,6 +1138,7 @@ window.addEventListener('load', () => {
   renderServicesGrid();
   renderPublicBarbers();
   fbInitListeners();
+  fbLoadServicePrices();
 });
 
 let navScrolled = false;
@@ -1057,10 +1169,16 @@ function renderServicesGrid(){
   document.getElementById('footerServicesList').innerHTML = SERVICES.slice(0,5).map(s => `<li><a>${s.name}</a></li>`).join('');
 }
 
+function barberAvatarHTML(b){
+  return b.photo
+    ? `<img src="${b.photo}" alt="${b.name}">`
+    : b.ini;
+}
+
 function renderPublicBarbers(){
   document.getElementById('barbersGrid').innerHTML = BARBERS.map(b => `
     <div class="barber-card reveal">
-      <div class="barber-card-head"><div class="barber-avatar">${b.ini}</div></div>
+      <div class="barber-card-head"><div class="barber-avatar">${barberAvatarHTML(b)}</div></div>
       <div class="barber-card-body">
         <div class="barber-name">${b.name}</div>
         <div class="barber-spec">${b.spec}</div>
@@ -1072,13 +1190,21 @@ function renderPublicBarbers(){
 
 /* BOOKING */
 let bk = {step:1, service:null, barber:null, date:null, time:null};
+let _slotsTimer = null;
+
 function openBooking(){ resetBooking(); document.getElementById('bookingModal').classList.add('open'); document.body.style.overflow='hidden'; }
 function openBookingWithService(id){ openBooking(); selectService(id); if (bk.service) setTimeout(() => goStep(2), 80); }
 function openBookingWithBarber(id){ openBooking(); setTimeout(() => { goStep(2); selectBarber(id); }, 100); }
-function closeBooking(){ document.getElementById('bookingModal').classList.remove('open'); document.body.style.overflow=''; }
+function closeBooking(){
+  if (_slotsTimer){ clearInterval(_slotsTimer); _slotsTimer = null; }
+  document.getElementById('bookingModal').classList.remove('open');
+  document.body.style.overflow='';
+}
 function resetBooking(){ bk={step:1,service:null,barber:null,date:null,time:null}; renderServiceList(); renderBarberList(); buildCalendar(); updateChips(); goStep(1,true); }
 
 function goStep(n, silent){
+  /* Para refresh automático ao sair do passo 4 */
+  if (_slotsTimer && n !== 4){ clearInterval(_slotsTimer); _slotsTimer = null; }
   for (let i=1;i<=7;i++){
     const p = document.getElementById('panel'+i);
     if (p) p.classList.toggle('active', i===n);
@@ -1091,7 +1217,16 @@ function goStep(n, silent){
   }
   bk.step = n;
   if (!silent) updateChips();
-  if (n===4) renderTimeSlots();
+  if (n===4){
+    renderTimeSlots();
+    /* Atualiza o grid a cada 60s para bloquear horários que passaram em tempo real */
+    if (!_slotsTimer){
+      _slotsTimer = setInterval(() => {
+        if (bk.step === 4) renderTimeSlots();
+        else { clearInterval(_slotsTimer); _slotsTimer = null; }
+      }, 60000);
+    }
+  }
 }
 
 function updateChips(){
@@ -1118,7 +1253,7 @@ function selectService(id){ bk.service = SERVICES.find(s=>s.id===id); renderServ
 function renderBarberList(){
   document.getElementById('barberPickList').innerHTML = BARBERS.map(b => `
     <div class="pick-row ${bk.barber && bk.barber.id===b.id ? 'selected':''}" onclick="selectBarber(${b.id})">
-      <div class="pick-row-avatar">${b.ini}</div>
+      <div class="pick-row-avatar">${barberAvatarHTML(b)}</div>
       <div class="pick-row-info"><div class="pick-row-name">${b.name}</div><div class="pick-row-meta">${b.spec}</div></div>
       <div class="pick-row-selected-mark">${bk.barber && bk.barber.id===b.id ? '✓':''}</div>
     </div>`).join('');
@@ -1297,7 +1432,7 @@ function selectPaymentMethod(method, ev){
     valueInput.value = SUBSCRIPTION_PLAN.pricePerCut.toFixed(2);
     valueInput.classList.add('readonly-sub');
     valueInput.readOnly = true;
-    if (appt && !isSubscriber(appt.name)){ SUBSCRIBERS.push(appt.name); saveSubs(); }
+    if (appt && !isSubscriber(appt.name)){ addOrUpdateSubscriber(appt.name, appt.phone||'', appt.barberId); }
     if (appt){
       const visits = countMonthlyVisits(appt.name, appt.barberId);
       document.getElementById('subInfoBox').classList.add('show');
@@ -1331,17 +1466,28 @@ function confirmPayment(){
   };
   PAYMENTS.push(payment);
   savePayments(); fbSavePayment(payment);
+  /* Registra/atualiza assinante com phone e barbeiro */
+  if (selectedPaymentMethod === 'subscription'){
+    addOrUpdateSubscriber(appt.name, appt.phone||'', appt.barberId);
+  }
   const method = PAYMENT_METHODS[selectedPaymentMethod].label;
   const formattedValue = `R$ ${value.toFixed(2).replace('.',',')}`;
   const clientName = appt.name;
+  const isSub = selectedPaymentMethod === 'subscription';
   closePaymentModal();
-  showSuccessAnimation(clientName, method, formattedValue);
+  showSuccessAnimation(clientName, method, formattedValue, isSub);
   renderAdminDashboard();
+  /* Atualiza aba assinantes se estiver aberta */
+  const subSec = document.getElementById('adm-subscribers');
+  if (subSec?.classList.contains('active')) renderSubscribersTab();
 }
 
-function showSuccessAnimation(clientName, method, value){
+function showSuccessAnimation(clientName, method, value, isSub){
   const overlay = document.getElementById('successOverlay');
-  document.getElementById('successSubtext').textContent = `${clientName} · ${method} · ${value}`;
+  const subtext = isSub
+    ? `${clientName} · Assinante · ${value} <i class="fas fa-gem" style="color:#C084FC;margin-left:4px"></i>`
+    : `${clientName} · ${method} · ${value}`;
+  document.getElementById('successSubtext').innerHTML = subtext;
   overlay.classList.remove('show');
   void overlay.offsetWidth;
   overlay.classList.add('show');
@@ -1409,7 +1555,7 @@ function updateContext(){
   if (!currentBarber) return;
   // Sidebar barber card
   document.getElementById('bswCurrent').innerHTML = `
-    <div class="bsw-avatar">${currentBarber.ini}</div>
+    <div class="bsw-avatar">${barberAvatarHTML(currentBarber)}</div>
     <div>
       <div class="bsw-name">${currentBarber.name}</div>
       <div class="bsw-spec">${currentBarber.spec}</div>
@@ -1420,7 +1566,7 @@ function updateContext(){
   
   // Context banner
   document.getElementById('contextBanner').innerHTML = `
-    <div class="ctx-avatar">${currentBarber.ini}</div>
+    <div class="ctx-avatar">${barberAvatarHTML(currentBarber)}</div>
     <div class="ctx-info">
       <div class="ctx-label"><i class="fas fa-eye" style="color:var(--gold);margin-right:5px"></i> Visualizando dados de</div>
       <div class="ctx-name">${currentBarber.name}</div>
@@ -1443,7 +1589,7 @@ function switchBarber(id){
   showToast(`Visualizando: ${currentBarber.name}`);
 }
 
-const sectionTitles = {dashboard:'Dashboard', appointments:'Agendamentos', clients:'Clientes', finance:'Financeiro'};
+const sectionTitles = {dashboard:'Dashboard', appointments:'Agendamentos', clients:'Clientes', finance:'Financeiro', subscribers:'Assinantes', prices:'Preços'};
 
 function switchAdminSection(sec, btn){
   document.querySelectorAll('.admin-section').forEach(el => el.classList.remove('active'));
@@ -1455,6 +1601,8 @@ function switchAdminSection(sec, btn){
   else if (sec==='appointments') renderAllAppointments();
   else if (sec==='clients') renderClientsTable();
   else if (sec==='finance') renderFinance();
+  else if (sec==='subscribers') renderSubscribersTab();
+  else if (sec==='prices') renderPricesPanel();
 }
 
 function myAppts(){ return APPOINTMENTS.filter(a => a.barberId === currentBarber.id); }
@@ -1557,15 +1705,15 @@ function renderClientsTable(){
       <td style="font-size:0.76rem">${last.service}</td>
       <td style="color:var(--green);font-family:'Playfair Display',serif;font-weight:700">R$${Math.round(total)}</td>
       <td>${sub ? '<span class="badge-tag badge-sub"><i class="fas fa-gem"></i> Assinante</span>':'<span style="color:var(--muted);font-size:0.7rem">Avulso</span>'}</td>
-      <td><button class="table-btn" onclick="toggleSubAndRefresh('${c.name.replace(/'/g,"\\'")}')"><i class="fas fa-gem"></i> ${sub?'Remover':'Tornar'} Assinante</button></td>
+      <td><button class="table-btn" onclick="toggleSubAndRefresh('${c.name.replace(/'/g,"\\'")}','${(c.phone||'').replace(/'/g,"\\'")}')"><i class="fas fa-gem"></i> ${sub?'Remover':'Tornar'} Assinante</button></td>
     </tr>`;
   }).join('')}</tbody></table></div>` : '<div class="empty-state"><i class="fas fa-users"></i><p>Nenhum cliente</p></div>';
 }
 
-function toggleSubAndRefresh(name){
-  toggleSubscriber(name);
+function toggleSubAndRefresh(name, phone){
+  if (isSubscriber(name)){ removeSubscriber(name); showToast(`${name} removido do plano`); }
+  else { addOrUpdateSubscriber(name, phone||'', null); showToast(`${name} agora é assinante`); }
   renderClientsTable();
-  showToast(isSubscriber(name) ? `${name} agora é assinante` : `${name} removido dos assinantes`);
 }
 
 function clearFinFilters(){
@@ -1641,7 +1789,7 @@ function renderFinance(){
       <div class="admin-card-header"><h3>Histórico Detalhado</h3><span class="meta-label">${payments.length} pagamento(s)</span></div>
       <div style="overflow-x:auto">
         <table class="premium-table">
-          <thead><tr><th>Cliente</th><th>Serviço</th><th>Data</th><th>Horário</th><th>Forma</th><th>Tipo</th><th>Valor</th><th>Ação</th></tr></thead>
+          <thead><tr><th>Cliente</th><th>Serviço</th><th>Data</th><th>Horário</th><th>Forma</th><th>Tipo</th><th>Valor</th></tr></thead>
           <tbody>
             ${payments.map(p => {
               const pm = PAYMENT_METHODS[p.method] || PAYMENT_METHODS.dinheiro;
@@ -1653,7 +1801,6 @@ function renderFinance(){
                 <td><span class="payment-method-badge ${p.method}"><i class="fas ${pm.icon}"></i> ${pm.label}</span></td>
                 <td>${p.method==='subscription' || isSubscriber(p.clientName) ? '<span class="badge-tag badge-sub"><i class="fas fa-gem"></i> Assinante</span>' : '<span style="color:var(--muted);font-size:0.7rem">Avulso</span>'}</td>
                 <td style="font-family:'Playfair Display',serif;font-weight:700;color:${pm.color}">R$ ${p.amount.toFixed(2).replace('.',',')}</td>
-                <td><button class="table-btn danger" onclick="deletePayment(${p.id})" title="Excluir"><i class="fas fa-trash"></i></button></td>
               </tr>`;
             }).join('')}
           </tbody>
@@ -1668,6 +1815,169 @@ function deletePayment(id){
   savePayments(); fbDeletePayment(id);
   renderFinance();
   showToast('Pagamento excluído');
+}
+
+/* ═══════════════════════════════════════════════════════
+   ASSINANTES
+   ═══════════════════════════════════════════════════════ */
+function renderSubscribersTab(){
+  const subs = SUBSCRIBERS.map(ensureSubObj);
+  const now = new Date(), mo = now.getMonth(), yr = now.getFullYear();
+  const cutsThisMonth = PAYMENTS.filter(p => { const d=new Date(p.date); return p.method==='subscription' && d.getMonth()===mo && d.getFullYear()===yr; }).length;
+  const monthlyRev = subs.length * SUBSCRIPTION_PLAN.monthlyPrice;
+
+  document.getElementById('subsCountLabel').textContent = `${subs.length} ativo${subs.length!==1?'s':''}`;
+  updateSubBadge();
+
+  document.getElementById('subsStatsGrid').innerHTML = `
+    <div class="subs-stat">
+      <div class="subs-stat-icon"><i class="fas fa-gem"></i></div>
+      <div class="subs-stat-val">${subs.length}</div>
+      <div class="subs-stat-lbl">Assinantes Ativos</div>
+    </div>
+    <div class="subs-stat">
+      <div class="subs-stat-icon" style="background:rgba(34,197,94,0.1);color:var(--green)"><i class="fas fa-dollar-sign"></i></div>
+      <div class="subs-stat-val">R$&nbsp;${monthlyRev.toFixed(0)}</div>
+      <div class="subs-stat-lbl">Receita Mensal Planos</div>
+    </div>
+    <div class="subs-stat">
+      <div class="subs-stat-icon" style="background:rgba(59,130,246,0.1);color:var(--blue)"><i class="fas fa-cut"></i></div>
+      <div class="subs-stat-val">${cutsThisMonth}</div>
+      <div class="subs-stat-lbl">Cortes Plano Este Mês</div>
+    </div>`;
+
+  if (!subs.length){
+    document.getElementById('subsGrid').innerHTML = `<div class="subs-empty"><i class="fas fa-gem"></i><p>Nenhum assinante cadastrado ainda.<br>Confirme um pagamento via <strong>Assinante</strong> ou adicione manualmente.</p></div>`;
+    return;
+  }
+
+  document.getElementById('subsGrid').innerHTML = subs.map(sub => {
+    const ini = sub.name.trim().split(/\s+/).map(p=>p[0]).join('').substring(0,2).toUpperCase();
+    const cutsUsed = PAYMENTS.filter(p => { const d=new Date(p.date); return p.method==='subscription' && p.clientName.toLowerCase()===sub.name.toLowerCase() && d.getMonth()===mo && d.getFullYear()===yr; }).length;
+    const cutsLeft = Math.max(0, SUBSCRIPTION_PLAN.cutsPerMonth - cutsUsed);
+    const pct = Math.min(100, (cutsUsed/SUBSCRIPTION_PLAN.cutsPerMonth)*100);
+    const isFull = cutsUsed >= SUBSCRIPTION_PLAN.cutsPerMonth;
+    const lastPay = PAYMENTS.filter(p => p.clientName.toLowerCase()===sub.name.toLowerCase() && p.method==='subscription').sort((a,b)=>new Date(b.date)-new Date(a.date))[0];
+    const sinceDate = sub.since ? formatDate(new Date(sub.since)) : '—';
+    const lastVisit = lastPay ? formatDate(new Date(lastPay.date)) : 'Nenhuma';
+    const barberName = sub.barberId ? (BARBERS.find(b=>b.id===sub.barberId)?.name||'—') : 'Qualquer';
+    const waLink = sub.phone ? `https://wa.me/55${sub.phone.replace(/\D/g,'')}` : '';
+    const safeName = sub.name.replace(/'/g,"\\'");
+    return `
+      <div class="sub-card">
+        <div class="sub-badge"><i class="fas fa-gem"></i> PLANO ATIVO</div>
+        <div class="sub-card-head">
+          <div class="sub-avatar">${ini}</div>
+          <div class="sub-card-info">
+            <div class="sub-card-name">${sub.name}</div>
+            <div class="sub-card-phone"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:4px"></i>${sub.phone||'Sem WhatsApp cadastrado'}</div>
+          </div>
+        </div>
+        <div class="sub-meta-grid">
+          <div class="sub-meta-item"><div class="sub-meta-label">Membro desde</div><div class="sub-meta-val">${sinceDate}</div></div>
+          <div class="sub-meta-item"><div class="sub-meta-label">Última visita</div><div class="sub-meta-val">${lastVisit}</div></div>
+          <div class="sub-meta-item"><div class="sub-meta-label">Plano mensal</div><div class="sub-meta-val">R$ ${SUBSCRIPTION_PLAN.monthlyPrice}</div></div>
+          <div class="sub-meta-item"><div class="sub-meta-label">Cortes restantes</div><div class="sub-meta-val" style="color:${cutsLeft>0?'var(--green)':'var(--red)'}">${cutsLeft} de ${SUBSCRIPTION_PLAN.cutsPerMonth}</div></div>
+        </div>
+        <div class="sub-progress-wrap">
+          <div class="sub-progress-head"><span>Uso do plano este mês</span><span>${cutsUsed}/${SUBSCRIPTION_PLAN.cutsPerMonth} cortes</span></div>
+          <div class="sub-progress-bar"><div class="sub-progress-fill${isFull?' full':''}" style="width:${pct}%"></div></div>
+        </div>
+        <div class="sub-card-actions">
+          ${waLink?`<a href="${waLink}" target="_blank" class="sub-wa-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>`:'<span style="flex:1"></span>'}
+          <button class="sub-remove-btn" onclick="confirmRemoveSub('${safeName}')"><i class="fas fa-times"></i> Remover Plano</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function addSubscriberManual(){
+  const name = document.getElementById('subAddName').value.trim();
+  const phone = document.getElementById('subAddPhone').value.trim();
+  if (!name){ showToast('Informe o nome do cliente'); return; }
+  addOrUpdateSubscriber(name, phone, null);
+  document.getElementById('subAddName').value='';
+  document.getElementById('subAddPhone').value='';
+  renderSubscribersTab();
+  showToast(`${name} adicionado ao plano`);
+}
+
+function confirmRemoveSub(name){
+  if (!confirm(`Remover ${name} do plano de assinatura?`)) return;
+  removeSubscriber(name);
+  renderSubscribersTab();
+  showToast(`${name} removido do plano`);
+}
+
+/* ═══════════════════════════════════════════════════════
+   GESTÃO DE PREÇOS E NOMES
+   ═══════════════════════════════════════════════════════ */
+function renderPricesPanel(){
+  document.getElementById('pricesGrid').innerHTML = SERVICES.map(s => `
+    <div class="price-card">
+      <div class="price-card-icon"><i class="fas ${s.icon}"></i></div>
+      <div class="price-card-body">
+        <div class="price-card-meta"><i class="fas fa-clock"></i> ${s.time} · ${s.cat}</div>
+        <div style="margin-bottom:8px">
+          <div class="price-field-label">Nome do Serviço</div>
+          <input class="price-name-input" type="text" id="nameInput${s.id}" value="${s.name}">
+        </div>
+        <div class="price-input-row">
+          <span class="price-prefix">R$</span>
+          <input class="price-input" type="number" id="priceInput${s.id}" value="${s.price.toFixed(2)}" min="0" step="0.01">
+          <button class="price-save-btn" onclick="saveServiceChanges(${s.id})"><i class="fas fa-check"></i> Salvar</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function saveServiceChanges(serviceId){
+  const nameInput = document.getElementById('nameInput'+serviceId);
+  const priceInput = document.getElementById('priceInput'+serviceId);
+  const newName = nameInput.value.trim();
+  const newPrice = parseFloat(priceInput.value);
+  if (!newName){ showToast('Nome não pode ser vazio'); return; }
+  if (isNaN(newPrice)||newPrice<0){ showToast('Valor inválido'); return; }
+  const svc = SERVICES.find(s=>s.id===serviceId);
+  if (!svc) return;
+  const nameChanged = newName !== svc.name;
+  const priceChanged = newPrice !== svc.price;
+  if (!nameChanged&&!priceChanged){ showToast('Sem alterações'); return; }
+  svc.name = newName;
+  svc.price = newPrice;
+  let updatedCount = 0;
+  APPOINTMENTS.forEach(a => {
+    if (a.serviceId===serviceId && a.status==='pending'){
+      if (nameChanged) a.service = newName;
+      if (priceChanged) a.price = newPrice;
+      fbSaveAppt(a); updatedCount++;
+    }
+  });
+  saveAppts();
+  if (db){
+    db.ref('servicePrices/'+serviceId).set(newPrice).catch(e=>console.warn(e));
+    if (nameChanged) db.ref('serviceNames/'+serviceId).set(newName).catch(e=>console.warn(e));
+  }
+  renderServicesGrid();
+  const changes = [];
+  if (nameChanged) changes.push(`"${newName}"`);
+  if (priceChanged) changes.push(`R$ ${newPrice.toFixed(2).replace('.',',')}`);
+  showToast(`${changes.join(' · ')} salvo${updatedCount>0?` · ${updatedCount} agendamento(s) atualizado(s)`:''}`);
+}
+
+/* Carrega preços e nomes salvos no Firebase */
+function fbLoadServicePrices(){
+  if (!db) return;
+  Promise.all([
+    db.ref('servicePrices').once('value'),
+    db.ref('serviceNames').once('value')
+  ]).then(([pSnap, nSnap]) => {
+    const prices = pSnap.val(), names = nSnap.val();
+    if (prices) Object.entries(prices).forEach(([id,price])=>{ const s=SERVICES.find(s=>s.id===parseInt(id)); if(s) s.price=price; });
+    if (names)  Object.entries(names).forEach(([id,name])=>{ const s=SERVICES.find(s=>s.id===parseInt(id)); if(s) s.name=name; });
+    renderServicesGrid();
+  }).catch(err=>console.warn('[Firebase] Erro ao carregar dados de serviços:', err.message));
 }
 
 /* CLOSE BACKDROPS */

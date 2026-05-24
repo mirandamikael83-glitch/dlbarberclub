@@ -3,10 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DL Barber Club — Premium</title>
+<title>DL Barber Club — Barbearia Premium · Curitiba</title>
+<meta name="description" content="A barbearia premium que redefine estilo, exclusividade e personalidade em Curitiba. Agende seu horário online.">
+<meta property="og:title"       content="DL Barber Club — Barbearia Premium · Curitiba">
+<meta property="og:description" content="Agende seu horário com os melhores barbeiros de Curitiba. Av. Anita Garibaldi, 5320 — Barreirinha.">
+<meta property="og:type"        content="website">
+<meta name="theme-color"        content="#C9A96E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- FIREBASE SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
 <style>
 :root {
   --gold:#C9A96E; --gold-l:#E8CC9A; --gold-d:#8B6B35;
@@ -992,7 +1001,7 @@ const PAYMENT_METHODS = {
 
 function saveAppts(){ sessionStorage.setItem('dlbc_appts', JSON.stringify(APPOINTMENTS)); }
 function savePayments(){ sessionStorage.setItem('dlbc_payments', JSON.stringify(PAYMENTS)); }
-function saveSubs(){ sessionStorage.setItem('dlbc_subs', JSON.stringify(SUBSCRIBERS)); }
+function saveSubs(){ sessionStorage.setItem('dlbc_subs', JSON.stringify(SUBSCRIBERS)); fbSaveSubs(SUBSCRIBERS); }
 
 function isSubscriber(name){ return SUBSCRIBERS.some(s => s.toLowerCase() === name.toLowerCase()); }
 function toggleSubscriber(name){
@@ -1017,6 +1026,7 @@ window.addEventListener('load', () => {
   if (counter) counter.textContent = BARBERS.length;
   renderServicesGrid();
   renderPublicBarbers();
+  fbInitListeners();
 });
 
 let navScrolled = false;
@@ -1205,18 +1215,31 @@ function renderConfirmSummary(){
     <div class="confirm-row"><span class="confirm-label">Valor</span><span class="confirm-value gold">R$ ${bk.service.price.toFixed(2).replace('.',',')}</span></div>`;
 }
 
-function finalizeBooking(){
+async function finalizeBooking(){
   const name = document.getElementById('clientName').value.trim();
   const phone = document.getElementById('clientPhone').value.trim();
+  const dk = `${bk.date.getFullYear()}-${bk.date.getMonth()}-${bk.date.getDate()}`;
+
+  /* Verifica disponibilidade em tempo real antes de confirmar */
+  const confirmBtn = document.querySelector('#panel6 .btn-next');
+  if (confirmBtn){ confirmBtn.disabled = true; confirmBtn.textContent = 'Verificando...'; }
+  const available = await fbCheckSlotAvailable(bk.barber.id, dk, bk.time);
+  if (!available){
+    if (confirmBtn){ confirmBtn.disabled = false; confirmBtn.innerHTML = '<i class="fas fa-check"></i> Confirmar'; }
+    alert('Este horário acabou de ser reservado por outra pessoa. Por favor, escolha outro horário.');
+    goStep(4);
+    return;
+  }
+
   const appt = {
     id: Date.now(), name, phone,
     serviceId: bk.service.id, service: bk.service.name, price: bk.service.price,
     barberId: bk.barber.id, barber: bk.barber.name,
-    date: bk.date.toISOString(),
-    dateKey: `${bk.date.getFullYear()}-${bk.date.getMonth()}-${bk.date.getDate()}`,
+    date: bk.date.toISOString(), dateKey: dk,
     time: bk.time, status:'pending', createdAt: new Date().toISOString()
   };
-  APPOINTMENTS.push(appt); saveAppts();
+  APPOINTMENTS.push(appt); saveAppts(); fbSaveAppt(appt);
+  if (confirmBtn){ confirmBtn.disabled = false; confirmBtn.innerHTML = '<i class="fas fa-check"></i> Confirmar'; }
   const msg = `Olá! Acabei de agendar.\n*Nome:* ${name}\n*Serviço:* ${appt.service}\n*Barbeiro:* ${appt.barber}\n*Data:* ${formatDate(bk.date)}\n*Horário:* ${bk.time}`;
   document.getElementById('successMessage').textContent = `${name}, seu agendamento foi registrado!`;
   document.getElementById('successWaBtn').href = `https://wa.me/5541997878695?text=${encodeURIComponent(msg)}`;
@@ -1299,14 +1322,15 @@ function confirmPayment(){
   if (isNaN(value) || value <= 0){ alert('Valor inválido'); return; }
   const appt = APPOINTMENTS.find(a => a.id===selectedPaymentApptId);
   if (!appt) return;
-  PAYMENTS.push({
+  const payment = {
     id: Date.now(), apptId: appt.id, clientName: appt.name,
     barberId: appt.barberId, barber: appt.barber, service: appt.service,
     originalPrice: appt.price, amount: value, method: selectedPaymentMethod,
     isSubscriber: selectedPaymentMethod === 'subscription' || isSubscriber(appt.name),
     date: new Date().toISOString(), apptDate: appt.date, apptTime: appt.time
-  });
-  savePayments();
+  };
+  PAYMENTS.push(payment);
+  savePayments(); fbSavePayment(payment);
   const method = PAYMENT_METHODS[selectedPaymentMethod].label;
   const formattedValue = `R$ ${value.toFixed(2).replace('.',',')}`;
   const clientName = appt.name;
@@ -1502,14 +1526,14 @@ function finishAppointment(id){
   const appt = APPOINTMENTS.find(a => a.id===id);
   if (!appt) return;
   appt.status = 'done';
-  saveAppts();
+  saveAppts(); fbUpdateApptStatus(id, 'done');
   openPaymentModal(id);
 }
 
 function deleteAppt(id){
   if (!confirm('Excluir agendamento?')) return;
   APPOINTMENTS = APPOINTMENTS.filter(x => x.id!==id);
-  saveAppts();
+  saveAppts(); fbDeleteAppt(id);
   renderAllAppointments();
 }
 
@@ -1628,7 +1652,7 @@ function renderFinance(){
                 <td>${p.apptTime}</td>
                 <td><span class="payment-method-badge ${p.method}"><i class="fas ${pm.icon}"></i> ${pm.label}</span></td>
                 <td>${p.method==='subscription' || isSubscriber(p.clientName) ? '<span class="badge-tag badge-sub"><i class="fas fa-gem"></i> Assinante</span>' : '<span style="color:var(--muted);font-size:0.7rem">Avulso</span>'}</td>
-                <td style="font-family:'Playfair Display',serif;font-weight:<td style="font-family:'Playfair Display',serif;font-weight:700;color:${pm.color}">R$ ${p.amount.toFixed(2).replace('.',',')}</td>
+                <td style="font-family:'Playfair Display',serif;font-weight:700;color:${pm.color}">R$ ${p.amount.toFixed(2).replace('.',',')}</td>
                 <td><button class="table-btn danger" onclick="deletePayment(${p.id})" title="Excluir"><i class="fas fa-trash"></i></button></td>
               </tr>`;
             }).join('')}
@@ -1641,7 +1665,7 @@ function renderFinance(){
 function deletePayment(id){
   if (!confirm('Excluir este pagamento? Esta ação não pode ser desfeita.')) return;
   PAYMENTS = PAYMENTS.filter(p => p.id !== id);
-  savePayments();
+  savePayments(); fbDeletePayment(id);
   renderFinance();
   showToast('Pagamento excluído');
 }

@@ -349,6 +349,9 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 /* ============== ADMIN PANEL ============== */
 .admin-panel { display:none; position:fixed; inset:0; z-index:8000; background:var(--bg); flex-direction:row; overflow:hidden; }
 .admin-panel.open { display:flex; }
+.admin-bottom-nav { display:none; }
+.admin-topbar-btn-menu { display:none; }
+.admin-drawer-overlay { display:none; }
 .admin-sidebar { width:270px; flex-shrink:0; background:linear-gradient(180deg,var(--bg1),var(--bg2)); border-right:1px solid var(--border2); display:flex; flex-direction:column; overflow-y:auto; }
 .sidebar-logo { padding:24px 20px; border-bottom:1px solid var(--border2); }
 .sidebar-logo-text { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--gold); letter-spacing:3px; }
@@ -601,7 +604,7 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 }
 @media (max-width:480px) {
   .hero-title { font-size:clamp(2.5rem,11vw,4rem); }
-  .stats-grid { grid-template-columns:1fr; }
+  .stats-grid { grid-template-columns:1fr 1fr; }
   .admin-sidebar { display:none; }
   .admin-panel.open { flex-direction:column; }
   .grid-2 { grid-template-columns:1fr; }
@@ -609,6 +612,259 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
   .payment-methods-summary { grid-template-columns:1fr; }
   .payment-modal-window { padding:24px; }
 }
+
+/* ===== ADMIN MOBILE — bottom nav + drawer ===== */
+@media (max-width:768px) {
+  /* Sidebar vira drawer deslizante */
+  .admin-sidebar {
+    position:fixed; top:0; left:0; bottom:0; width:280px;
+    transform:translateX(-100%); transition:transform 0.3s ease;
+    z-index:9500; box-shadow:6px 0 32px rgba(0,0,0,0.6);
+  }
+  .admin-sidebar.mob-open { transform:translateX(0); }
+
+  /* Overlay escuro atrás do drawer */
+  .admin-drawer-overlay {
+    display:none; position:fixed; inset:0; z-index:9400;
+    background:rgba(0,0,0,0.6); backdrop-filter:blur(2px);
+  }
+  .admin-drawer-overlay.open { display:block; }
+
+  /* Topbar mobile */
+  .admin-topbar { padding:0 14px; height:52px; }
+  .admin-topbar-btn-menu {
+    width:38px; height:38px; display:flex; align-items:center; justify-content:center;
+    background:var(--bg3); border:1px solid var(--border2); border-radius:9px;
+    color:var(--muted); cursor:pointer; font-size:0.9rem; flex-shrink:0;
+  }
+  .admin-topbar-btn-menu:hover { border-color:var(--gold); color:var(--gold); }
+  .admin-page-title { font-size:0.9rem; gap:7px; }
+  .admin-page-title em { display:none; }
+  .online-badge { display:none; }
+  .btn-logout { display:none; }
+
+  /* Conteúdo sobe acima da bottom nav */
+  .admin-content { padding:16px 14px 80px; }
+
+  /* Stats em 2 colunas */
+  .stats-grid { grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .stat-box { padding:16px; }
+  .stat-value { font-size:1.5rem; }
+
+  /* Subs stats 3-col → 1-col */
+  .subs-stats-grid { grid-template-columns:1fr; gap:10px; }
+
+  /* Context banner compacto */
+  .context-banner { padding:14px 16px; gap:12px; }
+  .ctx-avatar { width:40px; height:40px; font-size:0.95rem; }
+  .ctx-name { font-size:1rem; }
+
+  /* Agenda stats 2-col */
+  .agenda-stats-row { grid-template-columns:1fr 1fr; gap:10px; }
+  .agenda-stat-card { padding:14px 16px; }
+
+  /* Bottom navigation bar */
+  .admin-bottom-nav {
+    position:fixed; bottom:0; left:0; right:0; z-index:9300;
+    background:linear-gradient(180deg,rgba(10,10,10,0.97),var(--bg1));
+    border-top:1px solid var(--border2);
+    display:flex; align-items:stretch;
+    padding:0; height:62px;
+    box-shadow:0 -4px 20px rgba(0,0,0,0.5);
+    backdrop-filter:blur(10px);
+  }
+  .admin-bottom-nav-item {
+    flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:3px; border:none; background:none; color:var(--muted);
+    cursor:pointer; transition:color 0.2s; padding:4px 2px;
+    font-size:0.5rem; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+    position:relative;
+  }
+  .admin-bottom-nav-item i { font-size:1rem; margin-bottom:1px; }
+  .admin-bottom-nav-item.active { color:var(--gold); }
+  .admin-bottom-nav-item.active::after {
+    content:''; position:absolute; top:0; left:20%; right:20%; height:2px;
+    background:var(--gold); border-radius:0 0 3px 3px;
+  }
+  .admin-bottom-nav-item .bnav-badge {
+    position:absolute; top:6px; right:calc(50% - 16px);
+    background:var(--purple); color:#fff; border-radius:100px;
+    font-size:0.45rem; padding:1px 5px; font-weight:700; min-width:14px; text-align:center;
+  }
+
+  /* Prices grid 1 col */
+  .prices-grid { grid-template-columns:1fr; }
+
+  /* Finance filters */
+  .fin-filters { grid-template-columns:1fr; }
+
+  /* Subs grid 1 col */
+  .subs-grid { grid-template-columns:1fr; }
+
+  /* Sub card actions empilhados */
+  .sub-card-actions { flex-wrap:wrap; }
+  .sub-register-btn { flex:1 1 100%; }
+
+  /* Admin card padding */
+  .admin-card { padding:16px; }
+}
+
+/* Bottom nav oculta por padrão (desktop), mostrada só no media query mobile */
+
+/* ===== AGENDA CALENDAR VIEW ===== */
+.agenda-week-nav { display:flex; align-items:center; gap:8px; margin-bottom:18px; }
+.agenda-week-nav-btn { width:36px; height:36px; background:var(--bg3); border:1px solid var(--border2); border-radius:8px; color:var(--muted); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s; font-size:0.8rem; flex-shrink:0; }
+.agenda-week-nav-btn:hover { border-color:var(--gold); color:var(--gold); }
+.agenda-week-days { display:flex; gap:6px; flex:1; overflow-x:auto; padding-bottom:2px; }
+.agenda-week-days::-webkit-scrollbar { height:2px; }
+.agenda-week-days::-webkit-scrollbar-thumb { background:var(--gold); }
+.agenda-day-pill { display:flex; flex-direction:column; align-items:center; gap:3px; padding:10px 12px; background:var(--bg3); border:1px solid var(--border2); border-radius:10px; cursor:pointer; transition:all 0.22s var(--ease); flex-shrink:0; min-width:50px; }
+.agenda-day-pill:hover { border-color:rgba(201,169,110,0.4); background:var(--gold-subtle); }
+.agenda-day-pill.today { border-color:rgba(201,169,110,0.35); }
+.agenda-day-pill.selected { background:var(--gold); border-color:var(--gold); }
+.agenda-day-pill .dp-name { font-size:0.56rem; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+.agenda-day-pill.selected .dp-name,
+.agenda-day-pill.selected .dp-num { color:#000; }
+.agenda-day-pill.today .dp-name { color:var(--gold); }
+.agenda-day-pill .dp-num { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--white); line-height:1; }
+.agenda-day-pill .dp-dot { width:4px; height:4px; border-radius:50%; background:var(--gold); opacity:0; transition:opacity 0.2s; }
+.agenda-day-pill.has-appts .dp-dot { opacity:1; }
+.agenda-day-pill.selected .dp-dot { background:#000; opacity:1; }
+
+.agenda-stats-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
+.agenda-stat-card { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:20px 24px; position:relative; overflow:hidden; transition:all 0.3s; }
+.agenda-stat-card:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+.agenda-stat-card.today-card { background:linear-gradient(135deg,rgba(201,169,110,0.15),rgba(201,169,110,0.03)); border-color:rgba(201,169,110,0.3); }
+.agenda-stat-card::after { content:''; position:absolute; top:-30%; right:-20%; width:100px; height:100px; border-radius:50%; opacity:0.06; pointer-events:none; }
+.agenda-stat-card.today-card::after { background:var(--gold); }
+.agenda-stat-lbl { font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; display:flex; align-items:center; gap:7px; }
+.agenda-stat-rev { font-size:0.78rem; color:var(--gold); font-weight:600; margin-bottom:4px; }
+.agenda-stat-count { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; color:var(--white); line-height:1; }
+.agenda-stat-card.today-card .agenda-stat-count { color:var(--gold); }
+.agenda-stat-sub { font-size:0.62rem; color:var(--muted); margin-top:3px; }
+
+.agenda-day-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; gap:10px; }
+.agenda-day-title { font-family:'Playfair Display',serif; font-size:1rem; font-weight:600; }
+.agenda-filter-pills { display:flex; gap:5px; flex-wrap:wrap; }
+.agenda-filter-pill { padding:5px 12px; background:var(--bg3); border:1px solid var(--border2); border-radius:100px; font-size:0.62rem; font-weight:600; color:var(--muted); cursor:pointer; transition:all 0.2s; letter-spacing:0.3px; }
+.agenda-filter-pill:hover { border-color:var(--gold); color:var(--gold); }
+.agenda-filter-pill.active { background:var(--gold); border-color:var(--gold); color:#000; }
+
+.agenda-timeline { display:flex; flex-direction:column; gap:10px; }
+.agenda-appt-card { background:linear-gradient(135deg,var(--bg3),var(--bg4)); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:15px 17px; display:flex; align-items:center; gap:15px; transition:all 0.28s var(--ease); position:relative; overflow:hidden; }
+.agenda-appt-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; border-radius:0 2px 2px 0; }
+.agenda-appt-card:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,0,0,0.35); }
+.agenda-appt-card.is-pending::before { background:var(--gold); }
+.agenda-appt-card.is-pending { border-color:rgba(201,169,110,0.2); }
+.agenda-appt-card.is-done::before { background:var(--green); }
+.agenda-appt-card.is-done { border-color:rgba(34,197,94,0.15); }
+.agenda-appt-card.is-cancelled { opacity:0.48; }
+.agenda-appt-card.is-cancelled::before { background:var(--red); }
+.agenda-appt-card.is-subscriber::before { background:var(--purple); }
+.agenda-appt-card.is-subscriber { border-color:rgba(168,85,247,0.22); }
+.agenda-appt-card.is-subscriber:hover { box-shadow:0 10px 28px rgba(168,85,247,0.18); }
+.agenda-appt-time-block { display:flex; flex-direction:column; align-items:center; min-width:52px; flex-shrink:0; }
+.agenda-appt-time-start { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--white); line-height:1; }
+.agenda-appt-time-sep { font-size:0.6rem; color:var(--faint); margin:2px 0; }
+.agenda-appt-time-end { font-size:0.68rem; color:var(--muted); }
+.agenda-appt-vline { width:1px; background:var(--border2); align-self:stretch; flex-shrink:0; }
+.agenda-appt-body { flex:1; min-width:0; }
+.agenda-appt-name { font-size:0.9rem; font-weight:700; margin-bottom:3px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.agenda-appt-svc { font-size:0.72rem; color:var(--muted); margin-bottom:6px; }
+.agenda-appt-tags { display:flex; align-items:center; gap:5px; flex-wrap:wrap; }
+.agenda-appt-right { display:flex; flex-direction:column; align-items:flex-end; justify-content:space-between; gap:8px; flex-shrink:0; min-height:52px; }
+.agenda-appt-price { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--gold); }
+.agenda-appt-btns { display:flex; gap:6px; }
+.agenda-btn-finish { padding:7px 13px; background:linear-gradient(135deg,#22C55E,#16A34A); border:none; border-radius:7px; color:#fff; font-size:0.68rem; font-weight:700; cursor:pointer; transition:all 0.25s; white-space:nowrap; display:flex; align-items:center; gap:5px; box-shadow:0 3px 10px rgba(34,197,94,0.25); }
+.agenda-btn-finish:hover { transform:translateY(-1px); box-shadow:0 7px 18px rgba(34,197,94,0.4); }
+.agenda-btn-del { width:32px; height:32px; background:rgba(239,68,68,0.07); border:1px solid rgba(239,68,68,0.2); border-radius:7px; color:var(--red); font-size:0.72rem; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; }
+.agenda-btn-del:hover { background:rgba(239,68,68,0.16); border-color:var(--red); }
+.agenda-empty { text-align:center; padding:48px 24px; color:var(--muted); }
+.agenda-empty i { font-size:2.2rem; display:block; margin-bottom:12px; color:var(--ghost); }
+.agenda-empty p { font-size:0.82rem; line-height:1.6; }
+.agenda-week-label { font-size:0.68rem; color:var(--muted); text-align:center; margin-bottom:4px; letter-spacing:1px; text-transform:uppercase; }
+
+/* Renewal card redesign */
+.sub-renew-card { margin-top:12px; background:linear-gradient(135deg,rgba(34,197,94,0.07),rgba(34,197,94,0.02)); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:13px 15px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.sub-renew-info { display:flex; flex-direction:column; gap:1px; }
+.sub-renew-info-label { font-size:0.56rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+.sub-renew-info-date { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--green); line-height:1.2; }
+.sub-renew-info-days { font-size:0.64rem; color:var(--muted); margin-top:1px; }
+.sub-renew-action { padding:8px 15px; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); border-radius:8px; color:var(--green); font-size:0.68rem; font-weight:700; cursor:pointer; transition:all 0.2s; white-space:nowrap; display:flex; align-items:center; gap:6px; letter-spacing:0.3px; flex-shrink:0; }
+.sub-renew-action:hover { background:rgba(34,197,94,0.22); border-color:var(--green); transform:translateY(-1px); }
+
+/* ===== SISTEMA DE ASSINATURA PREMIUM ===== */
+@keyframes progressPulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+
+/* Status badges override */
+.sub-badge.sub-status-active { background:rgba(168,85,247,0.15); border-color:rgba(168,85,247,0.35); color:#C084FC; }
+.sub-badge.sub-status-expiring { background:rgba(234,179,8,0.15); border-color:rgba(234,179,8,0.4); color:#FACC15; }
+.sub-badge.sub-status-expired { background:rgba(239,68,68,0.15); border-color:rgba(239,68,68,0.35); color:#F87171; }
+
+/* Subscriber card glow for active */
+.sub-card.status-active:hover { border-color:rgba(168,85,247,0.4); box-shadow:0 0 24px rgba(168,85,247,0.12); }
+.sub-card.status-expiring { border-color:rgba(234,179,8,0.25); }
+.sub-card.status-expiring:hover { box-shadow:0 0 24px rgba(234,179,8,0.15); }
+.sub-card.status-expired { border-color:rgba(239,68,68,0.2); opacity:0.85; }
+
+/* Register cut button */
+.sub-register-btn {
+  flex:2; padding:9px 12px;
+  background:linear-gradient(135deg,rgba(168,85,247,0.18),rgba(168,85,247,0.06));
+  border:1px solid rgba(168,85,247,0.4); border-radius:7px; color:#C084FC;
+  font-size:0.72rem; font-weight:700; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  transition:all 0.25s; letter-spacing:0.5px;
+}
+.sub-register-btn:hover { background:rgba(168,85,247,0.28); border-color:var(--purple); transform:translateY(-1px); box-shadow:0 6px 20px rgba(168,85,247,0.22); }
+.sub-register-btn:disabled { opacity:0.38; cursor:not-allowed; transform:none; box-shadow:none; }
+
+/* Renew plan button */
+.sub-renew-btn {
+  width:100%; padding:9px; background:transparent;
+  border:1px solid rgba(34,197,94,0.28); border-radius:7px; color:var(--green);
+  font-size:0.7rem; font-weight:600; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  transition:all 0.2s; margin-top:8px; letter-spacing:0.3px;
+}
+.sub-renew-btn:hover { background:rgba(34,197,94,0.1); border-color:var(--green); }
+
+/* Renewal info row */
+.sub-renewal-row {
+  display:flex; align-items:center; justify-content:space-between;
+  font-size:0.7rem; color:var(--muted); margin-bottom:10px;
+  padding:8px 11px; background:var(--bg4); border-radius:7px; border:1px solid var(--border2);
+}
+.sub-renewal-date { font-weight:700; }
+
+/* History section */
+.sub-history-section { margin-bottom:12px; }
+.sub-history-title {
+  font-size:0.58rem; letter-spacing:2px; text-transform:uppercase;
+  color:var(--muted); margin-bottom:7px;
+  display:flex; align-items:center; gap:6px;
+}
+.sub-history-list { display:flex; flex-direction:column; gap:4px; }
+.sub-history-item {
+  display:flex; align-items:center; gap:7px;
+  padding:6px 10px; background:var(--bg4); border-radius:6px; font-size:0.72rem;
+}
+.sub-history-dot { width:5px; height:5px; border-radius:50%; background:var(--purple); flex-shrink:0; }
+.sub-history-date { color:var(--gold); font-weight:700; font-size:0.68rem; flex-shrink:0; min-width:32px; }
+.sub-history-svc { flex:1; color:var(--white); }
+.sub-history-barber { color:var(--faint); font-size:0.64rem; flex-shrink:0; }
+.sub-history-empty { font-size:0.72rem; color:var(--faint); padding:6px 10px; font-style:italic; }
+
+/* Premium appointment row */
+.appt-premium-row td:first-child { border-left:2px solid rgba(168,85,247,0.5); padding-left:14px; }
+.sub-premium-badge {
+  display:inline-flex; align-items:center; gap:3px;
+  padding:2px 7px; background:rgba(168,85,247,0.12);
+  border:1px solid rgba(168,85,247,0.28); border-radius:100px;
+  font-size:0.56rem; font-weight:700; color:#C084FC; letter-spacing:1px; margin-left:5px;
+}
+.sub-cuts-left { font-size:0.62rem; color:rgba(168,85,247,0.8); margin-top:2px; }
+.plan-mensal-label { font-size:0.6rem; color:var(--purple); font-weight:700; letter-spacing:1px; display:block; margin-top:2px; }
 </style>
 </head>
 <body>
@@ -751,6 +1007,35 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
   </div>
 </div>
 
+<!-- ============== REGISTER CUT MODAL ============== -->
+<div class="modal-overlay" id="registerCutModal" style="z-index:9200">
+  <div class="modal-window" style="max-width:420px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fas fa-cut" style="color:var(--purple);margin-right:8px;font-size:1rem"></i>Registrar <em>Corte</em></div>
+      <button class="modal-close" onclick="closeRegisterCutModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="rCutClientInfo" style="background:var(--bg3);border:1px solid rgba(168,85,247,0.25);border-radius:var(--radius);padding:14px;margin-bottom:16px;display:flex;align-items:center;gap:12px"></div>
+      <div class="form-group">
+        <label class="form-label">Serviço Realizado</label>
+        <select class="form-input" id="rCutService">
+          <option value="Corte">Corte</option>
+          <option value="Barba">Barba</option>
+          <option value="Corte + Barba">Corte + Barba</option>
+          <option value="Sobrancelha">Sobrancelha</option>
+          <option value="Combo VIP">Combo VIP</option>
+          <option value="Pigmentação">Pigmentação</option>
+        </select>
+      </div>
+      <div id="rCutProgressInfo" style="background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(168,85,247,0.03));border:1px solid rgba(168,85,247,0.22);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:center"></div>
+      <div class="panel-nav">
+        <button class="btn-back" onclick="closeRegisterCutModal()">Cancelar</button>
+        <button class="btn-next" style="background:linear-gradient(135deg,#A855F7,#7C3AED);color:#fff" onclick="confirmRegisterCut()"><i class="fas fa-check"></i> Confirmar Corte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ============== PAYMENT MODAL ============== -->
 <div class="payment-modal-overlay" id="paymentModal">
   <div class="payment-modal-window">
@@ -888,8 +1173,9 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 </div>
 
 <!-- ============== ADMIN PANEL ============== -->
+<div class="admin-drawer-overlay" id="adminDrawerOverlay" onclick="closeMobDrawer()"></div>
 <div class="admin-panel" id="adminPanel">
-  <aside class="admin-sidebar">
+  <aside class="admin-sidebar" id="adminSidebar">
     <div class="sidebar-logo">
       <div class="sidebar-logo-text">DL <span>BARBER</span></div>
       <div class="sidebar-logo-sub">Área Profissional</div>
@@ -905,12 +1191,12 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
     <nav class="sidebar-nav">
       <div class="nav-group">
         <span class="nav-group-label">Painel</span>
-        <button class="nav-item active" onclick="switchAdminSection('dashboard',this)"><i class="fas fa-chart-line"></i> Dashboard</button>
-        <button class="nav-item" onclick="switchAdminSection('appointments',this)"><i class="fas fa-calendar-check"></i> Agendamentos</button>
-        <button class="nav-item" onclick="switchAdminSection('clients',this)"><i class="fas fa-users"></i> Clientes</button>
-        <button class="nav-item" onclick="switchAdminSection('finance',this)"><i class="fas fa-coins"></i> Financeiro</button>
-        <button class="nav-item" onclick="switchAdminSection('subscribers',this)"><i class="fas fa-gem"></i> Assinantes <span class="nav-badge" id="subCountBadge">0</span></button>
-        <button class="nav-item" onclick="switchAdminSection('prices',this)"><i class="fas fa-tag"></i> Preços</button>
+        <button class="nav-item active" onclick="switchAdminSection('dashboard',this);closeMobDrawer()"><i class="fas fa-chart-line"></i> Dashboard</button>
+        <button class="nav-item" onclick="switchAdminSection('appointments',this);closeMobDrawer()"><i class="fas fa-calendar-check"></i> Agendamentos</button>
+        <button class="nav-item" onclick="switchAdminSection('clients',this);closeMobDrawer()"><i class="fas fa-users"></i> Clientes</button>
+        <button class="nav-item" onclick="switchAdminSection('finance',this);closeMobDrawer()"><i class="fas fa-coins"></i> Financeiro</button>
+        <button class="nav-item" onclick="switchAdminSection('subscribers',this);closeMobDrawer()"><i class="fas fa-gem"></i> Assinantes <span class="nav-badge" id="subCountBadge">0</span></button>
+        <button class="nav-item" onclick="switchAdminSection('prices',this);closeMobDrawer()"><i class="fas fa-tag"></i> Preços</button>
       </div>
     </nav>
     <div class="sidebar-footer">
@@ -920,12 +1206,21 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 
   <div class="admin-main">
     <div class="admin-topbar">
+      <button class="admin-topbar-btn-menu" onclick="openMobDrawer()" aria-label="Menu"><i class="fas fa-bars"></i></button>
       <div class="admin-page-title"><span id="adminPageTitle">Dashboard</span> <em id="adminBarberTitle"></em></div>
       <div class="admin-topbar-right">
         <div class="online-badge"><div class="online-dot"></div> Online</div>
         <button class="btn-logout" onclick="closeAdmin()"><i class="fas fa-sign-out-alt"></i> Sair</button>
       </div>
     </div>
+    <!-- Bottom Nav Mobile -->
+    <nav class="admin-bottom-nav" id="adminBottomNav">
+      <button class="admin-bottom-nav-item active" id="bnav-dashboard" onclick="switchAdminSection('dashboard',null,true)"><i class="fas fa-chart-line"></i>Painel</button>
+      <button class="admin-bottom-nav-item" id="bnav-appointments" onclick="switchAdminSection('appointments',null,true)"><i class="fas fa-calendar-check"></i>Agenda</button>
+      <button class="admin-bottom-nav-item" id="bnav-finance" onclick="switchAdminSection('finance',null,true)"><i class="fas fa-coins"></i>Financeiro</button>
+      <button class="admin-bottom-nav-item" id="bnav-subscribers" onclick="switchAdminSection('subscribers',null,true)"><i class="fas fa-gem"></i>Planos<span class="bnav-badge" id="bnavSubBadge" style="display:none">0</span></button>
+      <button class="admin-bottom-nav-item" id="bnav-more" onclick="openMobDrawer()"><i class="fas fa-ellipsis-h"></i>Mais</button>
+    </nav>
     <div class="admin-content">
       
       <!-- BANNER DE CONTEXTO (mostra qual barbeiro tá vendo) -->
@@ -950,10 +1245,7 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
       </div>
 
       <div class="admin-section" id="adm-appointments">
-        <div class="admin-card">
-          <div class="admin-card-header"><h3>Todos os Agendamentos</h3></div>
-          <div id="allApptsTable"></div>
-        </div>
+        <div id="allApptsTable"></div>
       </div>
 
       <div class="admin-section" id="adm-clients">
@@ -1069,7 +1361,13 @@ const SUBSCRIPTION_PLAN = { monthlyPrice:130, cutsPerMonth:4, pricePerCut:32.50 
 let APPOINTMENTS = JSON.parse(sessionStorage.getItem('dlbc_appts') || '[]');
 let PAYMENTS = JSON.parse(sessionStorage.getItem('dlbc_payments') || '[]');
 let SUBSCRIBERS = JSON.parse(sessionStorage.getItem('dlbc_subs') || '[]');
+let PLAN_HISTORY = JSON.parse(sessionStorage.getItem('dlbc_plan_history') || '[]');
 let currentBarber = null;
+
+/* Agenda calendar state */
+let selectedApptDate = (() => { const d = new Date(); d.setHours(0,0,0,0); return d; })();
+let apptFilter = 'all';
+let agendaWeekOffset = 0;
 
 const CONFIG = {
   weekday: {open:10, close:20, lunchStart:12, lunchEnd:13},
@@ -1090,10 +1388,62 @@ const PAYMENT_METHODS = {
 function saveAppts(){ sessionStorage.setItem('dlbc_appts', JSON.stringify(APPOINTMENTS)); }
 function savePayments(){ sessionStorage.setItem('dlbc_payments', JSON.stringify(PAYMENTS)); }
 function saveSubs(){ sessionStorage.setItem('dlbc_subs', JSON.stringify(SUBSCRIBERS)); fbSaveSubs(SUBSCRIBERS); }
+function savePlanHistory(){
+  sessionStorage.setItem('dlbc_plan_history', JSON.stringify(PLAN_HISTORY));
+  if (typeof db !== 'undefined' && db)
+    db.ref('planHistory').set(PLAN_HISTORY.length ? PLAN_HISTORY : null).catch(e=>console.warn('[Firebase] planHistory:', e.message));
+}
 
 /* Normaliza entrada legada (string) para objeto */
-function ensureSubObj(s){ return typeof s === 'string' ? {name:s, phone:'', since:new Date().toISOString(), barberId:null} : s; }
+function ensureSubObj(s){
+  if (typeof s === 'string') s = {name:s, phone:'', since:new Date().toISOString(), barberId:null};
+  if (!s.renewalDate){
+    const r = new Date(s.since || Date.now());
+    r.setDate(r.getDate() + 30);
+    s.renewalDate = r.toISOString();
+  }
+  return s;
+}
 function subName(s){ return typeof s === 'string' ? s : s.name; }
+
+/* ─── HELPERS DO PLANO ──────────────────────────────────── */
+function getCutsUsed(name){
+  const now = new Date(), mo = now.getMonth(), yr = now.getFullYear();
+  const fromHistory = PLAN_HISTORY.filter(h => {
+    const d = new Date(h.date);
+    return h.subscriberName.toLowerCase() === name.toLowerCase() && d.getMonth()===mo && d.getFullYear()===yr;
+  }).length;
+  const histApptIds = new Set(PLAN_HISTORY.filter(h=>h.apptId).map(h=>h.apptId));
+  const fromPayments = PAYMENTS.filter(p => {
+    const d = new Date(p.date);
+    return p.method==='subscription' && p.clientName.toLowerCase()===name.toLowerCase() &&
+           d.getMonth()===mo && d.getFullYear()===yr && !histApptIds.has(p.id);
+  }).length;
+  return fromHistory + fromPayments;
+}
+
+function getSubStatus(sub){
+  const renewal = new Date(sub.renewalDate);
+  const daysLeft = Math.ceil((renewal - new Date()) / (1000*60*60*24));
+  if (daysLeft < 0)  return {label:'Expirado',       cls:'sub-status-expired',  cardCls:'status-expired'};
+  if (daysLeft <= 7) return {label:'Vence em breve',  cls:'sub-status-expiring', cardCls:'status-expiring'};
+  return               {label:'Plano Ativo',          cls:'sub-status-active',   cardCls:'status-active'};
+}
+
+function getSubHistoryThisMonth(name){
+  const now = new Date();
+  const fromHistory = PLAN_HISTORY.filter(h => {
+    const d = new Date(h.date);
+    return h.subscriberName.toLowerCase()===name.toLowerCase() && d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear();
+  });
+  const histApptIds = new Set(PLAN_HISTORY.filter(h=>h.apptId).map(h=>h.apptId));
+  const fromPayments = PAYMENTS.filter(p => {
+    const d = new Date(p.date);
+    return p.method==='subscription' && p.clientName.toLowerCase()===name.toLowerCase() &&
+           d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear() && !histApptIds.has(p.id);
+  }).map(p => ({id:p.id, subscriberName:p.clientName, service:p.service, barber:p.barber, date:p.date}));
+  return [...fromHistory, ...fromPayments].sort((a,b) => new Date(a.date)-new Date(b.date));
+}
 
 function isSubscriber(name){ return SUBSCRIBERS.some(s => subName(s).toLowerCase() === name.toLowerCase()); }
 
@@ -1119,6 +1469,8 @@ function toggleSubscriber(name){
 function updateSubBadge(){
   const b = document.getElementById('subCountBadge');
   if (b) b.textContent = SUBSCRIBERS.length;
+  const bb = document.getElementById('bnavSubBadge');
+  if (bb){ bb.textContent = SUBSCRIBERS.length; bb.style.display = SUBSCRIBERS.length ? '' : 'none'; }
 }
 function countMonthlyVisits(name, barberId){
   const now = new Date();
@@ -1469,6 +1821,14 @@ function confirmPayment(){
   /* Registra/atualiza assinante com phone e barbeiro */
   if (selectedPaymentMethod === 'subscription'){
     addOrUpdateSubscriber(appt.name, appt.phone||'', appt.barberId);
+    /* Adiciona ao histórico do plano */
+    const histEntry = {
+      id: payment.id, subscriberName: appt.name,
+      service: appt.service, barber: appt.barber, barberId: appt.barberId,
+      date: new Date().toISOString(), apptId: appt.id, source: 'payment'
+    };
+    PLAN_HISTORY.push(histEntry);
+    savePlanHistory();
   }
   const method = PAYMENT_METHODS[selectedPaymentMethod].label;
   const formattedValue = `R$ ${value.toFixed(2).replace('.',',')}`;
@@ -1591,18 +1951,35 @@ function switchBarber(id){
 
 const sectionTitles = {dashboard:'Dashboard', appointments:'Agendamentos', clients:'Clientes', finance:'Financeiro', subscribers:'Assinantes', prices:'Preços'};
 
-function switchAdminSection(sec, btn){
+function switchAdminSection(sec, btn, fromBottomNav){
   document.querySelectorAll('.admin-section').forEach(el => el.classList.remove('active'));
   document.getElementById('adm-'+sec).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   document.getElementById('adminPageTitle').textContent = sectionTitles[sec] || sec;
+  /* sync bottom nav */
+  document.querySelectorAll('.admin-bottom-nav-item').forEach(b => b.classList.remove('active'));
+  const bnavBtn = document.getElementById('bnav-'+sec);
+  if (bnavBtn) bnavBtn.classList.add('active');
+  /* fechar drawer no mobile ao navegar */
+  if (fromBottomNav) closeMobDrawer();
   if (sec==='dashboard') renderAdminDashboard();
   else if (sec==='appointments') renderAllAppointments();
   else if (sec==='clients') renderClientsTable();
   else if (sec==='finance') renderFinance();
   else if (sec==='subscribers') renderSubscribersTab();
   else if (sec==='prices') renderPricesPanel();
+}
+
+function openMobDrawer(){
+  document.getElementById('adminSidebar').classList.add('mob-open');
+  document.getElementById('adminDrawerOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeMobDrawer(){
+  document.getElementById('adminSidebar').classList.remove('mob-open');
+  document.getElementById('adminDrawerOverlay').classList.remove('open');
+  document.body.style.overflow='';
 }
 
 function myAppts(){ return APPOINTMENTS.filter(a => a.barberId === currentBarber.id); }
@@ -1653,21 +2030,193 @@ function renderAdminDashboard(){
 }
 
 function renderAllAppointments(){
-  const sorted = [...myAppts()].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-  document.getElementById('allApptsTable').innerHTML = sorted.length ? buildApptTable(sorted, true) : '<div class="empty-state"><i class="fas fa-calendar"></i><p>Nenhum agendamento</p></div>';
+  if (!currentBarber) return;
+  const container = document.getElementById('allApptsTable');
+
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  /* Monday of the current displayed week */
+  const base = new Date(today);
+  const dow = base.getDay();
+  base.setDate(base.getDate() + (dow === 0 ? -6 : 1 - dow) + agendaWeekOffset * 7);
+
+  const weekDays = Array.from({length:7}, (_,i) => {
+    const d = new Date(base); d.setDate(base.getDate() + i); return d;
+  });
+
+  const myA = myAppts();
+  const selD = selectedApptDate;
+  const selDk = `${selD.getFullYear()}-${selD.getMonth()}-${selD.getDate()}`;
+  const todayDk = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+
+  /* Stats */
+  const todayAppts = myA.filter(a => a.dateKey === todayDk && a.status !== 'cancelled');
+  const todayRev = PAYMENTS.filter(p => p.barberId === currentBarber.id && new Date(p.date).toDateString() === today.toDateString()).reduce((s,p)=>s+p.amount,0);
+  const wkStart = weekDays[0], wkEnd = weekDays[6];
+  const weekAppts = myA.filter(a => { const d=new Date(a.date); d.setHours(0,0,0,0); return d>=wkStart&&d<=wkEnd&&a.status!=='cancelled'; });
+  const weekRev = PAYMENTS.filter(p => { const d=new Date(p.date); d.setHours(0,0,0,0); return p.barberId===currentBarber.id&&d>=wkStart&&d<=wkEnd; }).reduce((s,p)=>s+p.amount,0);
+
+  /* Day appointments */
+  let dayAppts = myA.filter(a => a.dateKey === selDk);
+  if (apptFilter==='pending')   dayAppts = dayAppts.filter(a=>a.status==='pending');
+  else if (apptFilter==='done') dayAppts = dayAppts.filter(a=>a.status==='done');
+  else if (apptFilter==='cancelled') dayAppts = dayAppts.filter(a=>a.status==='cancelled');
+  dayAppts.sort((a,b)=>a.time.localeCompare(b.time));
+
+  const isToday = selD.getTime()===today.getTime();
+  const selLabel = isToday ? 'Hoje' : `${DAYS_PT[selD.getDay()]}, ${selD.getDate()} ${MONTHS_PT[selD.getMonth()].substring(0,3)}`;
+
+  /* Week pills */
+  const weekHtml = weekDays.map(d => {
+    const dk = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    const hasAppts = myA.some(a=>a.dateKey===dk&&a.status!=='cancelled');
+    const isSel = d.getTime()===selD.getTime();
+    const isTod = d.getTime()===today.getTime();
+    let cls='agenda-day-pill';
+    if(isSel) cls+=' selected'; if(isTod) cls+=' today'; if(hasAppts) cls+=' has-appts';
+    return `<div class="${cls}" onclick="selectAgendaDate(${d.getFullYear()},${d.getMonth()},${d.getDate()})">
+      <span class="dp-name">${DAYS_PT[d.getDay()]}</span>
+      <span class="dp-num">${d.getDate()}</span>
+      <span class="dp-dot"></span>
+    </div>`;
+  }).join('');
+
+  /* Week label */
+  const wkLabel = `${weekDays[0].getDate()} ${MONTHS_PT[weekDays[0].getMonth()].substring(0,3)} – ${weekDays[6].getDate()} ${MONTHS_PT[weekDays[6].getMonth()].substring(0,3)} ${weekDays[6].getFullYear()}`;
+
+  /* Appointment cards */
+  const cardsHtml = dayAppts.length === 0
+    ? `<div class="agenda-empty"><i class="fas fa-calendar-times"></i><p>Nenhum agendamento ${apptFilter!=='all'?'com este filtro ':''}<br>para <strong>${selLabel}</strong></p></div>`
+    : dayAppts.map(a => {
+        const isSub = isSubscriber(a.name);
+        const cutsLeft = isSub ? Math.max(0, SUBSCRIPTION_PLAN.cutsPerMonth - getCutsUsed(a.name)) : 0;
+        const payInfo = PAYMENTS.find(p=>p.apptId===a.id);
+        const pm = payInfo ? PAYMENT_METHODS[payInfo.method] : null;
+        const svc = SERVICES.find(s=>s.id===a.serviceId);
+        const durMin = svc ? parseInt(svc.time) : 30;
+        const [hh,mm] = a.time.split(':').map(Number);
+        const endD = new Date(0,0,0,hh,mm+durMin);
+        const endT = `${String(endD.getHours()).padStart(2,'0')}:${String(endD.getMinutes()).padStart(2,'0')}`;
+        let cls = 'agenda-appt-card';
+        cls += a.status==='done' ? ' is-done' : a.status==='cancelled' ? ' is-cancelled' : ' is-pending';
+        if(isSub) cls += ' is-subscriber';
+        return `<div class="${cls}">
+          <div class="agenda-appt-time-block">
+            <div class="agenda-appt-time-start">${a.time}</div>
+            <div class="agenda-appt-time-sep">↓</div>
+            <div class="agenda-appt-time-end">${endT}</div>
+          </div>
+          <div class="agenda-appt-vline"></div>
+          <div class="agenda-appt-body">
+            <div class="agenda-appt-name">${a.name}${isSub?'<i class="fas fa-gem" style="color:var(--purple);font-size:0.6rem"></i>':''}</div>
+            <div class="agenda-appt-svc"><i class="fas fa-cut" style="font-size:0.6rem;margin-right:4px;color:var(--faint)"></i>${a.service}${isSub?' · <span style="color:var(--purple);font-weight:700;font-size:0.65rem">PLANO MENSAL</span>':''}</div>
+            <div class="agenda-appt-tags">
+              ${isSub?`<span class="sub-premium-badge"><i class="fas fa-crown"></i> ${cutsLeft}/${SUBSCRIPTION_PLAN.cutsPerMonth} restantes</span>`:''}
+              ${pm?`<span class="payment-method-badge ${payInfo.method}"><i class="fas ${pm.icon}"></i> ${pm.label}</span>`:''}
+              ${a.status==='done'?'<span class="badge-tag badge-done" style="font-size:0.56rem;padding:2px 7px">Concluído</span>':''}
+              ${a.status==='cancelled'?'<span class="badge-tag badge-cancelled" style="font-size:0.56rem;padding:2px 7px">Cancelado</span>':''}
+            </div>
+          </div>
+          <div class="agenda-appt-right">
+            <div class="agenda-appt-price">${fmtMoney(a.price)}</div>
+            <div class="agenda-appt-btns">
+              ${a.status==='pending'?`<button class="agenda-btn-finish" onclick="finishAppointment(${a.id})"><i class="fas fa-check"></i> Finalizar</button>`:''}
+              <button class="agenda-btn-del" onclick="deleteApptAndRefresh(${a.id})" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+  const filterLabels = {all:'Todos',pending:'Pendentes',done:'Concluídos',cancelled:'Cancelados'};
+
+  container.innerHTML = `
+    <p class="agenda-week-label">${wkLabel}</p>
+    <div class="agenda-week-nav">
+      <button class="agenda-week-nav-btn" onclick="changeAgendaWeek(-1)"><i class="fas fa-chevron-left"></i></button>
+      <div class="agenda-week-days">${weekHtml}</div>
+      <button class="agenda-week-nav-btn" onclick="changeAgendaWeek(1)"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <div class="agenda-stats-row">
+      <div class="agenda-stat-card today-card">
+        <div class="agenda-stat-lbl"><i class="fas fa-sun" style="color:var(--gold)"></i> Hoje</div>
+        <div class="agenda-stat-rev">R$ ${todayRev.toFixed(0)}</div>
+        <div class="agenda-stat-count">${todayAppts.length}</div>
+        <div class="agenda-stat-sub">agendamento${todayAppts.length!==1?'s':''}</div>
+      </div>
+      <div class="agenda-stat-card">
+        <div class="agenda-stat-lbl"><i class="fas fa-calendar-week"></i> Esta semana</div>
+        <div class="agenda-stat-rev">R$ ${weekRev.toFixed(0)}</div>
+        <div class="agenda-stat-count">${weekAppts.length}</div>
+        <div class="agenda-stat-sub">agendamento${weekAppts.length!==1?'s':''}</div>
+      </div>
+    </div>
+
+    <div class="agenda-day-header">
+      <div class="agenda-day-title">${selLabel} <span style="color:var(--muted);font-size:0.8rem;font-family:'Inter',sans-serif;font-weight:400">· ${dayAppts.length} agendamento${dayAppts.length!==1?'s':''}</span></div>
+      <div class="agenda-filter-pills">
+        ${Object.entries(filterLabels).map(([k,v])=>`<button class="agenda-filter-pill${apptFilter===k?' active':''}" onclick="setApptFilter('${k}')">${v}</button>`).join('')}
+      </div>
+    </div>
+
+    <div class="agenda-timeline">${cardsHtml}</div>`;
+}
+
+function selectAgendaDate(y, m, d){
+  selectedApptDate = new Date(y, m, d);
+  selectedApptDate.setHours(0,0,0,0);
+  renderAllAppointments();
+}
+
+function changeAgendaWeek(dir){
+  agendaWeekOffset += dir;
+  if (agendaWeekOffset === 0){
+    selectedApptDate = new Date(); selectedApptDate.setHours(0,0,0,0);
+  } else {
+    /* move selected date to Monday of target week */
+    const today = new Date(); today.setHours(0,0,0,0);
+    const base = new Date(today);
+    const dow = base.getDay();
+    base.setDate(base.getDate() + (dow===0?-6:1-dow) + agendaWeekOffset*7);
+    selectedApptDate = new Date(base); selectedApptDate.setHours(0,0,0,0);
+  }
+  renderAllAppointments();
+}
+
+function setApptFilter(f){
+  apptFilter = f;
+  renderAllAppointments();
+}
+
+function deleteApptAndRefresh(id){
+  if (!confirm('Excluir agendamento?')) return;
+  APPOINTMENTS = APPOINTMENTS.filter(x=>x.id!==id);
+  saveAppts(); fbDeleteAppt(id);
+  renderAllAppointments();
 }
 
 function buildApptTable(appts, showActions){
-  return `<div style="overflow-x:auto"><table class="premium-table"><thead><tr><th>Cliente</th><th>Serviço</th><th>Data</th><th>Horário</th><th>Valor</th><th>Status</th>${showActions?'<th>Ações</th>':''}</tr></thead><tbody>${appts.map(a => `
-    <tr>
-      <td><div style="font-weight:600">${a.name} ${isSubscriber(a.name) ? '<i class="fas fa-gem" style="color:var(--purple);font-size:0.65rem;margin-left:4px"></i>':''}</div>${a.phone?`<div style="font-size:0.68rem;color:var(--muted)">${a.phone}</div>`:''}</td>
-      <td>${a.service}</td>
+  return `<div style="overflow-x:auto"><table class="premium-table"><thead><tr><th>Cliente</th><th>Serviço</th><th>Data</th><th>Horário</th><th>Valor</th><th>Status</th>${showActions?'<th>Ações</th>':''}</tr></thead><tbody>${appts.map(a => {
+    const isSub = isSubscriber(a.name);
+    const cutsLeft = isSub ? Math.max(0, SUBSCRIPTION_PLAN.cutsPerMonth - getCutsUsed(a.name)) : 0;
+    return `
+    <tr class="${isSub?'appt-premium-row':''}">
+      <td>
+        <div style="font-weight:600">${a.name}${isSub?'<i class="fas fa-gem" style="color:var(--purple);font-size:0.65rem;margin-left:5px"></i>':''}</div>
+        ${isSub?`<div style="display:flex;align-items:center;gap:5px;margin-top:3px"><span class="sub-premium-badge"><i class="fas fa-crown"></i> PREMIUM</span><span class="sub-cuts-left">${cutsLeft}/${SUBSCRIPTION_PLAN.cutsPerMonth} restantes</span></div>`:''}
+        ${a.phone?`<div style="font-size:0.68rem;color:var(--muted);margin-top:2px">${a.phone}</div>`:''}
+      </td>
+      <td>
+        ${a.service}
+        ${isSub?`<span class="plan-mensal-label">PLANO MENSAL</span>`:''}
+      </td>
       <td>${formatDate(new Date(a.date))}</td>
       <td>${a.time}</td>
       <td style="color:var(--gold);font-family:'Playfair Display',serif;font-weight:700">${fmtMoney(a.price)}</td>
       <td><span class="badge-tag ${a.status==='pending'?'badge-pending':a.status==='done'?'badge-done':'badge-cancelled'}">${a.status==='pending'?'Pendente':a.status==='done'?'Concluído':'Cancelado'}</span></td>
       ${showActions?`<td>${a.status==='pending'?`<button class="table-btn" onclick="finishAppointment(${a.id})" title="Finalizar"><i class="fas fa-check"></i></button>`:''}<button class="table-btn danger" onclick="deleteAppt(${a.id})"><i class="fas fa-trash"></i></button></td>`:''}
-    </tr>`).join('')}</tbody></table></div>`;
+    </tr>`;
+  }).join('')}</tbody></table></div>`;
 }
 
 function finishAppointment(id){
@@ -1818,22 +2367,96 @@ function deletePayment(id){
 }
 
 /* ═══════════════════════════════════════════════════════
+   REGISTRAR CORTE — MODAL
+   ═══════════════════════════════════════════════════════ */
+let registerCutSubscriberName = null;
+
+function openRegisterCutModal(name){
+  registerCutSubscriberName = name;
+  const sub = getSubObj(name);
+  if (!sub) return;
+  const cutsUsed = getCutsUsed(name);
+  const cutsLeft = Math.max(0, SUBSCRIPTION_PLAN.cutsPerMonth - cutsUsed);
+  const ini = name.trim().split(/\s+/).map(p=>p[0]).join('').substring(0,2).toUpperCase();
+  document.getElementById('rCutClientInfo').innerHTML = `
+    <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#7C3AED);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:0.9rem;flex-shrink:0;box-shadow:0 4px 14px rgba(168,85,247,0.35)">${ini}</div>
+    <div>
+      <div style="font-weight:700;font-size:0.92rem;margin-bottom:2px">${name}</div>
+      <div style="font-size:0.72rem;color:var(--purple)">${cutsUsed}/${SUBSCRIPTION_PLAN.cutsPerMonth} cortes usados · <strong style="color:#C084FC">${cutsLeft} restante${cutsLeft!==1?'s':''}</strong></div>
+    </div>`;
+  document.getElementById('rCutProgressInfo').innerHTML = `
+    <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Após registrar este corte</div>
+    <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--purple);line-height:1">${cutsUsed+1}<span style="font-size:1.1rem;color:var(--faint)">/${SUBSCRIPTION_PLAN.cutsPerMonth}</span></div>
+    <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">${cutsLeft-1 >= 0 ? `${cutsLeft-1} corte${cutsLeft-1!==1?'s':''} restarão neste mês` : 'Limite do plano será atingido'}</div>
+    <div style="margin-top:12px;height:4px;background:var(--bg5);border-radius:2px;overflow:hidden">
+      <div style="width:${Math.min(100,((cutsUsed+1)/SUBSCRIPTION_PLAN.cutsPerMonth)*100)}%;height:100%;background:linear-gradient(90deg,#A855F7,#C084FC);border-radius:2px;transition:width 0.6s ease"></div>
+    </div>`;
+  document.getElementById('registerCutModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeRegisterCutModal(){
+  document.getElementById('registerCutModal').classList.remove('open');
+  document.body.style.overflow = '';
+  registerCutSubscriberName = null;
+}
+
+function confirmRegisterCut(){
+  if (!registerCutSubscriberName) return;
+  const service = document.getElementById('rCutService').value;
+  const now = new Date();
+  const entry = {
+    id: now.getTime(),
+    subscriberName: registerCutSubscriberName,
+    service,
+    barber: currentBarber ? currentBarber.name : '—',
+    barberId: currentBarber ? currentBarber.id : null,
+    date: now.toISOString(),
+    source: 'manual'
+  };
+  PLAN_HISTORY.push(entry);
+  savePlanHistory();
+  const name = registerCutSubscriberName;
+  closeRegisterCutModal();
+  renderSubscribersTab();
+  showToast(`Corte registrado: ${name} · ${getCutsUsed(name)}/${SUBSCRIPTION_PLAN.cutsPerMonth} este mês`);
+}
+
+function renewPlan(name){
+  const sub = getSubObj(name);
+  if (!sub) return;
+  const renewal = new Date();
+  renewal.setDate(renewal.getDate() + 30);
+  const renewStr = `${renewal.getDate()} ${MONTHS_PT[renewal.getMonth()]}`;
+  if (!confirm(`Renovar plano de ${name}?\nPróxima renovação será: ${renewStr}`)) return;
+  const idx = SUBSCRIBERS.findIndex(s => subName(s).toLowerCase() === name.toLowerCase());
+  if (idx < 0) return;
+  SUBSCRIBERS[idx] = {...ensureSubObj(SUBSCRIBERS[idx]), renewalDate: renewal.toISOString()};
+  saveSubs();
+  renderSubscribersTab();
+  showToast(`Plano renovado · Próxima renovação: ${renewStr}`);
+}
+
+/* ═══════════════════════════════════════════════════════
    ASSINANTES
    ═══════════════════════════════════════════════════════ */
 function renderSubscribersTab(){
   const subs = SUBSCRIBERS.map(ensureSubObj);
   const now = new Date(), mo = now.getMonth(), yr = now.getFullYear();
-  const cutsThisMonth = PAYMENTS.filter(p => { const d=new Date(p.date); return p.method==='subscription' && d.getMonth()===mo && d.getFullYear()===yr; }).length;
   const monthlyRev = subs.length * SUBSCRIPTION_PLAN.monthlyPrice;
 
-  document.getElementById('subsCountLabel').textContent = `${subs.length} ativo${subs.length!==1?'s':''}`;
+  /* total de cortes este mês (todas as fontes) */
+  const cutsThisMonth = subs.reduce((acc, sub) => acc + getCutsUsed(sub.name), 0);
+  const activeCount = subs.filter(s => { const st = getSubStatus(s); return st.cardCls !== 'status-expired'; }).length;
+
+  document.getElementById('subsCountLabel').textContent = `${subs.length} cadastrado${subs.length!==1?'s':''}`;
   updateSubBadge();
 
   document.getElementById('subsStatsGrid').innerHTML = `
     <div class="subs-stat">
       <div class="subs-stat-icon"><i class="fas fa-gem"></i></div>
-      <div class="subs-stat-val">${subs.length}</div>
-      <div class="subs-stat-lbl">Assinantes Ativos</div>
+      <div class="subs-stat-val">${activeCount}</div>
+      <div class="subs-stat-lbl">Planos Ativos</div>
     </div>
     <div class="subs-stat">
       <div class="subs-stat-icon" style="background:rgba(34,197,94,0.1);color:var(--green)"><i class="fas fa-dollar-sign"></i></div>
@@ -1853,19 +2476,44 @@ function renderSubscribersTab(){
 
   document.getElementById('subsGrid').innerHTML = subs.map(sub => {
     const ini = sub.name.trim().split(/\s+/).map(p=>p[0]).join('').substring(0,2).toUpperCase();
-    const cutsUsed = PAYMENTS.filter(p => { const d=new Date(p.date); return p.method==='subscription' && p.clientName.toLowerCase()===sub.name.toLowerCase() && d.getMonth()===mo && d.getFullYear()===yr; }).length;
+    const cutsUsed = getCutsUsed(sub.name);
     const cutsLeft = Math.max(0, SUBSCRIPTION_PLAN.cutsPerMonth - cutsUsed);
-    const pct = Math.min(100, (cutsUsed/SUBSCRIPTION_PLAN.cutsPerMonth)*100);
+    const pct = Math.min(100, (cutsUsed / SUBSCRIPTION_PLAN.cutsPerMonth) * 100);
     const isFull = cutsUsed >= SUBSCRIPTION_PLAN.cutsPerMonth;
-    const lastPay = PAYMENTS.filter(p => p.clientName.toLowerCase()===sub.name.toLowerCase() && p.method==='subscription').sort((a,b)=>new Date(b.date)-new Date(a.date))[0];
+    const status = getSubStatus(sub);
+    const renewalDate = new Date(sub.renewalDate);
+    const renewalStr = `${renewalDate.getDate()} ${MONTHS_PT[renewalDate.getMonth()]}`;
+    const daysLeft = Math.ceil((renewalDate - now) / (1000*60*60*24));
     const sinceDate = sub.since ? formatDate(new Date(sub.since)) : '—';
-    const lastVisit = lastPay ? formatDate(new Date(lastPay.date)) : 'Nenhuma';
-    const barberName = sub.barberId ? (BARBERS.find(b=>b.id===sub.barberId)?.name||'—') : 'Qualquer';
     const waLink = sub.phone ? `https://wa.me/55${sub.phone.replace(/\D/g,'')}` : '';
     const safeName = sub.name.replace(/'/g,"\\'");
+
+    /* histórico deste mês */
+    const history = getSubHistoryThisMonth(sub.name);
+    const histHtml = history.length === 0
+      ? `<div class="sub-history-empty">Nenhum corte registrado este mês</div>`
+      : history.map(h => {
+          const hd = new Date(h.date);
+          const dateStr = `${String(hd.getDate()).padStart(2,'0')}/${String(hd.getMonth()+1).padStart(2,'0')}`;
+          return `<div class="sub-history-item">
+            <div class="sub-history-dot"></div>
+            <span class="sub-history-date">${dateStr}</span>
+            <span class="sub-history-svc">${h.service}</span>
+            <span class="sub-history-barber">${h.barber}</span>
+          </div>`;
+        }).join('');
+
+    /* cor da renovação baseada no status */
+    const renewColor = status.cardCls==='status-expired' ? 'var(--red)'
+                     : status.cardCls==='status-expiring' ? '#FACC15' : 'var(--gold)';
+
     return `
-      <div class="sub-card">
-        <div class="sub-badge"><i class="fas fa-gem"></i> PLANO ATIVO</div>
+      <div class="sub-card ${status.cardCls}">
+        <div class="sub-badge ${status.cls}">
+          <i class="fas ${status.cardCls==='status-expired'?'fa-times-circle':status.cardCls==='status-expiring'?'fa-exclamation-circle':'fa-gem'}"></i>
+          ${status.label.toUpperCase()}
+        </div>
+
         <div class="sub-card-head">
           <div class="sub-avatar">${ini}</div>
           <div class="sub-card-info">
@@ -1873,19 +2521,48 @@ function renderSubscribersTab(){
             <div class="sub-card-phone"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:4px"></i>${sub.phone||'Sem WhatsApp cadastrado'}</div>
           </div>
         </div>
+
         <div class="sub-meta-grid">
           <div class="sub-meta-item"><div class="sub-meta-label">Membro desde</div><div class="sub-meta-val">${sinceDate}</div></div>
-          <div class="sub-meta-item"><div class="sub-meta-label">Última visita</div><div class="sub-meta-val">${lastVisit}</div></div>
+          <div class="sub-meta-item"><div class="sub-meta-label">Próx. renovação</div><div class="sub-meta-val" style="color:${renewColor}">${renewalStr}${daysLeft>=0&&daysLeft<=7?` <span style="font-size:0.6rem;color:#FACC15">(${daysLeft}d)</span>`:''}</div></div>
           <div class="sub-meta-item"><div class="sub-meta-label">Plano mensal</div><div class="sub-meta-val">R$ ${SUBSCRIPTION_PLAN.monthlyPrice}</div></div>
-          <div class="sub-meta-item"><div class="sub-meta-label">Cortes restantes</div><div class="sub-meta-val" style="color:${cutsLeft>0?'var(--green)':'var(--red)'}">${cutsLeft} de ${SUBSCRIPTION_PLAN.cutsPerMonth}</div></div>
+          <div class="sub-meta-item"><div class="sub-meta-label">Cortes restantes</div><div class="sub-meta-val" style="color:${cutsLeft>0?'var(--green)':'var(--red)'};font-size:0.95rem;font-weight:700">${cutsLeft}/${SUBSCRIPTION_PLAN.cutsPerMonth}</div></div>
         </div>
+
         <div class="sub-progress-wrap">
-          <div class="sub-progress-head"><span>Uso do plano este mês</span><span>${cutsUsed}/${SUBSCRIPTION_PLAN.cutsPerMonth} cortes</span></div>
-          <div class="sub-progress-bar"><div class="sub-progress-fill${isFull?' full':''}" style="width:${pct}%"></div></div>
+          <div class="sub-progress-head"><span>Uso do plano este mês</span><span style="font-weight:700;color:${isFull?'var(--green)':'var(--white)'}">${cutsUsed}/${SUBSCRIPTION_PLAN.cutsPerMonth} cortes</span></div>
+          <div class="sub-progress-bar">
+            <div class="sub-progress-fill${isFull?' full':''}" style="width:${pct}%;transition:width 0.8s cubic-bezier(0.4,0,0.2,1)"></div>
+          </div>
         </div>
+
+        <div class="sub-history-section">
+          <div class="sub-history-title"><i class="fas fa-history" style="color:var(--purple)"></i> Histórico deste mês</div>
+          <div class="sub-history-list">${histHtml}</div>
+        </div>
+
+        <div class="sub-renewal-row">
+          <span><i class="fas fa-sync-alt" style="margin-right:5px;color:var(--muted)"></i>Próxima renovação</span>
+          <span class="sub-renewal-date" style="color:${renewColor}">${renewalStr}</span>
+        </div>
+
         <div class="sub-card-actions">
           ${waLink?`<a href="${waLink}" target="_blank" class="sub-wa-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>`:'<span style="flex:1"></span>'}
-          <button class="sub-remove-btn" onclick="confirmRemoveSub('${safeName}')"><i class="fas fa-times"></i> Remover Plano</button>
+          <button class="sub-register-btn" onclick="openRegisterCutModal('${safeName}')" ${isFull?'disabled title="Limite atingido este mês"':''}>
+            <i class="fas fa-plus"></i> Registrar Corte
+          </button>
+          <button class="sub-remove-btn" onclick="confirmRemoveSub('${safeName}')" title="Remover plano"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="sub-renew-card">
+          <div class="sub-renew-info">
+            <span class="sub-renew-info-label">Próxima renovação</span>
+            <span class="sub-renew-info-date">${renewalStr}</span>
+            <span class="sub-renew-info-days">${daysLeft >= 0 ? `em ${daysLeft} dia${daysLeft!==1?'s':''}` : 'Expirado'}</span>
+          </div>
+          <button class="sub-renew-action" onclick="renewPlan('${safeName}')">
+            <i class="fas fa-sync-alt"></i> Renovar Plano
+          </button>
         </div>
       </div>`;
   }).join('');
@@ -1984,6 +2661,7 @@ function fbLoadServicePrices(){
 document.getElementById('bookingModal').addEventListener('click', e => { if (e.target === document.getElementById('bookingModal')) closeBooking(); });
 document.getElementById('paymentModal').addEventListener('click', e => { if (e.target === document.getElementById('paymentModal')) closePaymentModal(); });
 document.getElementById('adminLoginOverlay').addEventListener('click', e => { if (e.target === document.getElementById('adminLoginOverlay')) closeAdminLogin(); });
+document.getElementById('registerCutModal').addEventListener('click', e => { if (e.target === document.getElementById('registerCutModal')) closeRegisterCutModal(); });
 </script>
 </body>
 </html>

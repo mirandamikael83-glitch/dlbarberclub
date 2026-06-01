@@ -121,6 +121,17 @@ function fbInitListeners() {
     }
   }, err => console.warn('[Firebase] Listener pagamentos:', err.message));
 
+  /* Histórico do Plano */
+  db.ref('planHistory').on('value', snap => {
+    const val = snap.val();
+    if (typeof PLAN_HISTORY !== 'undefined') {
+      PLAN_HISTORY = val ? (Array.isArray(val) ? val : Object.values(val)) : [];
+      sessionStorage.setItem('dlbc_plan_history', JSON.stringify(PLAN_HISTORY));
+      const subSec = document.getElementById('adm-subscribers');
+      if (subSec?.classList.contains('active') && typeof renderSubscribersTab === 'function') renderSubscribersTab();
+    }
+  }, err => console.warn('[Firebase] Listener histórico plano:', err.message));
+
   /* Assinantes */
   db.ref('subscribers').on('value', snap => {
     const val = snap.val();

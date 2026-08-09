@@ -15,7 +15,7 @@
 <!-- FIREBASE SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-<script src="firebase-config.js"></script>
+<script src="firebase-config.js?v=2"></script>
 <style>
 :root {
   --gold:#C9A96E; --gold-l:#E8CC9A; --gold-d:#8B6B35;
@@ -1386,6 +1386,15 @@ const PAYMENT_METHODS = {
 };
 
 function saveAppts(){ sessionStorage.setItem('dlbc_appts', JSON.stringify(APPOINTMENTS)); }
+function saveServicesLocal(){
+  sessionStorage.setItem('dlbc_services', JSON.stringify(SERVICES.map(s=>({id:s.id,name:s.name,price:s.price}))));
+}
+function loadServicesLocal(){
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('dlbc_services') || '[]');
+    saved.forEach(sv => { const s = SERVICES.find(x=>x.id===sv.id); if (s){ s.name=sv.name; s.price=sv.price; } });
+  } catch(e){ console.warn('[Preços] Erro ao carregar do local:', e.message); }
+}
 function savePayments(){ sessionStorage.setItem('dlbc_payments', JSON.stringify(PAYMENTS)); }
 function saveSubs(){ sessionStorage.setItem('dlbc_subs', JSON.stringify(SUBSCRIBERS)); fbSaveSubs(SUBSCRIBERS); }
 function savePlanHistory(){
@@ -1487,6 +1496,7 @@ window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2000);
   const counter = document.getElementById('heroBarberCount');
   if (counter) counter.textContent = BARBERS.length;
+  loadServicesLocal();
   renderServicesGrid();
   renderPublicBarbers();
   fbInitListeners();
@@ -1546,13 +1556,23 @@ let _slotsTimer = null;
 
 function openBooking(){ resetBooking(); document.getElementById('bookingModal').classList.add('open'); document.body.style.overflow='hidden'; }
 function openBookingWithService(id){ openBooking(); selectService(id); if (bk.service) setTimeout(() => goStep(2), 80); }
-function openBookingWithBarber(id){ openBooking(); setTimeout(() => { goStep(2); selectBarber(id); }, 100); }
+function openBookingWithBarber(id){ openBooking(); setTimeout(() => { selectBarber(id); }, 100); }
 function closeBooking(){
   if (_slotsTimer){ clearInterval(_slotsTimer); _slotsTimer = null; }
   document.getElementById('bookingModal').classList.remove('open');
   document.body.style.overflow='';
 }
-function resetBooking(){ bk={step:1,service:null,barber:null,date:null,time:null}; renderServiceList(); renderBarberList(); buildCalendar(); updateChips(); goStep(1,true); }
+function resetBooking(){
+  bk={step:1,service:null,barber:null,date:null,time:null};
+  renderServiceList(); renderBarberList(); buildCalendar(); updateChips();
+  document.getElementById('nextBtn1').disabled = true;
+  document.getElementById('nextBtn2').disabled = true;
+  document.getElementById('nextBtn3').disabled = true;
+  document.getElementById('nextBtn4').disabled = true;
+  document.getElementById('clientName').value = '';
+  document.getElementById('clientPhone').value = '';
+  goStep(1,true);
+}
 
 function goStep(n, silent){
   /* Para refresh automático ao sair do passo 4 */
@@ -1684,10 +1704,16 @@ function renderTimeSlots(){
 function selectTime(t){ bk.time = t; renderTimeSlots(); document.getElementById('nextBtn4').disabled = false; }
 
 function proceedToConfirm(){
-  const name = document.getElementById('clientName').value.trim();
-  if (!name){ alert('Por favor, informe seu nome.'); document.getElementById('clientName').focus(); return; }
-  renderConfirmSummary();
-  goStep(6);
+  try {
+    const name = document.getElementById('clientName').value.trim();
+    if (!name){ alert('Por favor, informe seu nome.'); document.getElementById('clientName').focus(); return; }
+    if (!bk.service || !bk.barber || !bk.date || !bk.time){ alert('Alguma etapa anterior não foi preenchida corretamente. Volte e selecione tudo de novo.'); return; }
+    renderConfirmSummary();
+    goStep(6);
+  } catch(err){
+    alert('Erro ao revisar: ' + err.message);
+    console.error(err);
+  }
 }
 function renderConfirmSummary(){
   const name = document.getElementById('clientName').value.trim();
@@ -2632,6 +2658,9 @@ function saveServiceChanges(serviceId){
     }
   });
   saveAppts();
+  saveServicesLocal();
+  /* Atualiza qualquer lugar que já esteja mostrando os serviços, inclusive o modal de agendamento se estiver aberto */
+  renderServiceList();
   if (db){
     db.ref('servicePrices/'+serviceId).set(newPrice).catch(e=>console.warn(e));
     if (nameChanged) db.ref('serviceNames/'+serviceId).set(newName).catch(e=>console.warn(e));

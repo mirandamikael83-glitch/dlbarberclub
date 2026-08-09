@@ -1185,7 +1185,7 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
     <div class="barber-switcher-wrap">
       <div class="bsw-label"><i class="fas fa-exchange-alt"></i> Visualizando</div>
       <div class="bsw-current" id="bswCurrent"></div>
-      <select class="bsw-select" id="bswSelect" onchange="switchBarber(this.value)"></select>
+      <select class="bsw-select" id="bswSelect" onchange="switchBarber(this.value); this.blur();"></select>
     </div>
     
     <nav class="sidebar-nav">
@@ -1963,6 +1963,7 @@ function updateContext(){
 function switchBarber(id){
   currentBarber = BARBERS.find(b => b.id === parseInt(id));
   updateContext();
+  closeMobDrawer();
   // Re-renderiza a seção ativa
   const activeSec = document.querySelector('.admin-section.active');
   if (activeSec){

@@ -1555,7 +1555,7 @@ let bk = {step:1, service:null, barber:null, date:null, time:null};
 let _slotsTimer = null;
 
 function openBooking(){ resetBooking(); document.getElementById('bookingModal').classList.add('open'); document.body.style.overflow='hidden'; }
-function openBookingWithService(id){ openBooking(); selectService(id); if (bk.service) setTimeout(() => goStep(2), 80); }
+function openBookingWithService(id){ openBooking(); selectService(id); }
 function openBookingWithBarber(id){ openBooking(); setTimeout(() => { selectBarber(id); }, 100); }
 function closeBooking(){
   if (_slotsTimer){ clearInterval(_slotsTimer); _slotsTimer = null; }

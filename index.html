@@ -1929,7 +1929,15 @@ async function finalizeBooking(){
   APPOINTMENTS.push(appt); saveAppts(); fbSaveAppt(appt);
   if (confirmBtn){ confirmBtn.disabled = false; confirmBtn.innerHTML = '<i class="fas fa-check"></i> Confirmar'; }
   const msg = `Olá! Acabei de agendar.\n*Nome:* ${name}\n*Serviço:* ${appt.service}\n*Barbeiro:* ${appt.barber}\n*Data:* ${formatDate(bk.date)}\n*Horário:* ${bk.time}`;
-  document.getElementById('successMessage').textContent = `${name}, seu agendamento foi registrado!`;
+  if (!reservation.synced){
+    /* Não deu pra confirmar a conexão com o banco em tempo real — o agendamento
+       ficou salvo só neste aparelho e pode não aparecer na área do barbeiro/admin.
+       Avisamos o cliente e reforçamos a confirmação via WhatsApp como garantia. */
+    console.warn('[Agendamento] Salvo localmente, sem confirmação de sincronização com o Firebase.');
+    document.getElementById('successMessage').innerHTML = `${name}, seu agendamento foi registrado neste aparelho, mas não conseguimos confirmar a conexão com o sistema. <strong>Por favor, confirme pelo WhatsApp abaixo</strong> para garantir seu horário.`;
+  } else {
+    document.getElementById('successMessage').textContent = `${name}, seu agendamento foi registrado!`;
+  }
   document.getElementById('successWaBtn').href = `https://wa.me/5541997878695?text=${encodeURIComponent(msg)}`;
   goStep(7);
 }

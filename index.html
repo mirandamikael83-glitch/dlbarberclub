@@ -15,7 +15,7 @@
 <!-- FIREBASE SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-<script src="firebase-config.js?v=2"></script>
+<script src="firebase-config.js?v=3"></script>
 <style>
 :root {
   --gold:#C9A96E; --gold-l:#E8CC9A; --gold-d:#8B6B35;
@@ -971,7 +971,8 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
       <div class="footer-social">
         <a class="social-link" href="https://instagram.com/DlBarber.Club" target="_blank"><i class="fab fa-instagram"></i></a>
         <a class="social-link" href="https://wa.me/5541997878695" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <button class="social-link" onclick="openAdminLogin()" title="Painel" style="cursor:pointer;border:1.5px solid var(--gold);color:var(--gold);background:rgba(201,169,110,0.12);font-size:1.1rem"><i class="fas fa-lock"></i></button>
+        <button class="social-link" onclick="openAdminLogin()" title="Administrativo" style="cursor:pointer;border:1.5px solid var(--gold);color:var(--gold);background:rgba(201,169,110,0.12);font-size:1.1rem"><i class="fas fa-lock"></i></button>
+        <button class="social-link" onclick="openBarberLogin()" title="Barbeiros" style="cursor:pointer;border:1.5px solid var(--gold);color:var(--gold);background:rgba(201,169,110,0.12);font-size:1.1rem"><i class="fas fa-cut"></i></button>
       </div>
     </div>
     <div class="footer-col"><h5>Serviços</h5><ul id="footerServicesList"></ul></div>
@@ -1171,6 +1172,39 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
   </div>
 </div>
 
+<!-- ============== LOGIN BARBEIROS ============== -->
+<div class="admin-login-overlay" id="barberLoginOverlay">
+  <div class="login-bg-orbs">
+    <div class="login-orb o1"></div>
+    <div class="login-orb o2"></div>
+  </div>
+  <div class="admin-login-box">
+    <div class="login-brand-circle"><i class="fas fa-cut"></i></div>
+    <div class="login-brand">
+      <div class="login-brand-name">DL <span>BARBER</span></div>
+      <div class="login-brand-sub">Área do Barbeiro</div>
+    </div>
+    <div class="login-error" id="barberLoginError"><i class="fas fa-exclamation-circle"></i> Usuário ou senha incorretos</div>
+    <div class="login-form-group">
+      <label class="login-form-label">Usuário</label>
+      <div class="login-input-wrap">
+        <input class="login-input" id="barberLoginUser" type="text" placeholder="Seu usuário" autocomplete="username">
+        <i class="login-input-icon fas fa-user"></i>
+      </div>
+    </div>
+    <div class="login-form-group">
+      <label class="login-form-label">Senha</label>
+      <div class="login-input-wrap">
+        <input class="login-input" id="barberLoginPass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doBarberLogin()">
+        <i class="login-input-icon fas fa-lock"></i>
+      </div>
+    </div>
+    <button class="login-btn" onclick="doBarberLogin()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+    <button class="login-cancel" onclick="closeBarberLogin()">Cancelar</button>
+    <div class="login-hint">Cada barbeiro acessa somente a própria agenda</div>
+  </div>
+</div>
+
 <!-- ============== ADMIN PANEL ============== -->
 <div class="admin-drawer-overlay" id="adminDrawerOverlay" onclick="closeMobDrawer()"></div>
 <div class="admin-panel" id="adminPanel">
@@ -1191,7 +1225,6 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
       <div class="nav-group">
         <span class="nav-group-label">Painel</span>
         <button class="nav-item active" onclick="switchAdminSection('dashboard',this);closeMobDrawer()"><i class="fas fa-chart-line"></i> Dashboard</button>
-        <button class="nav-item" onclick="switchAdminSection('appointments',this);closeMobDrawer()"><i class="fas fa-calendar-check"></i> Agendamentos</button>
         <button class="nav-item" onclick="switchAdminSection('clients',this);closeMobDrawer()"><i class="fas fa-users"></i> Clientes</button>
         <button class="nav-item" onclick="switchAdminSection('finance',this);closeMobDrawer()"><i class="fas fa-coins"></i> Financeiro</button>
         <button class="nav-item" onclick="switchAdminSection('subscribers',this);closeMobDrawer()"><i class="fas fa-gem"></i> Assinantes <span class="nav-badge" id="subCountBadge">0</span></button>
@@ -1215,7 +1248,6 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
     <!-- Bottom Nav Mobile -->
     <nav class="admin-bottom-nav" id="adminBottomNav">
       <button class="admin-bottom-nav-item active" id="bnav-dashboard" onclick="switchAdminSection('dashboard',null,true)"><i class="fas fa-chart-line"></i>Painel</button>
-      <button class="admin-bottom-nav-item" id="bnav-appointments" onclick="switchAdminSection('appointments',null,true)"><i class="fas fa-calendar-check"></i>Agenda</button>
       <button class="admin-bottom-nav-item" id="bnav-finance" onclick="switchAdminSection('finance',null,true)"><i class="fas fa-coins"></i>Financeiro</button>
       <button class="admin-bottom-nav-item" id="bnav-subscribers" onclick="switchAdminSection('subscribers',null,true)"><i class="fas fa-gem"></i>Planos<span class="bnav-badge" id="bnavSubBadge" style="display:none">0</span></button>
       <button class="admin-bottom-nav-item" id="bnav-more" onclick="openMobDrawer()"><i class="fas fa-ellipsis-h"></i>Mais</button>
@@ -1237,15 +1269,9 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
             <div id="topServicesChart"></div>
           </div>
         </div>
-        <div class="admin-card" style="margin-top:18px">
-          <div class="admin-card-header"><h3>Agendamentos Recentes</h3></div>
-          <div id="recentApptsTable"></div>
-        </div>
       </div>
 
-      <div class="admin-section" id="adm-appointments">
-        <div id="allApptsTable"></div>
-      </div>
+
 
       <div class="admin-section" id="adm-clients">
         <div class="admin-card">
@@ -1327,6 +1353,96 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
   </div>
 </div>
 
+<!-- ============== ÁREA BARBEIROS (agenda privada por barbeiro) ============== -->
+<div class="admin-drawer-overlay" id="barberDrawerOverlay" onclick="closeBarberMobDrawer()"></div>
+<div class="admin-panel" id="barberPanel">
+  <aside class="admin-sidebar" id="barberSidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-text">DL <span>BARBER</span></div>
+      <div class="sidebar-logo-sub">Área do Barbeiro</div>
+    </div>
+
+    <div class="barber-switcher-wrap">
+      <div class="bsw-label"><i class="fas fa-user"></i> Logado como</div>
+      <div class="bsw-current" id="barbCurrent"></div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <span class="nav-group-label">Minha Área</span>
+        <button class="nav-item active" onclick="switchBarberSection('agenda',this);closeBarberMobDrawer()"><i class="fas fa-calendar-check"></i> Minha Agenda</button>
+        <button class="nav-item" onclick="switchBarberSection('recurring',this);closeBarberMobDrawer()"><i class="fas fa-redo"></i> Clientes Fixos</button>
+        <button class="nav-item" onclick="switchBarberSection('settings',this);closeBarberMobDrawer()"><i class="fas fa-cog"></i> Configurações</button>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="nav-item" style="color:var(--red)" onclick="closeBarberPanel()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <button class="admin-topbar-btn-menu" onclick="openBarberMobDrawer()" aria-label="Menu"><i class="fas fa-bars"></i></button>
+      <div class="admin-page-title"><span id="barberPageTitle">Minha Agenda</span></div>
+      <div class="admin-topbar-right">
+        <div class="online-badge"><div class="online-dot"></div> Online</div>
+        <button class="btn-logout" onclick="closeBarberPanel()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+      </div>
+    </div>
+    <nav class="admin-bottom-nav" id="barberBottomNav">
+      <button class="admin-bottom-nav-item active" id="bbnav-agenda" onclick="switchBarberSection('agenda',null,true)"><i class="fas fa-calendar-check"></i>Agenda</button>
+      <button class="admin-bottom-nav-item" id="bbnav-recurring" onclick="switchBarberSection('recurring',null,true)"><i class="fas fa-redo"></i>Fixos</button>
+      <button class="admin-bottom-nav-item" id="bbnav-settings" onclick="switchBarberSection('settings',null,true)"><i class="fas fa-cog"></i>Config</button>
+    </nav>
+    <div class="admin-content">
+
+      <div class="admin-section active" id="barb-agenda">
+        <div id="allApptsTable"></div>
+      </div>
+
+      <div class="admin-section" id="barb-recurring">
+        <div class="admin-card" style="max-width:520px">
+          <div class="admin-card-header"><h3><i class="fas fa-redo" style="margin-right:8px;color:var(--gold)"></i>Novo Cliente Fixo</h3></div>
+          <p style="font-size:0.78rem;color:var(--muted);margin:-6px 0 16px">Repete o mesmo cliente automaticamente todo(a) mesmo dia da semana, no mesmo horário.</p>
+          <div class="form-group"><label class="form-label">Nome do cliente</label><input class="form-input" id="recClientName" type="text" placeholder="Ex: Roberto"></div>
+          <div class="form-group"><label class="form-label">Telefone (opcional)</label><input class="form-input" id="recClientPhone" type="text" placeholder="(00) 00000-0000"></div>
+          <div class="form-group"><label class="form-label">Dia da semana</label>
+            <select class="form-input" id="recWeekday" onchange="populateRecTimeOptions()">
+              <option value="1">Segunda-feira</option>
+              <option value="2">Terça-feira</option>
+              <option value="3">Quarta-feira</option>
+              <option value="4">Quinta-feira</option>
+              <option value="5">Sexta-feira</option>
+              <option value="6" selected>Sábado</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Horário</label><select class="form-input" id="recTime"></select></div>
+          <div class="form-group"><label class="form-label">Serviço</label><select class="form-input" id="recService"></select></div>
+          <div class="login-error" id="recError" style="position:static;margin:8px 0 0"><i class="fas fa-exclamation-circle"></i> <span id="recErrorText">Erro</span></div>
+          <button class="btn-next" style="width:100%;margin-top:14px" onclick="addRecurringClient()"><i class="fas fa-plus"></i> Adicionar Cliente Fixo</button>
+        </div>
+
+        <div class="admin-card" style="margin-top:18px">
+          <div class="admin-card-header"><h3>Meus Clientes Fixos</h3></div>
+          <div id="recurringList"></div>
+        </div>
+      </div>
+
+      <div class="admin-section" id="barb-settings">
+        <div class="admin-card" style="max-width:420px">
+          <div class="admin-card-header"><h3><i class="fas fa-lock" style="margin-right:8px;color:var(--gold)"></i>Alterar Senha</h3></div>
+          <div class="form-group"><label class="form-label">Senha atual</label><input class="form-input" id="curPassInput" type="password" autocomplete="current-password"></div>
+          <div class="form-group"><label class="form-label">Nova senha</label><input class="form-input" id="newPassInput" type="password" autocomplete="new-password"></div>
+          <div class="form-group"><label class="form-label">Confirmar nova senha</label><input class="form-input" id="confirmPassInput" type="password" autocomplete="new-password"></div>
+          <div class="login-error" id="passChangeError" style="position:static;margin:8px 0 0"><i class="fas fa-exclamation-circle"></i> <span id="passChangeErrorText">Erro</span></div>
+          <button class="btn-next" style="width:100%;margin-top:14px" onclick="changeBarberPassword()"><i class="fas fa-check"></i> Salvar nova senha</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
 'use strict';
 
@@ -1345,21 +1461,53 @@ const SERVICES = [
 ];
 
 const BARBERS = [
-  {id:1, name:'David Leal',     spec:'Cortes & Barba',          ini:'DL', photo:'davi.jpg'},
-  {id:2, name:'Kauan Martins',  spec:'Degradê & Química',       ini:'KM'},
-  {id:3, name:'Luiz Gustavo',   spec:'Estética & Coloração',    ini:'LG'},
-  {id:4, name:'Guilherme',      spec:'Estilo & Modernidade',    ini:'GU'}
+  {id:1, name:'David Leal',     spec:'Cortes & Barba',          ini:'DL', photo:'davi.jpg', username:'david'},
+  {id:2, name:'Kauan Martins',  spec:'Degradê & Química',       ini:'KM', username:'kauan'},
+  {id:3, name:'Luiz Gustavo',   spec:'Estética & Coloração',    ini:'LG', username:'gustavo'},
+  {id:4, name:'Guilherme',      spec:'Estilo & Modernidade',    ini:'GU', username:'guilherme'}
 ];
 
-/* LOGIN ÚNICO DO PAINEL */
+/* Senhas iniciais (o barbeiro deve trocar em Configurações → Alterar senha).
+   Usadas apenas na 1ª vez, para semear o hash no Firebase — depois disso
+   o valor real fica só no banco, com hash, nunca em texto puro. */
+const BARBER_DEFAULT_PASS = {1:'david123', 2:'kauan123', 3:'gustavo123', 4:'guilherme123'};
+
+/* LOGIN ÚNICO DO PAINEL ADMINISTRATIVO (gerência) */
 const ADMIN_USER = 'barbearia';
 const ADMIN_PASS = 'dlbarber';
+
+/* ─── AUTENTICAÇÃO DOS BARBEIROS (hash local, SHA-256 + salt) ─── */
+let BARBER_CREDS = {};       // { [barberId]: {username, salt, hash} } — carregado do Firebase
+let loggedBarber = null;     // barbeiro autenticado na área "Barbeiros" (sessão da aba)
+
+function toHex(buf){ return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join(''); }
+function randomSalt(){ return toHex(crypto.getRandomValues(new Uint8Array(16)).buffer); }
+async function hashPass(password, salt){
+  const enc = new TextEncoder().encode(salt + ':' + password);
+  const digest = await crypto.subtle.digest('SHA-256', enc);
+  return toHex(digest);
+}
+
+async function initBarberCreds(){
+  BARBER_CREDS = (typeof fbLoadAllBarberCreds === 'function') ? await fbLoadAllBarberCreds() : {};
+  /* Semeia credenciais padrão para barbeiros que ainda não têm senha cadastrada */
+  for (const b of BARBERS){
+    if (!BARBER_CREDS[b.id]){
+      const salt = randomSalt();
+      const hash = await hashPass(BARBER_DEFAULT_PASS[b.id] || 'trocar123', salt);
+      const cred = {username: b.username, salt, hash};
+      BARBER_CREDS[b.id] = cred;
+      if (typeof fbSaveBarberCred === 'function') fbSaveBarberCred(b.id, cred);
+    }
+  }
+}
 
 const SUBSCRIPTION_PLAN = { monthlyPrice:130, cutsPerMonth:4, pricePerCut:32.50 };
 
 let APPOINTMENTS = JSON.parse(sessionStorage.getItem('dlbc_appts') || '[]');
 let PAYMENTS = JSON.parse(sessionStorage.getItem('dlbc_payments') || '[]');
 let SUBSCRIBERS = JSON.parse(sessionStorage.getItem('dlbc_subs') || '[]');
+let RECURRING = JSON.parse(sessionStorage.getItem('dlbc_recurring') || '[]');
 let PLAN_HISTORY = JSON.parse(sessionStorage.getItem('dlbc_plan_history') || '[]');
 let currentBarber = null;
 
@@ -1385,6 +1533,7 @@ const PAYMENT_METHODS = {
 };
 
 function saveAppts(){ sessionStorage.setItem('dlbc_appts', JSON.stringify(APPOINTMENTS)); }
+function saveRecurringLocal(){ sessionStorage.setItem('dlbc_recurring', JSON.stringify(RECURRING)); }
 function saveServicesLocal(){
   sessionStorage.setItem('dlbc_services', JSON.stringify(SERVICES.map(s=>({id:s.id,name:s.name,price:s.price}))));
 }
@@ -1443,14 +1592,28 @@ function getSubHistoryThisMonth(name){
   const fromHistory = PLAN_HISTORY.filter(h => {
     const d = new Date(h.date);
     return h.subscriberName.toLowerCase()===name.toLowerCase() && d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear();
-  });
+  }).map(h => ({...h, _source:'history'}));
   const histApptIds = new Set(PLAN_HISTORY.filter(h=>h.apptId).map(h=>h.apptId));
   const fromPayments = PAYMENTS.filter(p => {
     const d = new Date(p.date);
     return p.method==='subscription' && p.clientName.toLowerCase()===name.toLowerCase() &&
            d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear() && !histApptIds.has(p.id);
-  }).map(p => ({id:p.id, subscriberName:p.clientName, service:p.service, barber:p.barber, date:p.date}));
+  }).map(p => ({id:p.id, subscriberName:p.clientName, service:p.service, barber:p.barber, date:p.date, _source:'payment'}));
   return [...fromHistory, ...fromPayments].sort((a,b) => new Date(a.date)-new Date(b.date));
+}
+
+function removeSubHistoryEntry(id, source){
+  if (!confirm('Remover este corte do histórico? Isso libera uma vaga no plano mensal do cliente.')) return;
+  if (source === 'history'){
+    PLAN_HISTORY = PLAN_HISTORY.filter(h => h.id !== id);
+    savePlanHistory();
+  } else {
+    PAYMENTS = PAYMENTS.filter(p => p.id !== id);
+    savePayments();
+    if (typeof fbDeletePayment === 'function') fbDeletePayment(id);
+  }
+  renderSubscribersTab();
+  showToast('Corte removido do histórico');
 }
 
 function isSubscriber(name){ return SUBSCRIBERS.some(s => subName(s).toLowerCase() === name.toLowerCase()); }
@@ -1500,6 +1663,7 @@ window.addEventListener('load', () => {
   renderPublicBarbers();
   fbInitListeners();
   fbLoadServicePrices();
+  initBarberCreds();
 });
 
 let navScrolled = false;
@@ -1750,6 +1914,18 @@ async function finalizeBooking(){
     date: bk.date.toISOString(), dateKey: dk,
     time: bk.time, status:'pending', createdAt: new Date().toISOString()
   };
+
+  /* Trava REAL no banco: transaction atômica — se dois clientes tentarem
+     o mesmo horário ao mesmo tempo, só um consegue reservar. */
+  if (confirmBtn){ confirmBtn.textContent = 'Reservando...'; }
+  const reservation = await fbReserveSlot(bk.barber.id, dk, bk.time, appt.id);
+  if (!reservation.ok){
+    if (confirmBtn){ confirmBtn.disabled = false; confirmBtn.innerHTML = '<i class="fas fa-check"></i> Confirmar'; }
+    alert(reservation.reason || 'Este horário já foi reservado. Escolha outro horário.');
+    goStep(4);
+    return;
+  }
+
   APPOINTMENTS.push(appt); saveAppts(); fbSaveAppt(appt);
   if (confirmBtn){ confirmBtn.disabled = false; confirmBtn.innerHTML = '<i class="fas fa-check"></i> Confirmar'; }
   const msg = `Olá! Acabei de agendar.\n*Nome:* ${name}\n*Serviço:* ${appt.service}\n*Barbeiro:* ${appt.barber}\n*Data:* ${formatDate(bk.date)}\n*Horário:* ${bk.time}`;
@@ -1913,6 +2089,8 @@ function doAdminLogin(){
   }
   
   // Login OK - inicia com o primeiro barbeiro
+  document.getElementById('barberPanel').classList.remove('open'); /* garante que só um painel fica aberto por vez */
+  loggedBarber = null;
   currentBarber = BARBERS[0];
   closeAdminLogin();
   document.getElementById('adminPanel').classList.add('open');
@@ -1929,6 +2107,346 @@ function closeAdmin(){
   document.body.style.overflow = '';
   currentBarber = null;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   ÁREA BARBEIROS — login individual + agenda privada
+   ═══════════════════════════════════════════════════════════════ */
+
+function openBarberLogin(){
+  document.getElementById('barberLoginOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('barberLoginUser').focus(), 100);
+}
+function closeBarberLogin(){
+  document.getElementById('barberLoginOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('barberLoginUser').value = '';
+  document.getElementById('barberLoginPass').value = '';
+  document.getElementById('barberLoginError').classList.remove('show');
+}
+
+async function doBarberLogin(){
+  const u = document.getElementById('barberLoginUser').value.trim().toLowerCase();
+  const p = document.getElementById('barberLoginPass').value;
+  const err = document.getElementById('barberLoginError');
+
+  if (!u || !p){ err.classList.add('show'); setTimeout(()=>err.classList.remove('show'),4000); return; }
+  if (!Object.keys(BARBER_CREDS).length) await initBarberCreds();
+
+  const entry = Object.entries(BARBER_CREDS).find(([id,c]) => c.username === u);
+  let ok = false, matchedBarber = null;
+  if (entry){
+    const [bid, cred] = entry;
+    const hash = await hashPass(p, cred.salt);
+    if (hash === cred.hash){ ok = true; matchedBarber = BARBERS.find(b => b.id === parseInt(bid)); }
+  }
+
+  if (!ok || !matchedBarber){
+    err.classList.add('show');
+    setTimeout(() => err.classList.remove('show'), 4000);
+    return;
+  }
+
+  document.getElementById('adminPanel').classList.remove('open'); /* garante que só um painel fica aberto por vez */
+  loggedBarber = matchedBarber;
+  currentBarber = matchedBarber; /* reaproveita myAppts()/renderAllAppointments(), já filtradas por currentBarber.id */
+  closeBarberLogin();
+  document.getElementById('barberPanel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('barbCurrent').innerHTML = `
+    <div class="bsw-avatar">${barberAvatarHTML(loggedBarber)}</div>
+    <div>
+      <div class="bsw-name">${loggedBarber.name}</div>
+      <div class="bsw-spec">${loggedBarber.spec}</div>
+    </div>`;
+
+  agendaWeekOffset = 0;
+  selectedApptDate = (() => { const d = new Date(); d.setHours(0,0,0,0); return d; })();
+  apptFilter = 'all';
+  switchBarberSection('agenda', document.querySelector('#barberSidebar .nav-item'));
+  ensureRecurringOccurrences(loggedBarber.id);
+}
+
+function closeBarberPanel(){
+  if (!confirm('Sair da sua agenda?')) return;
+  document.getElementById('barberPanel').classList.remove('open');
+  document.body.style.overflow = '';
+  loggedBarber = null;
+  currentBarber = null;
+}
+
+const barberSectionTitles = {agenda:'Minha Agenda', recurring:'Clientes Fixos', settings:'Configurações'};
+
+function switchBarberSection(sec, btn, fromBottomNav){
+  document.querySelectorAll('#barberPanel .admin-section').forEach(el => el.classList.remove('active'));
+  document.getElementById('barb-'+sec).classList.add('active');
+  document.querySelectorAll('#barberSidebar .nav-item').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('barberPageTitle').textContent = barberSectionTitles[sec] || sec;
+  document.querySelectorAll('#barberBottomNav .admin-bottom-nav-item').forEach(b => b.classList.remove('active'));
+  const bnavBtn = document.getElementById('bbnav-'+sec);
+  if (bnavBtn) bnavBtn.classList.add('active');
+  if (fromBottomNav) closeBarberMobDrawer();
+  if (sec==='agenda') renderAllAppointments();
+  if (sec==='recurring'){ populateRecServiceOptions(); populateRecTimeOptions(); renderRecurringList(); }
+}
+
+function openBarberMobDrawer(){
+  document.getElementById('barberSidebar').classList.add('mob-open');
+  document.getElementById('barberDrawerOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeBarberMobDrawer(){
+  document.getElementById('barberSidebar').classList.remove('mob-open');
+  document.getElementById('barberDrawerOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+async function changeBarberPassword(){
+  const cur = document.getElementById('curPassInput').value;
+  const nw = document.getElementById('newPassInput').value;
+  const cf = document.getElementById('confirmPassInput').value;
+  const errBox = document.getElementById('passChangeError');
+  const errText = document.getElementById('passChangeErrorText');
+  function fail(msg){ errText.textContent = msg; errBox.classList.add('show'); setTimeout(()=>errBox.classList.remove('show'),4000); }
+
+  if (!loggedBarber) return;
+  const cred = BARBER_CREDS[loggedBarber.id];
+  if (!cred) return;
+
+  const curHash = await hashPass(cur, cred.salt);
+  if (curHash !== cred.hash){ fail('Senha atual incorreta.'); return; }
+  if (!nw || nw.length < 4){ fail('A nova senha deve ter pelo menos 4 caracteres.'); return; }
+  if (nw !== cf){ fail('As senhas não coincidem.'); return; }
+
+  const newSalt = randomSalt();
+  const newHash = await hashPass(nw, newSalt);
+  const newCred = {username: cred.username, salt: newSalt, hash: newHash};
+  BARBER_CREDS[loggedBarber.id] = newCred;
+  await fbSaveBarberCred(loggedBarber.id, newCred);
+
+  document.getElementById('curPassInput').value = '';
+  document.getElementById('newPassInput').value = '';
+  document.getElementById('confirmPassInput').value = '';
+  showToast('Senha alterada com sucesso!');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CLIENTES FIXOS — agendamento recorrente semanal (ex: Roberto,
+   todo sábado às 10:00). Cada rodada gera agendamentos reais nas
+   próximas semanas, usando a mesma trava de conflito da agenda.
+   ═══════════════════════════════════════════════════════════════ */
+
+const RECURRING_WEEKS_AHEAD = 8; /* quantas semanas à frente manter geradas */
+
+function populateRecServiceOptions(){
+  const sel = document.getElementById('recService');
+  if (!sel) return;
+  sel.innerHTML = SERVICES.map(s => `<option value="${s.id}">${s.name} · ${fmtMoney(s.price)}</option>`).join('');
+}
+
+function populateRecTimeOptions(){
+  const wdSel = document.getElementById('recWeekday');
+  const timeSel = document.getElementById('recTime');
+  if (!wdSel || !timeSel) return;
+  const wd = parseInt(wdSel.value);
+  const cfg = wd === 6 ? CONFIG.saturday : CONFIG.weekday;
+  const opts = [];
+  for (let h = cfg.open; h < cfg.close; h++){
+    for (const min of [0,30]){
+      if (h === cfg.close-1 && min===30) continue;
+      if (h >= cfg.lunchStart && h < cfg.lunchEnd) continue;
+      opts.push(`${String(h).padStart(2,'0')}:${String(min).padStart(2,'0')}`);
+    }
+  }
+  timeSel.innerHTML = opts.map(t => `<option value="${t}">${t}</option>`).join('');
+}
+
+function nextDateForWeekday(weekday, fromDate){
+  /* próxima data (incluindo hoje) cujo getDay() === weekday */
+  const d = new Date(fromDate); d.setHours(0,0,0,0);
+  const diff = (weekday - d.getDay() + 7) % 7;
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+
+async function generateRecurringOccurrences(rule){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const existingKeys = new Set(
+    APPOINTMENTS.filter(a => a.recurringId === rule.id && a.status !== 'cancelled').map(a => a.dateKey)
+  );
+  let first = nextDateForWeekday(rule.weekday, today);
+  /* se for hoje mas o horário já passou, pula pra próxima semana */
+  if (first.getTime() === today.getTime()){
+    const now = new Date();
+    const [hh,mm] = rule.time.split(':').map(Number);
+    if (hh < now.getHours() || (hh===now.getHours() && mm<=now.getMinutes())) first.setDate(first.getDate()+7);
+  }
+  let created = 0, skipped = 0;
+  for (let i=0; i<RECURRING_WEEKS_AHEAD; i++){
+    const d = new Date(first); d.setDate(first.getDate() + i*7);
+    const dk = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    if (existingKeys.has(dk)) continue; /* já existe ocorrência gerada para essa data */
+    const apptId = Date.now() + i + Math.floor(Math.random()*1000);
+    const reservation = await fbReserveSlot(rule.barberId, dk, rule.time, apptId);
+    if (!reservation.ok){ skipped++; continue; }
+    const appt = {
+      id: apptId, name: rule.clientName, phone: rule.phone || '',
+      serviceId: rule.serviceId, service: rule.service, price: rule.price,
+      barberId: rule.barberId, barber: rule.barberName,
+      date: d.toISOString(), dateKey: dk, time: rule.time,
+      status: 'pending', createdAt: new Date().toISOString(),
+      recurringId: rule.id
+    };
+    APPOINTMENTS.push(appt); saveAppts(); fbSaveAppt(appt);
+    created++;
+  }
+  return { created, skipped };
+}
+
+async function addRecurringClient(){
+  const name = document.getElementById('recClientName').value.trim();
+  const phone = document.getElementById('recClientPhone').value.trim();
+  const weekday = parseInt(document.getElementById('recWeekday').value);
+  const time = document.getElementById('recTime').value;
+  const serviceId = parseInt(document.getElementById('recService').value);
+  const svc = SERVICES.find(s => s.id === serviceId);
+  const errBox = document.getElementById('recError');
+  const errText = document.getElementById('recErrorText');
+  function fail(msg){ errText.textContent = msg; errBox.classList.add('show'); setTimeout(()=>errBox.classList.remove('show'),4500); }
+
+  if (!name){ fail('Informe o nome do cliente.'); return; }
+  if (!time || !svc){ fail('Selecione horário e serviço.'); return; }
+  if (!loggedBarber) return;
+
+  const rule = {
+    id: Date.now(), barberId: loggedBarber.id, barberName: loggedBarber.name,
+    clientName: name, phone, weekday, time,
+    serviceId: svc.id, service: svc.name, price: svc.price,
+    active: true, createdAt: new Date().toISOString()
+  };
+
+  RECURRING.push(rule); saveRecurringLocal(); await fbSaveRecurring(rule);
+
+  const btn = document.querySelector('#barb-recurring .btn-next');
+  if (btn){ btn.disabled = true; btn.textContent = 'Gerando agendamentos...'; }
+  const { created, skipped } = await generateRecurringOccurrences(rule);
+  if (btn){ btn.disabled = false; btn.innerHTML = '<i class="fas fa-plus"></i> Adicionar Cliente Fixo'; }
+
+  document.getElementById('recClientName').value = '';
+  document.getElementById('recClientPhone').value = '';
+  renderRecurringList();
+  renderAllAppointments();
+
+  showToast(skipped
+    ? `${name} adicionado como fixo · ${created} horários criados, ${skipped} já ocupados`
+    : `${name} adicionado como fixo · ${created} horários criados`);
+}
+
+async function ensureRecurringOccurrences(barberId){
+  const mine = RECURRING.filter(r => r.barberId === barberId && r.active !== false);
+  for (const rule of mine){
+    await generateRecurringOccurrences(rule);
+  }
+  if (document.getElementById('barb-recurring')?.classList.contains('active')) renderRecurringList();
+  renderAllAppointments();
+}
+
+const WEEKDAY_NAMES_PT = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+
+function renderRecurringList(){
+  const container = document.getElementById('recurringList');
+  if (!container || !loggedBarber) return;
+  const mine = RECURRING.filter(r => r.barberId === loggedBarber.id);
+  if (!mine.length){
+    container.innerHTML = '<div class="empty-state"><i class="fas fa-redo"></i><p>Nenhum cliente fixo cadastrado</p></div>';
+    return;
+  }
+  container.innerHTML = `<div style="display:flex;flex-direction:column;gap:10px">${mine.map(r => `
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:12px 14px">
+      <div>
+        <div style="font-weight:700;font-size:0.85rem">${r.clientName}</div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:2px">${WEEKDAY_NAMES_PT[r.weekday]} · ${r.time} · ${r.service}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="color:var(--gold);font-weight:700;font-size:0.82rem;font-family:'Playfair Display',serif">${fmtMoney(r.price)}</span>
+        <button class="table-btn danger" onclick="deleteRecurringClient(${r.id})" title="Remover"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+async function deleteRecurringClient(id){
+  const rule = RECURRING.find(r => r.id === id);
+  if (!rule) return;
+  if (!confirm(`Remover ${rule.clientName} dos clientes fixos?\nOs agendamentos futuros já criados também serão cancelados.`)) return;
+
+  RECURRING = RECURRING.filter(r => r.id !== id);
+  saveRecurringLocal(); await fbDeleteRecurring(id);
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const futureLinked = APPOINTMENTS.filter(a => a.recurringId === id && a.status==='pending' && new Date(a.date) >= today);
+  for (const appt of futureLinked){
+    APPOINTMENTS = APPOINTMENTS.filter(x => x.id !== appt.id);
+    fbDeleteAppt(appt.id);
+    fbReleaseSlot(appt.barberId, appt.dateKey, appt.time);
+  }
+  saveAppts();
+  renderRecurringList();
+  renderAllAppointments();
+  showToast('Cliente fixo removido');
+}
+
+/* ─── VISÃO GERAL DE AGENDAMENTOS NO ADMINISTRATIVO (somente leitura/gestão, sem agenda própria) ─── */
+
+function renderAdminApptsOverview(){
+  const sel = document.getElementById('ovBarber');
+  if (sel && sel.options.length <= 1){
+    sel.innerHTML = '<option value="">Todos</option>' + BARBERS.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+  }
+  const search = (document.getElementById('ovSearch')?.value || '').trim().toLowerCase();
+  const barberF = document.getElementById('ovBarber')?.value || '';
+  const statusF = document.getElementById('ovStatus')?.value || '';
+
+  let list = [...APPOINTMENTS];
+  if (search) list = list.filter(a => a.name.toLowerCase().includes(search));
+  if (barberF) list = list.filter(a => a.barberId === parseInt(barberF));
+  if (statusF) list = list.filter(a => a.status === statusF);
+  list.sort((a,b) => new Date(b.date) - new Date(a.date) || (b.time||'').localeCompare(a.time||''));
+
+  const container = document.getElementById('adminApptsOverviewTable');
+  if (!container) return;
+  container.innerHTML = list.length ? buildApptTableWithBarber(list) : '<div class="empty-state"><i class="fas fa-calendar"></i><p>Nenhum agendamento encontrado</p></div>';
+}
+
+function clearOverviewFilters(){
+  const s = document.getElementById('ovSearch'); if (s) s.value = '';
+  const b = document.getElementById('ovBarber'); if (b) b.value = '';
+  const st = document.getElementById('ovStatus'); if (st) st.value = '';
+  renderAdminApptsOverview();
+}
+
+function buildApptTableWithBarber(appts){
+  return `<div style="overflow-x:auto"><table class="premium-table"><thead><tr><th>Cliente</th><th>Barbeiro</th><th>Serviço</th><th>Data</th><th>Horário</th><th>Valor</th><th>Status</th><th>Ações</th></tr></thead><tbody>${appts.map(a => {
+    const isSub = isSubscriber(a.name);
+    return `
+    <tr class="${isSub?'appt-premium-row':''}">
+      <td>
+        <div style="font-weight:600">${a.name}${isSub?'<i class="fas fa-gem" style="color:var(--purple);font-size:0.65rem;margin-left:5px"></i>':''}</div>
+        ${a.phone?`<div style="font-size:0.68rem;color:var(--muted);margin-top:2px">${a.phone}</div>`:''}
+      </td>
+      <td>${a.barber}</td>
+      <td>${a.service}</td>
+      <td>${formatDate(new Date(a.date))}</td>
+      <td>${a.time}</td>
+      <td style="color:var(--gold);font-family:'Playfair Display',serif;font-weight:700">${fmtMoney(a.price)}</td>
+      <td><span class="badge-tag ${a.status==='pending'?'badge-pending':a.status==='done'?'badge-done':'badge-cancelled'}">${a.status==='pending'?'Pendente':a.status==='done'?'Concluído':'Cancelado'}</span></td>
+      <td>${a.status==='pending'?`<button class="table-btn" onclick="finishAppointment(${a.id})" title="Finalizar"><i class="fas fa-check"></i></button>`:''}<button class="table-btn danger" onclick="deleteAppt(${a.id})"><i class="fas fa-trash"></i></button></td>
+    </tr>`;
+  }).join('')}</tbody></table></div>`;
+}
+
+document.getElementById('barberLoginOverlay').addEventListener('click', e => { if (e.target === document.getElementById('barberLoginOverlay')) closeBarberLogin(); });
 
 /* SELETOR DE BARBEIRO DENTRO DO PAINEL */
 function initBarberSwitcher(){
@@ -1964,11 +2482,10 @@ function switchBarber(id){
   updateContext();
   closeMobDrawer();
   // Re-renderiza a seção ativa
-  const activeSec = document.querySelector('.admin-section.active');
+  const activeSec = document.querySelector('#adminPanel .admin-section.active');
   if (activeSec){
     const sec = activeSec.id.replace('adm-','');
     if (sec==='dashboard') renderAdminDashboard();
-    else if (sec==='appointments') renderAllAppointments();
     else if (sec==='clients') renderClientsTable();
     else if (sec==='finance') renderFinance();
   }
@@ -1978,19 +2495,19 @@ function switchBarber(id){
 const sectionTitles = {dashboard:'Dashboard', appointments:'Agendamentos', clients:'Clientes', finance:'Financeiro', subscribers:'Assinantes', prices:'Preços'};
 
 function switchAdminSection(sec, btn, fromBottomNav){
-  document.querySelectorAll('.admin-section').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('#adminPanel .admin-section').forEach(el => el.classList.remove('active'));
   document.getElementById('adm-'+sec).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#adminSidebar .nav-item').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   document.getElementById('adminPageTitle').textContent = sectionTitles[sec] || sec;
   /* sync bottom nav */
-  document.querySelectorAll('.admin-bottom-nav-item').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#adminBottomNav .admin-bottom-nav-item').forEach(b => b.classList.remove('active'));
   const bnavBtn = document.getElementById('bnav-'+sec);
   if (bnavBtn) bnavBtn.classList.add('active');
   /* fechar drawer no mobile ao navegar */
   if (fromBottomNav) closeMobDrawer();
   if (sec==='dashboard') renderAdminDashboard();
-  else if (sec==='appointments') renderAllAppointments();
+  else if (sec==='appointments') renderAdminApptsOverview();
   else if (sec==='clients') renderClientsTable();
   else if (sec==='finance') renderFinance();
   else if (sec==='subscribers') renderSubscribersTab();
@@ -2050,9 +2567,6 @@ function renderAdminDashboard(){
       <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:0.76rem">${nm}</span><span style="font-size:0.68rem;color:var(--gold)">${cnt}x</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:${(cnt/maxC)*100}%"></div></div>
     </div>`).join('') : '<div class="empty-state"><i class="fas fa-chart-bar"></i><p>Sem dados</p></div>';
-  
-  const recent = [...myA].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5);
-  document.getElementById('recentApptsTable').innerHTML = recent.length ? buildApptTable(recent, true) : '<div class="empty-state"><i class="fas fa-calendar"></i><p>Nenhum agendamento</p></div>';
 }
 
 function renderAllAppointments(){
@@ -2141,6 +2655,7 @@ function renderAllAppointments(){
               ${pm?`<span class="payment-method-badge ${payInfo.method}"><i class="fas ${pm.icon}"></i> ${pm.label}</span>`:''}
               ${a.status==='done'?'<span class="badge-tag badge-done" style="font-size:0.56rem;padding:2px 7px">Concluído</span>':''}
               ${a.status==='cancelled'?'<span class="badge-tag badge-cancelled" style="font-size:0.56rem;padding:2px 7px">Cancelado</span>':''}
+              ${a.recurringId?'<span class="badge-tag" style="font-size:0.56rem;padding:2px 7px;background:rgba(201,169,110,0.15);color:var(--gold);border:1px solid rgba(201,169,110,0.3)"><i class="fas fa-redo" style="font-size:0.5rem;margin-right:3px"></i>Fixo</span>':''}
             </div>
           </div>
           <div class="agenda-appt-right">
@@ -2216,8 +2731,10 @@ function setApptFilter(f){
 
 function deleteApptAndRefresh(id){
   if (!confirm('Excluir agendamento?')) return;
+  const appt = APPOINTMENTS.find(x => x.id===id);
   APPOINTMENTS = APPOINTMENTS.filter(x=>x.id!==id);
   saveAppts(); fbDeleteAppt(id);
+  if (appt && typeof fbReleaseSlot === 'function') fbReleaseSlot(appt.barberId, appt.dateKey, appt.time);
   renderAllAppointments();
 }
 
@@ -2255,9 +2772,13 @@ function finishAppointment(id){
 
 function deleteAppt(id){
   if (!confirm('Excluir agendamento?')) return;
+  const appt = APPOINTMENTS.find(x => x.id===id);
   APPOINTMENTS = APPOINTMENTS.filter(x => x.id!==id);
   saveAppts(); fbDeleteAppt(id);
-  renderAllAppointments();
+  if (appt && typeof fbReleaseSlot === 'function') fbReleaseSlot(appt.barberId, appt.dateKey, appt.time);
+  if (document.getElementById('barberPanel')?.classList.contains('open')) renderAllAppointments();
+  if (document.getElementById('adm-appointments')?.classList.contains('active')) renderAdminApptsOverview();
+  if (document.getElementById('adm-dashboard')?.classList.contains('active')) renderAdminDashboard();
 }
 
 function renderClientsTable(){
@@ -2526,6 +3047,7 @@ function renderSubscribersTab(){
             <span class="sub-history-date">${dateStr}</span>
             <span class="sub-history-svc">${h.service}</span>
             <span class="sub-history-barber">${h.barber}</span>
+            <button class="table-btn danger" style="padding:3px 7px;margin-left:6px" onclick="removeSubHistoryEntry(${h.id},'${h._source}')" title="Remover este corte"><i class="fas fa-trash" style="font-size:0.65rem"></i></button>
           </div>`;
         }).join('');
 

@@ -85,6 +85,73 @@ async function fbCheckSlotAvailable(barberId, dateKey, time) {
   }
 }
 
+/* ─── RESERVA ATÔMICA DE HORÁRIO (trava real no banco) ──────────
+   Usa uma transaction do Realtime Database sobre um nó dedicado
+   (slotLocks). A transaction só "vence a corrida" para UM dos
+   dois clientes que tentarem o mesmo horário ao mesmo tempo —
+   isso é garantido pelo próprio Firebase (Compare-And-Swap),
+   não depende de checagem prévia (que sozinha teria brecha). */
+
+function slotLockRef(barberId, dateKey, time) {
+  return db.ref('slotLocks/' + barberId + '/' + dateKey + '/' + time);
+}
+
+async function fbReserveSlot(barberId, dateKey, time, apptId) {
+  if (!db) return { ok: true }; /* sem Firebase, confia no fluxo local */
+  try {
+    const result = await slotLockRef(barberId, dateKey, time).transaction(current => {
+      if (current) return; /* já ocupado -> aborta a transaction (undefined) */
+      return apptId;
+    });
+    if (!result.committed) {
+      return { ok: false, reason: 'Este horário já foi reservado. Escolha outro horário.' };
+    }
+    return { ok: true };
+  } catch (err) {
+    console.warn('[Firebase] Erro ao reservar horário:', err.message);
+    return { ok: true }; /* falha de rede: não bloqueia o cliente, o fbSaveAppt ainda roda */
+  }
+}
+
+function fbReleaseSlot(barberId, dateKey, time) {
+  if (!db) return;
+  slotLockRef(barberId, dateKey, time).remove()
+    .catch(err => console.warn('[Firebase] Erro ao liberar horário:', err.message));
+}
+
+/* ─── CREDENCIAIS DOS BARBEIROS (senha com hash, nunca em texto puro) ── */
+
+function fbSaveBarberCred(barberId, cred) {
+  if (!db || !barberId || !cred) return Promise.resolve();
+  return db.ref('barberCreds/' + barberId).set(cred)
+    .catch(err => console.warn('[Firebase] Erro ao salvar credencial:', err.message));
+}
+
+async function fbLoadAllBarberCreds() {
+  if (!db) return {};
+  try {
+    const snap = await db.ref('barberCreds').once('value');
+    return snap.val() || {};
+  } catch (err) {
+    console.warn('[Firebase] Erro ao carregar credenciais:', err.message);
+    return {};
+  }
+}
+
+/* ─── CLIENTES FIXOS (agendamento recorrente semanal) ───────────── */
+
+function fbSaveRecurring(rule) {
+  if (!db || !rule || !rule.id) return Promise.resolve();
+  return db.ref('recurring/' + rule.id).set(rule)
+    .catch(err => console.warn('[Firebase] Erro ao salvar cliente fixo:', err.message));
+}
+
+function fbDeleteRecurring(id) {
+  if (!db || !id) return Promise.resolve();
+  return db.ref('recurring/' + id).remove()
+    .catch(err => console.warn('[Firebase] Erro ao excluir cliente fixo:', err.message));
+}
+
 /* ─── LISTENERS EM TEMPO REAL ───────────────────────────────────── */
 
 function fbInitListeners() {
@@ -102,13 +169,30 @@ function fbInitListeners() {
     }
     /* Atualiza painel admin se estiver aberto */
     if (typeof currentBarber !== 'undefined' && currentBarber) {
-      if (typeof renderAdminDashboard === 'function') renderAdminDashboard();
+      const activeSec = document.querySelector('#adminPanel .admin-section.active');
+      if (activeSec && activeSec.id === 'adm-dashboard' && typeof renderAdminDashboard === 'function') renderAdminDashboard();
+      if (activeSec && activeSec.id === 'adm-appointments' && typeof renderAdminApptsOverview === 'function') renderAdminApptsOverview();
+    }
+    /* Atualiza a agenda privada do barbeiro, se estiver logado */
+    if (document.getElementById('barberPanel')?.classList.contains('open') && typeof renderAllAppointments === 'function') {
+      renderAllAppointments();
     }
     /* Re-renderiza horários se usuário estiver no passo 4 do agendamento */
     if (typeof bk !== 'undefined' && bk && bk.barber && bk.date && bk.step === 4) {
       if (typeof renderTimeSlots === 'function') renderTimeSlots();
     }
   }, err => console.warn('[Firebase] Listener agendamentos:', err.message));
+
+  /* Clientes fixos (recorrentes) */
+  db.ref('recurring').on('value', snap => {
+    const val = snap.val();
+    if (typeof RECURRING !== 'undefined') {
+      RECURRING = val ? Object.values(val) : [];
+    }
+    if (document.getElementById('barberPanel')?.classList.contains('open') && typeof renderRecurringList === 'function') {
+      renderRecurringList();
+    }
+  }, err => console.warn('[Firebase] Listener clientes fixos:', err.message));
 
   /* Pagamentos */
   db.ref('payments').on('value', snap => {

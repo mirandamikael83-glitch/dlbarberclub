@@ -97,7 +97,7 @@ function slotLockRef(barberId, dateKey, time) {
 }
 
 async function fbReserveSlot(barberId, dateKey, time, apptId) {
-  if (!db) return { ok: true }; /* sem Firebase, confia no fluxo local */
+  if (!db) return { ok: true, synced: false }; /* sem Firebase, confia no fluxo local (não sincroniza com outros dispositivos) */
   try {
     const result = await slotLockRef(barberId, dateKey, time).transaction(current => {
       if (current) return; /* já ocupado -> aborta a transaction (undefined) */
@@ -106,10 +106,10 @@ async function fbReserveSlot(barberId, dateKey, time, apptId) {
     if (!result.committed) {
       return { ok: false, reason: 'Este horário já foi reservado. Escolha outro horário.' };
     }
-    return { ok: true };
+    return { ok: true, synced: true };
   } catch (err) {
     console.warn('[Firebase] Erro ao reservar horário:', err.message);
-    return { ok: true }; /* falha de rede: não bloqueia o cliente, o fbSaveAppt ainda roda */
+    return { ok: true, synced: false }; /* falha de rede: não bloqueia o cliente, mas não há garantia de sincronização */
   }
 }
 

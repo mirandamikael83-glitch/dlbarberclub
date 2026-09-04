@@ -152,6 +152,47 @@ function fbDeleteRecurring(id) {
     .catch(err => console.warn('[Firebase] Erro ao excluir cliente fixo:', err.message));
 }
 
+/* ─── CHECAGEM DE CONEXÃO REAL (usa o path especial .info/connected) ── */
+
+function fbWaitForConnection(timeoutMs = 4000) {
+  return new Promise(resolve => {
+    if (!db) { resolve(false); return; }
+    let done = false;
+    const ref = db.ref('.info/connected');
+    const timer = setTimeout(() => {
+      if (done) return;
+      done = true;
+      ref.off('value', handler);
+      resolve(false);
+    }, timeoutMs);
+    const handler = snap => {
+      if (snap.val() === true && !done) {
+        done = true;
+        clearTimeout(timer);
+        ref.off('value', handler);
+        resolve(true);
+      }
+    };
+    ref.on('value', handler);
+  });
+}
+
+/* ─── FORÇA UMA RELEITURA IMEDIATA (usada pelo auto-refresh de 15s e ao
+   voltar de segundo plano no celular, sem depender só do listener .on) ── */
+
+async function fbForceRefreshAppointments() {
+  if (!db) return false;
+  try {
+    const snap = await db.ref('appointments').once('value');
+    const val = snap.val();
+    if (typeof APPOINTMENTS !== 'undefined') APPOINTMENTS = val ? Object.values(val) : [];
+    return true;
+  } catch (err) {
+    console.warn('[Firebase] Erro no refresh forçado:', err.message);
+    return false;
+  }
+}
+
 /* ─── LISTENERS EM TEMPO REAL ───────────────────────────────────── */
 
 function fbInitListeners() {

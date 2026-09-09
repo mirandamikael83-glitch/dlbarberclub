@@ -1041,6 +1041,28 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
   </div>
 </div>
 
+<!-- ============== EDITAR HORÁRIO (cliente atrasado) ============== -->
+<div class="modal-overlay" id="editTimeModal" style="z-index:9200">
+  <div class="modal-window" style="max-width:380px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fas fa-clock" style="color:var(--gold);margin-right:8px;font-size:1rem"></i>Alterar <em>Horário</em></div>
+      <button class="modal-close" onclick="closeEditTimeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="editTimeClientInfo" style="background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:14px;margin-bottom:16px"></div>
+      <div class="form-group">
+        <label class="form-label">Novo horário</label>
+        <select class="form-input" id="editTimeSelect"></select>
+      </div>
+      <div class="login-error" id="editTimeError" style="position:static;margin:0 0 8px"><i class="fas fa-exclamation-circle"></i> <span id="editTimeErrorText">Erro</span></div>
+      <div class="panel-nav">
+        <button class="btn-back" onclick="closeEditTimeModal()">Cancelar</button>
+        <button class="btn-next" onclick="confirmEditTime()"><i class="fas fa-check"></i> Salvar Novo Horário</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ============== PAYMENT MODAL ============== -->
 <div class="payment-modal-overlay" id="paymentModal">
   <div class="payment-modal-window">
@@ -2779,6 +2801,7 @@ function renderAllAppointments(){
             <div class="agenda-appt-price">${fmtMoney(a.price)}</div>
             <div class="agenda-appt-btns">
               ${a.status==='pending'?`<button class="agenda-btn-finish" onclick="finishAppointment(${a.id})"><i class="fas fa-check"></i> Finalizar</button>`:''}
+              ${a.status==='pending'?`<button class="agenda-btn-del" onclick="openEditTimeModal(${a.id})" title="Alterar horário (cliente atrasado)"><i class="fas fa-clock"></i></button>`:''}
               <button class="agenda-btn-del" onclick="deleteApptAndRefresh(${a.id})" title="Excluir"><i class="fas fa-trash"></i></button>
             </div>
           </div>
@@ -2856,6 +2879,78 @@ function deleteApptAndRefresh(id){
   if (appt && typeof fbReleaseSlot === 'function') fbReleaseSlot(appt.barberId, appt.dateKey, appt.time);
   renderAllAppointments();
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   ALTERAR HORÁRIO — cliente chegou atrasado, o barbeiro empurra
+   o mesmo agendamento pra outro horário livre do mesmo dia.
+   ═══════════════════════════════════════════════════════════════ */
+
+let editTimeApptId = null;
+
+function buildTimeOptionsForDate(d){
+  const cfg = d.getDay()===6 ? CONFIG.saturday : CONFIG.weekday;
+  const opts = [];
+  for (let h = cfg.open; h < cfg.close; h++){
+    for (const min of [0,30]){
+      if (h === cfg.close-1 && min===30) continue;
+      if (h >= cfg.lunchStart && h < cfg.lunchEnd) continue;
+      opts.push(`${String(h).padStart(2,'0')}:${String(min).padStart(2,'0')}`);
+    }
+  }
+  return opts;
+}
+
+function openEditTimeModal(id){
+  const appt = APPOINTMENTS.find(a => a.id===id);
+  if (!appt) return;
+  editTimeApptId = id;
+  document.getElementById('editTimeClientInfo').innerHTML = `
+    <div style="font-weight:700">${appt.name}</div>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">${appt.service} · horário atual: <strong style="color:var(--gold)">${appt.time}</strong></div>`;
+  const apptDate = new Date(appt.date);
+  const opts = buildTimeOptionsForDate(apptDate);
+  const sel = document.getElementById('editTimeSelect');
+  sel.innerHTML = opts.map(t => `<option value="${t}" ${t===appt.time?'selected':''}>${t}${t===appt.time?' (atual)':''}</option>`).join('');
+  document.getElementById('editTimeError').classList.remove('show');
+  document.getElementById('editTimeModal').classList.add('open');
+}
+
+function closeEditTimeModal(){
+  document.getElementById('editTimeModal').classList.remove('open');
+  editTimeApptId = null;
+}
+
+async function confirmEditTime(){
+  const appt = APPOINTMENTS.find(a => a.id===editTimeApptId);
+  if (!appt) return;
+  const newTime = document.getElementById('editTimeSelect').value;
+  const errBox = document.getElementById('editTimeError');
+  const errText = document.getElementById('editTimeErrorText');
+  function fail(msg){ errText.textContent = msg; errBox.classList.add('show'); }
+
+  if (newTime === appt.time){ closeEditTimeModal(); return; }
+
+  const btn = document.querySelector('#editTimeModal .btn-next');
+  if (btn){ btn.disabled = true; btn.textContent = 'Verificando...'; }
+
+  const reservation = await fbReserveSlot(appt.barberId, appt.dateKey, newTime, appt.id);
+  if (btn){ btn.disabled = false; btn.innerHTML = '<i class="fas fa-check"></i> Salvar Novo Horário'; }
+  if (!reservation.ok){
+    fail(reservation.reason || 'Esse horário já está ocupado. Escolha outro.');
+    return;
+  }
+
+  const oldTime = appt.time;
+  fbReleaseSlot(appt.barberId, appt.dateKey, oldTime);
+  appt.time = newTime;
+  saveAppts(); fbSaveAppt(appt);
+
+  closeEditTimeModal();
+  renderAllAppointments();
+  showToast(`Horário de ${appt.name} alterado para ${newTime}`);
+}
+
+document.getElementById('editTimeModal').addEventListener('click', e => { if (e.target === document.getElementById('editTimeModal')) closeEditTimeModal(); });
 
 function buildApptTable(appts, showActions){
   return `<div style="overflow-x:auto"><table class="premium-table"><thead><tr><th>Cliente</th><th>Serviço</th><th>Data</th><th>Horário</th><th>Valor</th><th>Status</th>${showActions?'<th>Ações</th>':''}</tr></thead><tbody>${appts.map(a => {

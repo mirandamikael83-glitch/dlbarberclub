@@ -1393,6 +1393,7 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
       <div class="nav-group">
         <span class="nav-group-label">Minha Área</span>
         <button class="nav-item active" onclick="switchBarberSection('agenda',this);closeBarberMobDrawer()"><i class="fas fa-calendar-check"></i> Minha Agenda</button>
+        <button class="nav-item" onclick="switchBarberSection('newappt',this);closeBarberMobDrawer()"><i class="fas fa-plus-circle"></i> Novo Agendamento</button>
         <button class="nav-item" onclick="switchBarberSection('recurring',this);closeBarberMobDrawer()"><i class="fas fa-redo"></i> Clientes Fixos</button>
         <button class="nav-item" onclick="switchBarberSection('subscribers',this);closeBarberMobDrawer()"><i class="fas fa-gem"></i> Assinantes</button>
         <button class="nav-item" onclick="switchBarberSection('settings',this);closeBarberMobDrawer()"><i class="fas fa-cog"></i> Configurações</button>
@@ -1415,6 +1416,7 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
     </div>
     <nav class="admin-bottom-nav" id="barberBottomNav">
       <button class="admin-bottom-nav-item active" id="bbnav-agenda" onclick="switchBarberSection('agenda',null,true)"><i class="fas fa-calendar-check"></i>Agenda</button>
+      <button class="admin-bottom-nav-item" id="bbnav-newappt" onclick="switchBarberSection('newappt',null,true)"><i class="fas fa-plus-circle"></i>Novo</button>
       <button class="admin-bottom-nav-item" id="bbnav-recurring" onclick="switchBarberSection('recurring',null,true)"><i class="fas fa-redo"></i>Fixos</button>
       <button class="admin-bottom-nav-item" id="bbnav-subscribers" onclick="switchBarberSection('subscribers',null,true)"><i class="fas fa-gem"></i>Assinantes</button>
       <button class="admin-bottom-nav-item" id="bbnav-settings" onclick="switchBarberSection('settings',null,true)"><i class="fas fa-cog"></i>Config</button>
@@ -1423,6 +1425,20 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 
       <div class="admin-section active" id="barb-agenda">
         <div id="allApptsTable"></div>
+      </div>
+
+      <div class="admin-section" id="barb-newappt">
+        <div class="admin-card" style="max-width:520px">
+          <div class="admin-card-header"><h3><i class="fas fa-plus-circle" style="margin-right:8px;color:var(--gold)"></i>Novo Agendamento</h3></div>
+          <p style="font-size:0.78rem;color:var(--muted);margin:-6px 0 16px">Use para registrar um cliente que agendou por fora do site (telefone, WhatsApp, presencial).</p>
+          <div class="form-group"><label class="form-label">Nome do cliente</label><input class="form-input" id="newApptName" type="text" placeholder="Nome do cliente"></div>
+          <div class="form-group"><label class="form-label">Telefone (opcional)</label><input class="form-input" id="newApptPhone" type="text" placeholder="(00) 00000-0000"></div>
+          <div class="form-group"><label class="form-label">Data</label><input class="form-input" id="newApptDate" type="date" onchange="populateNewApptTimeOptions()"></div>
+          <div class="form-group"><label class="form-label">Horário</label><select class="form-input" id="newApptTime"></select></div>
+          <div class="form-group"><label class="form-label">Serviço</label><select class="form-input" id="newApptService"></select></div>
+          <div class="login-error" id="newApptError" style="position:static;margin:8px 0 0"><i class="fas fa-exclamation-circle"></i> <span id="newApptErrorText">Erro</span></div>
+          <button class="btn-next" style="width:100%;margin-top:14px" onclick="submitNewAppointment()"><i class="fas fa-check"></i> Criar Agendamento</button>
+        </div>
       </div>
 
       <div class="admin-section" id="barb-recurring">
@@ -2241,7 +2257,7 @@ function closeBarberPanel(){
   stopAutoSyncIfNoPanelsOpen();
 }
 
-const barberSectionTitles = {agenda:'Minha Agenda', recurring:'Clientes Fixos', subscribers:'Assinantes', settings:'Configurações'};
+const barberSectionTitles = {agenda:'Minha Agenda', newappt:'Novo Agendamento', recurring:'Clientes Fixos', subscribers:'Assinantes', settings:'Configurações'};
 
 function switchBarberSection(sec, btn, fromBottomNav){
   document.querySelectorAll('#barberPanel .admin-section').forEach(el => el.classList.remove('active'));
@@ -2254,6 +2270,7 @@ function switchBarberSection(sec, btn, fromBottomNav){
   if (bnavBtn) bnavBtn.classList.add('active');
   if (fromBottomNav) closeBarberMobDrawer();
   if (sec==='agenda') renderAllAppointments();
+  if (sec==='newappt') openNewApptForm();
   if (sec==='recurring'){ populateRecServiceOptions(); populateRecTimeOptions(); renderRecurringList(); }
   if (sec==='subscribers') renderSubscribersTab('barber');
 }
@@ -2305,6 +2322,91 @@ async function changeBarberPassword(){
    ═══════════════════════════════════════════════════════════════ */
 
 const RECURRING_WEEKS_AHEAD = 8; /* quantas semanas à frente manter geradas */
+
+/* ═══════════════════════════════════════════════════════════════
+   NOVO AGENDAMENTO — o barbeiro registra manualmente um cliente
+   que marcou por fora do site (telefone, WhatsApp, presencial).
+   Usa a mesma trava de conflito da agenda pública.
+   ═══════════════════════════════════════════════════════════════ */
+
+function todayDateInputValue(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function openNewApptForm(){
+  document.getElementById('newApptName').value = '';
+  document.getElementById('newApptPhone').value = '';
+  const dateInput = document.getElementById('newApptDate');
+  dateInput.value = todayDateInputValue();
+  dateInput.min = todayDateInputValue();
+  document.getElementById('newApptError').classList.remove('show');
+  populateNewApptServiceOptions();
+  populateNewApptTimeOptions();
+}
+
+function populateNewApptServiceOptions(){
+  const sel = document.getElementById('newApptService');
+  if (!sel) return;
+  sel.innerHTML = SERVICES.map(s => `<option value="${s.id}">${s.name} · ${fmtMoney(s.price)}</option>`).join('');
+}
+
+function populateNewApptTimeOptions(){
+  const dateInput = document.getElementById('newApptDate');
+  const timeSel = document.getElementById('newApptTime');
+  if (!dateInput.value || !timeSel) return;
+  const [y,m,d] = dateInput.value.split('-').map(Number);
+  const opts = buildTimeOptionsForDate(new Date(y, m-1, d));
+  timeSel.innerHTML = opts.map(t => `<option value="${t}">${t}</option>`).join('');
+}
+
+async function submitNewAppointment(){
+  if (!loggedBarber) return;
+  const name = document.getElementById('newApptName').value.trim();
+  const phone = document.getElementById('newApptPhone').value.trim();
+  const dateStr = document.getElementById('newApptDate').value;
+  const time = document.getElementById('newApptTime').value;
+  const serviceId = parseInt(document.getElementById('newApptService').value);
+  const svc = SERVICES.find(s => s.id === serviceId);
+  const errBox = document.getElementById('newApptError');
+  const errText = document.getElementById('newApptErrorText');
+  function fail(msg){ errText.textContent = msg; errBox.classList.add('show'); setTimeout(()=>errBox.classList.remove('show'),4500); }
+
+  if (!name){ fail('Informe o nome do cliente.'); return; }
+  if (!dateStr || !time || !svc){ fail('Selecione data, horário e serviço.'); return; }
+
+  const [y,m,d] = dateStr.split('-').map(Number);
+  const apptDate = new Date(y, m-1, d);
+  const dateKey = `${y}-${m-1}-${d}`;
+  const apptId = Date.now();
+
+  const btn = document.querySelector('#barb-newappt .btn-next');
+  if (btn){ btn.disabled = true; btn.textContent = 'Verificando...'; }
+  const reservation = await fbReserveSlot(loggedBarber.id, dateKey, time, apptId);
+  if (btn){ btn.disabled = false; btn.innerHTML = '<i class="fas fa-check"></i> Criar Agendamento'; }
+
+  if (!reservation.ok){
+    fail(reservation.reason || 'Esse horário já está ocupado. Escolha outro.');
+    return;
+  }
+
+  const appt = {
+    id: apptId, name, phone,
+    serviceId: svc.id, service: svc.name, price: svc.price,
+    barberId: loggedBarber.id, barber: loggedBarber.name,
+    date: apptDate.toISOString(), dateKey, time,
+    status: 'pending', createdAt: new Date().toISOString()
+  };
+  APPOINTMENTS.push(appt); saveAppts(); fbSaveAppt(appt);
+
+  showToast(`Agendamento criado: ${name} · ${time}`);
+  openNewApptForm(); /* limpa o formulário pra registrar outro rapidinho */
+
+  /* Leva o barbeiro pra ver o agendamento recém-criado na agenda daquele dia */
+  selectedApptDate = apptDate; selectedApptDate.setHours(0,0,0,0);
+  showingFullHistory = false; apptFilter = 'all';
+  switchBarberSection('agenda', document.querySelector('#barberSidebar .nav-item'));
+}
 
 function populateRecServiceOptions(){
   const sel = document.getElementById('recService');

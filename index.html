@@ -1114,25 +1114,24 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
         <div class="panel-title">Escolha o <em>Serviço</em></div>
         <p class="panel-subtitle">Selecione o serviço desejado</p>
         <div class="pick-list" id="svcPickList"></div>
-        <div class="panel-nav"><button class="btn-next" id="nextBtn1" onclick="goStep(2)" disabled>Próximo →</button></div>
       </div>
       <div class="booking-panel" id="panel2">
         <div class="panel-title">Escolha o <em>Barbeiro</em></div>
         <p class="panel-subtitle">Quem vai te atender?</p>
         <div class="pick-list" id="barberPickList"></div>
-        <div class="panel-nav"><button class="btn-back" onclick="goStep(1)">← Voltar</button><button class="btn-next" id="nextBtn2" onclick="goStep(3)" disabled>Próximo →</button></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(1)">← Voltar</button></div>
       </div>
       <div class="booking-panel" id="panel3">
         <div class="panel-title">Escolha a <em>Data</em></div>
         <p class="panel-subtitle">Apenas dias disponíveis</p>
         <div class="calendar-widget"><div class="cal-header"><button class="cal-nav-btn" disabled><i class="fas fa-chevron-left"></i></button><span class="cal-month-label" id="calMonthLabel"></span><button class="cal-nav-btn" disabled><i class="fas fa-chevron-right"></i></button></div><div class="cal-body"><div class="cal-weekdays" id="calWeekdays"></div><div class="cal-days-grid" id="calDaysGrid"></div></div></div>
-        <div class="panel-nav"><button class="btn-back" onclick="goStep(2)">← Voltar</button><button class="btn-next" id="nextBtn3" onclick="goStep(4)" disabled>Próximo →</button></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(2)">← Voltar</button></div>
       </div>
       <div class="booking-panel" id="panel4">
         <div class="panel-title">Escolha o <em>Horário</em></div>
         <p class="panel-subtitle" id="panel4sub"></p>
         <div class="time-section"><div class="time-section-title">Selecione um horário</div><div class="time-grid" id="timeSlotsGrid"></div></div>
-        <div class="panel-nav"><button class="btn-back" onclick="goStep(3)">← Voltar</button><button class="btn-next" id="nextBtn4" onclick="goStep(5)" disabled>Próximo →</button></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(3)">← Voltar</button></div>
       </div>
       <div class="booking-panel" id="panel5">
         <div class="panel-title">Seus <em>Dados</em></div>
@@ -1813,10 +1812,6 @@ function closeBooking(){
 function resetBooking(){
   bk={step:1,service:null,barber:null,date:null,time:null};
   renderServiceList(); renderBarberList(); buildCalendar(); updateChips();
-  document.getElementById('nextBtn1').disabled = true;
-  document.getElementById('nextBtn2').disabled = true;
-  document.getElementById('nextBtn3').disabled = true;
-  document.getElementById('nextBtn4').disabled = true;
   document.getElementById('clientName').value = '';
   document.getElementById('clientPhone').value = '';
   goStep(1,true);
@@ -1868,7 +1863,7 @@ function renderServiceList(){
       <div class="pick-row-selected-mark">${bk.service && bk.service.id===s.id ? '✓':''}</div>
     </div>`).join('');
 }
-function selectService(id){ bk.service = SERVICES.find(s=>s.id===id); renderServiceList(); document.getElementById('nextBtn1').disabled = false; goStep(2); }
+function selectService(id){ bk.service = SERVICES.find(s=>s.id===id); renderServiceList(); goStep(2); }
 
 function renderBarberList(){
   document.getElementById('barberPickList').innerHTML = BARBERS.map(b => `
@@ -1878,7 +1873,7 @@ function renderBarberList(){
       <div class="pick-row-selected-mark">${bk.barber && bk.barber.id===b.id ? '✓':''}</div>
     </div>`).join('');
 }
-function selectBarber(id, noAdvance){ bk.barber = BARBERS.find(b=>b.id===id); renderBarberList(); document.getElementById('nextBtn2').disabled = false; if (!noAdvance) goStep(3); }
+function selectBarber(id, noAdvance){ bk.barber = BARBERS.find(b=>b.id===id); renderBarberList(); if (!noAdvance) goStep(3); }
 
 function buildCalendar(){
   const now = new Date(), y=now.getFullYear(), m=now.getMonth();
@@ -1903,7 +1898,7 @@ function buildCalendar(){
   }
   grid.innerHTML = html;
 }
-function selectDate(y,m,d){ bk.date = new Date(y,m,d); bk.time = null; buildCalendar(); document.getElementById('nextBtn3').disabled = false; goStep(4); }
+function selectDate(y,m,d){ bk.date = new Date(y,m,d); bk.time = null; buildCalendar(); goStep(4); }
 
 function renderTimeSlots(){
   const grid = document.getElementById('timeSlotsGrid');
@@ -1949,7 +1944,7 @@ function renderTimeSlots(){
     return `<div class="time-cell ${sel?'selected':''}" onclick="selectTime('${s.t}')">${s.t}</div>`;
   }).join('');
 }
-function selectTime(t){ bk.time = t; renderTimeSlots(); document.getElementById('nextBtn4').disabled = false; goStep(5); }
+function selectTime(t){ bk.time = t; renderTimeSlots(); goStep(5); }
 
 function proceedToConfirm(){
   try {

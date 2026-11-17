@@ -1804,7 +1804,7 @@ let _slotsTimer = null;
 
 function openBooking(){ resetBooking(); document.getElementById('bookingModal').classList.add('open'); document.body.style.overflow='hidden'; }
 function openBookingWithService(id){ openBooking(); selectService(id); }
-function openBookingWithBarber(id){ openBooking(); setTimeout(() => { selectBarber(id); }, 100); }
+function openBookingWithBarber(id){ openBooking(); setTimeout(() => { selectBarber(id, true); }, 100); }
 function closeBooking(){
   if (_slotsTimer){ clearInterval(_slotsTimer); _slotsTimer = null; }
   document.getElementById('bookingModal').classList.remove('open');
@@ -1868,7 +1868,7 @@ function renderServiceList(){
       <div class="pick-row-selected-mark">${bk.service && bk.service.id===s.id ? '✓':''}</div>
     </div>`).join('');
 }
-function selectService(id){ bk.service = SERVICES.find(s=>s.id===id); renderServiceList(); document.getElementById('nextBtn1').disabled = false; }
+function selectService(id){ bk.service = SERVICES.find(s=>s.id===id); renderServiceList(); document.getElementById('nextBtn1').disabled = false; goStep(2); }
 
 function renderBarberList(){
   document.getElementById('barberPickList').innerHTML = BARBERS.map(b => `
@@ -1878,7 +1878,7 @@ function renderBarberList(){
       <div class="pick-row-selected-mark">${bk.barber && bk.barber.id===b.id ? '✓':''}</div>
     </div>`).join('');
 }
-function selectBarber(id){ bk.barber = BARBERS.find(b=>b.id===id); renderBarberList(); document.getElementById('nextBtn2').disabled = false; }
+function selectBarber(id, noAdvance){ bk.barber = BARBERS.find(b=>b.id===id); renderBarberList(); document.getElementById('nextBtn2').disabled = false; if (!noAdvance) goStep(3); }
 
 function buildCalendar(){
   const now = new Date(), y=now.getFullYear(), m=now.getMonth();
@@ -1903,7 +1903,7 @@ function buildCalendar(){
   }
   grid.innerHTML = html;
 }
-function selectDate(y,m,d){ bk.date = new Date(y,m,d); bk.time = null; buildCalendar(); document.getElementById('nextBtn3').disabled = false; }
+function selectDate(y,m,d){ bk.date = new Date(y,m,d); bk.time = null; buildCalendar(); document.getElementById('nextBtn3').disabled = false; goStep(4); }
 
 function renderTimeSlots(){
   const grid = document.getElementById('timeSlotsGrid');
@@ -1949,7 +1949,7 @@ function renderTimeSlots(){
     return `<div class="time-cell ${sel?'selected':''}" onclick="selectTime('${s.t}')">${s.t}</div>`;
   }).join('');
 }
-function selectTime(t){ bk.time = t; renderTimeSlots(); document.getElementById('nextBtn4').disabled = false; }
+function selectTime(t){ bk.time = t; renderTimeSlots(); document.getElementById('nextBtn4').disabled = false; goStep(5); }
 
 function proceedToConfirm(){
   try {

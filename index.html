@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -63,7 +63,6 @@ input, select, textarea { font-family:'Inter',sans-serif; }
 
 #loader { position:fixed; inset:0; z-index:99999; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; transition:opacity 0.8s var(--ease), visibility 0.8s; }
 #loader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
-.ldr-logo { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold); letter-spacing:6px; }
 .ldr-sub { font-size:0.6rem; letter-spacing:5px; text-transform:uppercase; color:var(--muted); }
 .ldr-progress { width:160px; height:1px; background:var(--bg5); border-radius:1px; overflow:hidden; }
 .ldr-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-l)); animation:ldrFill 2.2s ease forwards; }
@@ -154,7 +153,6 @@ input, select, textarea { font-family:'Inter',sans-serif; }
 
 footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60px 40px 28px; }
 .footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; margin-bottom:40px; }
-.footer-logo { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--gold); letter-spacing:4px; margin-bottom:10px; }
 .footer-logo span { color:var(--white); font-weight:300; }
 .footer-desc { font-size:0.8rem; color:var(--muted); line-height:1.7; margin-bottom:20px; }
 .footer-social { display:flex; gap:8px; }
@@ -903,18 +901,13 @@ footer { background:#0C0C0E; border-top-color:#292929; }
   .hero-stat:nth-child(2) { border-right:none; }
   .hero-cta-wrap .hero-btn { width:100%; }
 }
-.nav-logo { height:54px; width:auto; display:block; }
-.ldr-logo { font-family:inherit; font-size:0; letter-spacing:0; color:inherit; height:110px; width:auto; }
-.hero-logo { display:block; height:120px; width:auto; margin:0 auto 28px; animation:fadeUp 0.9s 0.3s both; }
-.footer-logo { height:84px; width:auto; display:block; margin-bottom:14px; }
-@media (max-width:600px){ .nav-logo { height:44px; } .hero-logo { height:96px; } }
 @media (max-width:640px){ .modal-steps .step-label{display:none;} .modal-steps .step-item.active .step-label{display:block;font-size:.62rem;} }
 </style>
 </head>
 <body>
 
 <div id="loader">
-  <img class="ldr-logo" src="logo-dl-barber-club.png" alt="DL Barber Club">
+  <div class="ldr-logo">DL BARBER CLUB</div>
   <div class="ldr-sub">Premium Barbershop · Curitiba</div>
   <div class="ldr-progress"><div class="ldr-fill"></div></div>
 </div>
@@ -922,7 +915,7 @@ footer { background:#0C0C0E; border-top-color:#292929; }
 <a class="wa-float" href="https://wa.me/5541997878695" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
 <nav id="navbar">
-  <a class="nav-brand" href="#hero"><img class="nav-logo" src="logo-dl-barber-club.png" alt="DL Barber Club"></a>
+  <a class="nav-brand" href="#hero"><div class="nav-brand-text">DL <span>BARBER</span> CLUB</div></a>
   <ul class="nav-links">
     <li><a href="#services">Serviços</a></li>
     <li><a href="#barbers">Barbeiros</a></li>
@@ -950,7 +943,6 @@ footer { background:#0C0C0E; border-top-color:#292929; }
   <div class="hero-bg"></div>
   <div class="hero-grid-lines"></div>
   <div class="hero-content">
-    <img class="hero-logo" src="logo-dl-barber-club.png" alt="DL Barber Club">
     <div class="hero-badge"><i class="fas fa-crown"></i> Premium Barbershop · Curitiba, Paraná</div>
     <h1 class="hero-title">
       <span class="row1">Mais que um corte.</span>
@@ -1012,7 +1004,7 @@ footer { background:#0C0C0E; border-top-color:#292929; }
 <footer>
   <div class="footer-top">
     <div>
-      <img class="footer-logo" src="logo-dl-barber-club.png" alt="DL Barber Club">
+      <div class="footer-logo">DL <span>BARBER</span> CLUB</div>
       <p class="footer-desc">A barbearia premium em Curitiba. Av. Anita Garibaldi, 5320 — Barreirinha.</p>
       <div class="footer-social">
         <a class="social-link" href="https://instagram.com/DlBarber.Club" target="_blank"><i class="fab fa-instagram"></i></a>

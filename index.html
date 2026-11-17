@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -1120,6 +1120,7 @@ footer { background:#0C0C0E; border-top-color:#292929; }
       <button class="payment-btn" data-method="credito" onclick="selectPaymentMethod('credito', event)"><i class="fas fa-credit-card"></i>Crédito</button>
       <button class="payment-btn" data-method="debito" onclick="selectPaymentMethod('debito', event)"><i class="fas fa-money-check-alt"></i>Débito</button>
       <button class="payment-btn" data-method="dinheiro" onclick="selectPaymentMethod('dinheiro', event)"><i class="fas fa-money-bill-wave"></i>Dinheiro</button>
+      <button class="payment-btn subscription" data-method="subscription" onclick="selectPaymentMethod('subscription', event)"><i class="fas fa-gem"></i>Assinatura</button>
     </div>
     <div class="payment-step-label" data-step="2">Valor</div>
     <div class="payment-value-input-wrap">
@@ -2113,8 +2114,8 @@ function selectPaymentMethod(method, ev){
   if (ev) ev.currentTarget.classList.add('selected');
   const valueInput = document.getElementById('paymentValueInput');
   const appt = APPOINTMENTS.find(a => a.id===selectedPaymentApptId);
-  valueInput.classList.remove('readonly-sub');
-  valueInput.readOnly = false;
+  valueInput.classList.toggle('readonly-sub', method === 'subscription');
+  valueInput.readOnly = method === 'subscription';
   if (appt) valueInput.value = appt.price.toFixed(2);
   updatePaymentConfirmBtn();
 }
@@ -2130,6 +2131,8 @@ function confirmPayment(){
   if (isNaN(value) || value <= 0){ alert('Valor inválido'); return; }
   const appt = APPOINTMENTS.find(a => a.id===selectedPaymentApptId);
   if (!appt) return;
+  /* Pagamento via Assinatura: o cliente entra na lista de Assinantes automaticamente */
+  if (selectedPaymentMethod === 'subscription' && !isSubscriber(appt.name)) addOrUpdateSubscriber(appt.name, '', appt.barberId || null);
   const payment = {
     id: Date.now(), apptId: appt.id, clientName: appt.name,
     barberId: appt.barberId, barber: appt.barber, service: appt.service,

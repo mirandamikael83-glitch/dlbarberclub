@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -879,7 +879,7 @@ footer { background:var(--bg1); border-top:1px solid var(--border2); padding:60p
 .hero-btn { border-radius:10px; }
 .hero-btn.ghost { border-color:#333; }
 .hero-stat { border-right-color:#292929; }
-#navbar.scrolled { background:#101110; }
+#navbar.scrolled { background:rgba(9,9,9,0.96); }
 .svc-card, .barber-card { background:linear-gradient(180deg,#161618 0%,#121214 100%); border:1px solid #292929; border-radius:18px; }
 .svc-card:hover, .barber-card:hover { border-color:rgba(211,183,125,0.45); box-shadow:0 18px 40px rgba(0,0,0,0.5); transform:translateY(-4px); }
 .svc-card::before { display:none; }
@@ -908,175 +908,6 @@ footer { background:#0C0C0E; border-top-color:#292929; }
 .hero-logo { display:block; height:120px; width:auto; margin:0 auto 28px; animation:fadeUp 0.9s 0.3s both; }
 .footer-logo { height:84px; width:auto; display:block; margin-bottom:14px; }
 @media (max-width:600px){ .nav-logo { height:44px; } .hero-logo { height:96px; } }
-/* ===== Remodelação editorial: carvão, marfim e dourado fosco ===== */
-:root { --carvao:#101110; --carvao2:#171815; --marfim:#F2EEE5; --dourado:#B99A60; --cinza:#A29A8E; --linha-escura:#2A2927; }
-body { background:var(--carvao); }
-.eyebrow { font-size:.66rem; letter-spacing:.28em; text-transform:uppercase; color:var(--dourado); display:block; font-weight:600; }
-.sec-title { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,3.4vw,2.8rem); font-weight:600; line-height:1.1; color:var(--marfim); }
-.sec-title em { color:var(--dourado); font-style:italic; }
-.section-dark, .section-dark2, .section-ivory { padding:112px 48px; }
-.section-dark { background:var(--carvao); }
-.section-dark2 { background:var(--carvao2); border-top:1px solid var(--linha-escura); }
-.section-ivory { background:var(--marfim); color:#101110; }
-.sec-head { display:grid; grid-template-columns:auto 1fr auto; gap:28px; align-items:end; max-width:1200px; margin:0 auto 56px; padding-bottom:28px; border-bottom:1px solid var(--linha-escura); }
-.section-ivory .sec-head { border-bottom-color:rgba(16,17,16,.16); }
-.sec-num { font-family:'Playfair Display',serif; font-size:2.6rem; color:var(--dourado); line-height:1; }
-.section-ivory .sec-num { color:#8C7A55; }
-.sec-note { font-size:.9rem; color:var(--cinza); max-width:320px; line-height:1.7; }
-.section-ivory .sec-note { color:#5F5A52; }
-.section-ivory .eyebrow { color:#7D6437; }
-.section-ivory .sec-title { color:#101110; }
-.section-ivory .sec-title em { color:#7D6437; }
-
-/* botões e links */
-.btn-primary { display:inline-flex; align-items:center; gap:10px; padding:16px 28px; background:var(--marfim); color:#101110; border:none; border-radius:3px; font:600 .78rem 'Inter',sans-serif; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:transform .25s var(--ease), background .25s; }
-.btn-primary:hover { background:#fff; transform:translateY(-2px); }
-.link-ghost { color:var(--marfim); text-decoration:none; border-bottom:1px solid var(--dourado); padding-bottom:4px; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; transition:color .2s; }
-.link-ghost:hover { color:var(--dourado); }
-.whats-link { display:inline-flex; align-items:center; gap:10px; color:var(--marfim); text-decoration:none; font-size:.9rem; border:1px solid var(--linha-escura); padding:12px 18px; border-radius:3px; transition:border-color .2s; }
-.whats-link i { color:#25D366; }
-.whats-link:hover { border-color:var(--dourado); }
-
-/* primeira dobra */
-#hero { display:block; min-height:auto; padding:150px 48px 0; background:var(--carvao); }
-.hero-bg, .hero-grid-lines, .scroll-indicator { display:none !important; }
-.hero2-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.08fr .92fr; gap:72px; align-items:center; }
-.hero2-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,4.8vw,4.3rem); font-weight:600; line-height:1.05; color:var(--marfim); margin:20px 0 24px; }
-.hero2-title em { color:var(--dourado); font-style:italic; }
-.hero2-sub { color:var(--cinza); font-size:1.02rem; max-width:470px; line-height:1.75; }
-.hero2-actions { display:flex; gap:28px; align-items:center; flex-wrap:wrap; margin-top:36px; }
-.hero2-facts { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:52px; padding-top:28px; border-top:1px solid var(--linha-escura); }
-.hero2-facts dt { font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:var(--dourado); margin-bottom:8px; }
-.hero2-facts dd { color:var(--marfim); font-size:.92rem; line-height:1.6; }
-.hero2-visual { position:relative; }
-.hero2-frame { aspect-ratio:4/5; border:1px solid var(--linha-escura); background:radial-gradient(circle at 50% 38%,#1B1C1A 0%,var(--carvao) 72%); display:flex; align-items:center; justify-content:center; position:relative; }
-.hero2-frame::before { content:''; position:absolute; inset:16px; border:1px solid rgba(185,154,96,.22); pointer-events:none; }
-.hero2-logo { width:64%; height:auto; }
-.hero2-panel { position:absolute; left:-32px; bottom:-30px; background:var(--marfim); color:#101110; padding:22px 26px; max-width:270px; box-shadow:0 22px 50px rgba(0,0,0,.45); }
-.hero2-panel .eyebrow { color:#7D6437; margin-bottom:8px; }
-.hero2-panel strong { display:block; font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:600; margin-bottom:6px; }
-.hero2-panel small { color:#5F5A52; font-size:.8rem; }
-.hero2-stats { max-width:1200px; margin:96px auto 0; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--linha-escura); }
-.hero2-stats .hero-stat { padding:30px 24px; border-right:1px solid var(--linha-escura); text-align:left; }
-.hero2-stats .hero-stat:last-child { border-right:none; }
-.hero2-stats .stat-num { color:var(--marfim); font-size:2.2rem; }
-.hero2-stats .stat-lab { color:var(--cinza); text-align:left; }
-
-/* serviços (fundo marfim) */
-.svc-wrap { max-width:1000px; margin:0 auto; }
-.svc-group { margin-bottom:44px; }
-.svc-cat { font-size:.68rem; letter-spacing:.26em; text-transform:uppercase; color:#7D6437; font-weight:600; padding-bottom:12px; border-bottom:1px solid #101110; }
-.svc-list { list-style:none; }
-.svc-row { display:grid; grid-template-columns:52px 1fr auto 150px; align-items:center; gap:20px; padding:22px 0; border-bottom:1px solid rgba(16,17,16,.12); }
-.svc-num { font-family:'Playfair Display',serif; color:#8C7A55; font-size:1rem; }
-.svc-info { min-width:0; }
-.svc-name { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:600; color:#101110; margin:0; }
-.svc-meta { font-size:.8rem; color:#5F5A52; margin-top:4px; letter-spacing:.03em; }
-.svc-meta i { color:#8C7A55; margin-right:4px; }
-.svc-price { font-family:'Playfair Display',serif; font-size:1.35rem; color:#101110; text-align:right; white-space:nowrap; }
-.svc-action { background:transparent; border:1px solid #101110; color:#101110; padding:11px 14px; border-radius:3px; font:600 .7rem 'Inter',sans-serif; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; transition:background .2s, color .2s; }
-.svc-action:hover { background:#101110; color:var(--marfim); }
-
-/* equipe (fundo carvão) */
-.team-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--linha-escura); }
-.team-card { padding:36px 28px 32px; border-right:1px solid var(--linha-escura); display:flex; flex-direction:column; }
-.team-card:last-child { border-right:none; }
-.team-media { aspect-ratio:3/4; background:#1A1B19; border:1px solid var(--linha-escura); overflow:hidden; margin-bottom:22px; }
-.team-media img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
-.team-type { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; }
-.team-ini { font-family:'Playfair Display',serif; font-size:3.6rem; color:var(--marfim); line-height:1; }
-.team-ini-line { width:36px; height:1px; background:var(--dourado); }
-.team-type small { font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:var(--cinza); }
-.team-no { font-size:.66rem; letter-spacing:.26em; color:var(--dourado); margin-bottom:10px; }
-.team-card h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:600; color:var(--marfim); line-height:1.15; }
-.team-spec { font-size:.8rem; color:var(--cinza); letter-spacing:.05em; margin:8px 0 26px; }
-.team-btn { margin-top:auto; width:100%; background:transparent; border:1px solid var(--marfim); color:var(--marfim); padding:14px 12px; border-radius:3px; font:600 .7rem 'Inter',sans-serif; letter-spacing:.13em; text-transform:uppercase; cursor:pointer; transition:background .2s, color .2s; }
-.team-btn:hover { background:var(--marfim); color:#101110; }
-
-/* contato */
-.contact-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.1fr .9fr; gap:80px; align-items:start; }
-.contact-addr { font-family:'Playfair Display',serif; font-size:1.7rem; color:var(--marfim); line-height:1.35; margin-bottom:30px; }
-.contact-actions { display:flex; gap:28px; align-items:center; flex-wrap:wrap; }
-.contact-list { border-top:1px solid var(--linha-escura); }
-.contact-list div { display:grid; grid-template-columns:160px 1fr; gap:16px; padding:20px 0; border-bottom:1px solid var(--linha-escura); }
-.contact-list dt { font-size:.66rem; letter-spacing:.22em; text-transform:uppercase; color:var(--dourado); padding-top:3px; }
-.contact-list dd { color:var(--marfim); font-size:.95rem; }
-.contact-list a { color:var(--marfim); text-decoration:none; border-bottom:1px solid transparent; }
-.contact-list a:hover { border-bottom-color:var(--dourado); }
-
-/* rodapé */
-footer { background:#0C0C0B; border-top:1px solid var(--linha-escura); }
-
-/* agendamento: layout em duas colunas */
-.bk-window { max-width:1060px; width:calc(100% - 32px); }
-.bk-window .modal-steps { padding:18px 28px; }
-.bk-layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; border-top:1px solid var(--linha-escura); }
-.bk-main { min-width:0; padding:28px 36px 36px; }
-.bk-summary { border-left:1px solid var(--linha-escura); background:#151614; padding:28px 26px; align-self:stretch; }
-.bk-sum-toggle { display:none; }
-.bk-sum-body { display:block; }
-.bk-sum-row { display:flex; justify-content:space-between; gap:14px; padding:14px 0; border-bottom:1px solid var(--linha-escura); font-size:.86rem; }
-.bk-sum-row span { color:var(--cinza); }
-.bk-sum-row strong { color:var(--marfim); font-weight:600; text-align:right; }
-.bk-sum-total { display:flex; justify-content:space-between; align-items:baseline; padding-top:20px; }
-.bk-sum-total span { font-size:.66rem; letter-spacing:.24em; text-transform:uppercase; color:var(--dourado); }
-.bk-sum-total strong { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--marfim); font-weight:600; }
-button.step-item { background:none; border:0; padding:0; font:inherit; color:inherit; cursor:pointer; }
-button.step-item:focus-visible { outline:2px solid var(--dourado); outline-offset:4px; }
-.success-msg { color:var(--cinza); font-size:.85rem; margin-bottom:24px; line-height:1.7; }
-
-/* responsivo */
-@media (max-width:1000px) {
-  .team-grid { grid-template-columns:repeat(2,1fr); }
-  .team-card:nth-child(2) { border-right:none; }
-  .team-card { border-bottom:1px solid var(--linha-escura); }
-  .bk-layout { grid-template-columns:1fr; }
-  .bk-summary { border-left:none; border-top:1px solid var(--linha-escura); padding:0; }
-  .bk-sum-toggle { display:flex; width:100%; justify-content:space-between; align-items:center; gap:12px; background:transparent; border:0; color:var(--marfim); padding:18px 22px; font:600 .72rem 'Inter',sans-serif; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; }
-  .bk-sum-toggle span:last-child { color:var(--dourado); font-family:'Playfair Display',serif; font-size:1rem; letter-spacing:0; text-transform:none; }
-  .bk-sum-body { display:none; padding:0 22px 18px; }
-  .bk-summary.open .bk-sum-body { display:block; }
-}
-@media (max-width:900px) {
-  #hero { padding:120px 24px 0; }
-  .hero2-grid { grid-template-columns:1fr; gap:56px; }
-  .hero2-frame { aspect-ratio:16/10; }
-  .hero2-panel { left:16px; bottom:-22px; }
-  .hero2-stats { grid-template-columns:repeat(2,1fr); }
-  .hero2-stats .hero-stat:nth-child(2) { border-right:none; }
-  .hero2-stats .hero-stat:nth-child(-n+2) { border-bottom:1px solid var(--linha-escura); }
-  .contact-grid { grid-template-columns:1fr; gap:48px; }
-  .sec-head { grid-template-columns:1fr; gap:14px; }
-  .sec-note { max-width:none; }
-}
-@media (max-width:640px) {
-  .section-dark, .section-dark2, .section-ivory { padding:76px 20px; }
-  .team-grid { grid-template-columns:1fr 1fr; }
-  .team-card { padding:24px 16px 22px; }
-  .team-card h3 { font-size:1.2rem; }
-  .team-btn { font-size:.62rem; padding:12px 8px; letter-spacing:.1em; }
-  .svc-row { grid-template-columns:1fr auto; gap:6px 14px; padding:18px 0; }
-  .svc-num { display:none; }
-  .svc-action { grid-column:1 / -1; width:100%; }
-  .svc-price { font-size:1.2rem; }
-  .bk-main { padding:22px 18px 28px; }
-  .hero2-facts { grid-template-columns:1fr; }
-  .hero2-stats .stat-num { font-size:1.8rem; }
-  .contact-list div { grid-template-columns:1fr; gap:4px; }
-  .sec-num { font-size:2rem; }
-}
-@media (max-width:640px) {
-  .modal-steps .step-label { display:none; }
-  .modal-steps .step-item.active .step-label { display:block; font-size:.62rem; }
-  .bk-window .modal-steps { padding:14px 16px; }
-  .bk-sum-toggle { padding:16px 18px; }
-  .bk-sum-toggle span:first-child { font-size:.66rem; letter-spacing:.12em; }
-  .bk-sum-toggle span:last-child { white-space:nowrap; font-size:1.05rem; }
-}
-@media (prefers-reduced-motion:reduce) {
-  *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
-}
-
 </style>
 </head>
 <body>
@@ -1115,86 +946,65 @@ button.step-item:focus-visible { outline:2px solid var(--dourado); outline-offse
 </div>
 
 <section id="hero">
-  <div class="hero2-grid">
-    <div class="hero2-text">
-      <div class="eyebrow">DL Barber Club · Curitiba</div>
-      <h1 class="hero2-title">Seu estilo <em>começa aqui.</em></h1>
-      <p class="hero2-sub">Cortes, barba e cuidados masculinos com hora marcada. Escolha o serviço, o barbeiro e o horário em poucos toques.</p>
-      <div class="hero2-actions">
-        <button class="btn-primary" onclick="openBooking()"><i class="fas fa-calendar-alt"></i> Reservar meu horário</button>
-        <a class="link-ghost" href="#barbers">Conhecer a equipe</a>
-      </div>
-      <dl class="hero2-facts">
-        <div><dt>Onde</dt><dd>Av. Anita Garibaldi, 5320<br>Barreirinha, Curitiba</dd></div>
-        <div><dt>Atendimento</dt><dd>Seg–Sex 10h–20h<br>Sáb 09h–19h · Dom fechado</dd></div>
-      </dl>
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <img class="hero-logo" src="logo-dl-barber-club.png" alt="DL Barber Club">
+    <div class="hero-badge"><i class="fas fa-crown"></i> Premium Barbershop · Curitiba, Paraná</div>
+    <h1 class="hero-title">
+      <span class="row1">Mais que um corte.</span>
+      <span class="row2">Uma experiência.</span>
+    </h1>
+    <p class="hero-sub">A barbearia premium que redefine estilo, exclusividade e personalidade.</p>
+    <div class="hero-cta-wrap">
+      <button class="hero-btn primary" onclick="openBooking()"><i class="fas fa-calendar-alt"></i> Agendar Horário</button>
+      <a class="hero-btn whatsapp" href="https://wa.me/5541997878695" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a class="hero-btn ghost" href="#services"><i class="fas fa-scissors"></i> Ver Serviços</a>
     </div>
-    <div class="hero2-visual">
-      <div class="hero2-frame">
-        <img class="hero2-logo" src="logo-dl-barber-club.png" alt="DL Barber Club">
-      </div>
-      <div class="hero2-panel">
-        <span class="eyebrow">Agendamento online</span>
-        <strong>Escolha em 4 passos</strong>
-        <small>Serviço · barbeiro · data · horário</small>
-      </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="stat-num">4.4★</span><span class="stat-lab">Avaliação</span></div>
+      <div class="hero-stat"><span class="stat-num">500+</span><span class="stat-lab">Clientes</span></div>
+      <div class="hero-stat"><span class="stat-num">5+</span><span class="stat-lab">Anos</span></div>
+      <div class="hero-stat"><span class="stat-num" id="heroBarberCount">4</span><span class="stat-lab">Barbeiros</span></div>
     </div>
   </div>
-  <div class="hero2-stats">
-    <div class="hero-stat"><span class="stat-num">4.4★</span><span class="stat-lab">Avaliação</span></div>
-    <div class="hero-stat"><span class="stat-num">500+</span><span class="stat-lab">Clientes</span></div>
-    <div class="hero-stat"><span class="stat-num">5+</span><span class="stat-lab">Anos</span></div>
-    <div class="hero-stat"><span class="stat-num" id="heroBarberCount">4</span><span class="stat-lab">Barbeiros</span></div>
+  <div class="scroll-indicator"><div class="scroll-line"></div>scroll</div>
+</section>
+
+<section class="section alt" id="services">
+  <div class="services-header reveal">
+    <div>
+      <span class="section-tag">O que oferecemos</span>
+      <h2 class="section-title">Serviços <em>Premium</em></h2>
+      <div class="section-bar"></div>
+    </div>
+    <p class="section-sub" style="max-width:340px">Cada serviço executado com precisão e produtos selecionados.</p>
   </div>
+  <div class="services-grid" id="servicesGrid"></div>
 </section>
 
-<section class="section-ivory" id="services">
-  <header class="sec-head">
-    <span class="sec-num">01</span>
+<section class="section alt" id="barbers">
+  <div class="services-header reveal">
     <div>
-      <span class="eyebrow">Serviços</span>
-      <h2 class="sec-title">Menu de <em>serviços</em></h2>
+      <span class="section-tag">Nossa Equipe</span>
+      <h2 class="section-title">Conheça nossos <em>Barbeiros</em></h2>
+      <div class="section-bar"></div>
     </div>
-    <p class="sec-note">Preço e duração de cada serviço. Toque em reservar para escolher o barbeiro e o horário.</p>
-  </header>
-  <div class="svc-wrap" id="servicesGrid"></div>
+  </div>
+  <div class="barbers-grid" id="barbersGrid"></div>
 </section>
 
-<section class="section-dark" id="barbers">
-  <header class="sec-head">
-    <span class="sec-num">02</span>
-    <div>
-      <span class="eyebrow">Equipe</span>
-      <h2 class="sec-title">Conheça nossos <em>barbeiros</em></h2>
+<section class="section" id="contact">
+  <div class="reveal" style="text-align:center">
+    <span class="section-tag">Fale Conosco</span>
+    <h2 class="section-title">Entre em <em>Contato</em></h2>
+    <div class="section-bar" style="margin:16px auto 0"></div>
+    <div style="max-width:500px;margin:40px auto 0;display:flex;flex-direction:column;gap:14px">
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:20px"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:8px"></i><strong>(41) 99787-8695</strong></div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:20px"><i class="fas fa-map-marker-alt" style="color:var(--gold);margin-right:8px"></i>Av. Anita Garibaldi, 5320 · Barreirinha, Curitiba/PR</div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:20px"><i class="fas fa-clock" style="color:var(--gold);margin-right:8px"></i>Seg–Sex: 10h–20h · Sáb: 09h–19h · Dom: Fechado</div>
+      <a class="hero-btn whatsapp" href="https://wa.me/5541997878695" target="_blank"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
     </div>
-    <p class="sec-note">Cada profissional tem a sua especialidade. Reserve já com quem você quer.</p>
-  </header>
-  <div class="team-grid" id="barbersGrid"></div>
-</section>
-
-<section class="section-dark2" id="contact">
-  <header class="sec-head">
-    <span class="sec-num">03</span>
-    <div>
-      <span class="eyebrow">Localização e contato</span>
-      <h2 class="sec-title">Venha até a <em>barbearia</em></h2>
-    </div>
-  </header>
-  <div class="contact-grid">
-    <div class="contact-main">
-      <p class="contact-addr">Av. Anita Garibaldi, 5320<br>Barreirinha, Curitiba/PR</p>
-      <div class="contact-actions">
-        <a class="link-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Anita+Garibaldi,+5320,+Curitiba+PR" target="_blank" rel="noopener">Abrir no mapa</a>
-        <a class="whats-link" href="https://wa.me/5541997878695" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> (41) 99787-8695</a>
-      </div>
-    </div>
-    <dl class="contact-list">
-      <div><dt>Telefone</dt><dd>(41) 99787-8695</dd></div>
-      <div><dt>Segunda a sexta</dt><dd>10h às 20h</dd></div>
-      <div><dt>Sábado</dt><dd>09h às 19h</dd></div>
-      <div><dt>Domingo</dt><dd>Fechado</dd></div>
-      <div><dt>Instagram</dt><dd><a href="https://instagram.com/DlBarber.Club" target="_blank" rel="noopener">@DlBarber.Club</a></dd></div>
-    </dl>
   </div>
 </section>
 
@@ -1325,71 +1135,66 @@ button.step-item:focus-visible { outline:2px solid var(--dourado); outline-offse
 
 <!-- ============== BOOKING MODAL ============== -->
 <div class="modal-overlay" id="bookingModal">
-  <div class="modal-window bk-window">
+  <div class="modal-window">
     <div class="modal-header">
-      <div class="modal-title">Agendar <em>horário</em></div>
-      <button class="modal-close" onclick="closeBooking()" aria-label="Fechar"><i class="fas fa-times"></i></button>
+      <div class="modal-title">Agendar <em>Horário</em></div>
+      <button class="modal-close" onclick="closeBooking()"><i class="fas fa-times"></i></button>
     </div>
-    <nav class="modal-steps" aria-label="Etapas do agendamento">
-      <button class="step-item active" id="step1" onclick="goTo(1)"><span class="step-circle">1</span><span class="step-label">Serviço</span></button>
-      <button class="step-item" id="step2" onclick="goTo(2)"><span class="step-circle">2</span><span class="step-label">Barbeiro</span></button>
-      <button class="step-item" id="step3" onclick="goTo(3)"><span class="step-circle">3</span><span class="step-label">Data</span></button>
-      <button class="step-item" id="step4" onclick="goTo(4)"><span class="step-circle">4</span><span class="step-label">Horário</span></button>
-      <button class="step-item" id="step5" onclick="goTo(5)"><span class="step-circle">5</span><span class="step-label">Dados</span></button>
-      <div class="step-item" id="step6"><span class="step-circle">6</span><span class="step-label">Confirmar</span></div>
-    </nav>
-    <div class="bk-layout">
-      <div class="modal-body bk-main">
-        <div class="booking-panel active" id="panel1">
-          <div class="panel-title">Escolha o <em>serviço</em></div>
-          <p class="panel-subtitle">Toque em um serviço para continuar</p>
-          <div class="pick-list" id="svcPickList"></div>
-        </div>
-        <div class="booking-panel" id="panel2">
-          <div class="panel-title">Escolha o <em>barbeiro</em></div>
-          <p class="panel-subtitle">Quem vai te atender?</p>
-          <div class="pick-list" id="barberPickList"></div>
-          <div class="panel-nav"><button class="btn-back" onclick="goStep(1)">← Voltar</button></div>
-        </div>
-        <div class="booking-panel" id="panel3">
-          <div class="panel-title">Escolha a <em>data</em></div>
-          <p class="panel-subtitle">Apenas dias disponíveis</p>
-          <div class="calendar-widget"><div class="cal-header"><button class="cal-nav-btn" disabled><i class="fas fa-chevron-left"></i></button><span class="cal-month-label" id="calMonthLabel"></span><button class="cal-nav-btn" disabled><i class="fas fa-chevron-right"></i></button></div><div class="cal-body"><div class="cal-weekdays" id="calWeekdays"></div><div class="cal-days-grid" id="calDaysGrid"></div></div></div>
-          <div class="panel-nav"><button class="btn-back" onclick="goStep(2)">← Voltar</button></div>
-        </div>
-        <div class="booking-panel" id="panel4">
-          <div class="panel-title">Escolha o <em>horário</em></div>
-          <p class="panel-subtitle" id="panel4sub"></p>
-          <div class="time-section"><div class="time-section-title">Horários disponíveis</div><div class="time-grid" id="timeSlotsGrid"></div></div>
-          <div class="panel-nav"><button class="btn-back" onclick="goStep(3)">← Voltar</button></div>
-        </div>
-        <div class="booking-panel" id="panel5">
-          <div class="panel-title">Seus <em>dados</em></div>
-          <p class="panel-subtitle">Preencha para revisar o agendamento</p>
-          <div class="form-group"><label class="form-label" for="clientName">Nome completo *</label><input class="form-input" id="clientName" type="text" placeholder="Digite seu nome completo" autocomplete="name"></div>
-          <div class="form-group"><label class="form-label" for="clientPhone">WhatsApp (opcional)</label><input class="form-input" id="clientPhone" type="text" placeholder="(41) 9 9999-9999" autocomplete="tel"></div>
-          <div class="panel-nav"><button class="btn-back" onclick="goStep(4)">← Voltar</button><button class="btn-next" onclick="proceedToConfirm()">Revisar →</button></div>
-        </div>
-        <div class="booking-panel" id="panel6">
-          <div class="panel-title">Confirmar <em>agendamento</em></div>
-          <p class="panel-subtitle">Revise os detalhes antes de confirmar</p>
-          <div class="confirm-summary" id="confirmSummaryBox"></div>
-          <div class="panel-nav"><button class="btn-back" onclick="goStep(5)">← Voltar</button><button class="btn-next" onclick="finalizeBooking()"><i class="fas fa-check"></i> Confirmar</button></div>
-        </div>
-        <div class="booking-panel" id="panel7">
-          <div class="success-panel">
-            <div class="success-ring"><i class="fas fa-check"></i></div>
-            <div class="success-title">Agendado com <em>sucesso!</em></div>
-            <p class="success-msg" id="successMessage"></p>
-            <a class="btn-full wa" id="successWaBtn" href="#" target="_blank"><i class="fab fa-whatsapp"></i> Confirmar no WhatsApp</a>
-            <button class="btn-full ghost" onclick="closeBooking()">Fechar</button>
-          </div>
+    <div class="modal-steps">
+      <div class="step-item active" id="step1"><div class="step-circle">1</div><span class="step-label">Serviço</span></div>
+      <div class="step-item" id="step2"><div class="step-circle">2</div><span class="step-label">Barbeiro</span></div>
+      <div class="step-item" id="step3"><div class="step-circle">3</div><span class="step-label">Data</span></div>
+      <div class="step-item" id="step4"><div class="step-circle">4</div><span class="step-label">Horário</span></div>
+      <div class="step-item" id="step5"><div class="step-circle">5</div><span class="step-label">Dados</span></div>
+      <div class="step-item" id="step6"><div class="step-circle">6</div><span class="step-label">Confirmar</span></div>
+    </div>
+    <div class="modal-chips" id="bookingChips"></div>
+    <div class="modal-body">
+      <div class="booking-panel active" id="panel1">
+        <div class="panel-title">Escolha o <em>Serviço</em></div>
+        <p class="panel-subtitle">Selecione o serviço desejado</p>
+        <div class="pick-list" id="svcPickList"></div>
+      </div>
+      <div class="booking-panel" id="panel2">
+        <div class="panel-title">Escolha o <em>Barbeiro</em></div>
+        <p class="panel-subtitle">Quem vai te atender?</p>
+        <div class="pick-list" id="barberPickList"></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(1)">← Voltar</button></div>
+      </div>
+      <div class="booking-panel" id="panel3">
+        <div class="panel-title">Escolha a <em>Data</em></div>
+        <p class="panel-subtitle">Apenas dias disponíveis</p>
+        <div class="calendar-widget"><div class="cal-header"><button class="cal-nav-btn" disabled><i class="fas fa-chevron-left"></i></button><span class="cal-month-label" id="calMonthLabel"></span><button class="cal-nav-btn" disabled><i class="fas fa-chevron-right"></i></button></div><div class="cal-body"><div class="cal-weekdays" id="calWeekdays"></div><div class="cal-days-grid" id="calDaysGrid"></div></div></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(2)">← Voltar</button></div>
+      </div>
+      <div class="booking-panel" id="panel4">
+        <div class="panel-title">Escolha o <em>Horário</em></div>
+        <p class="panel-subtitle" id="panel4sub"></p>
+        <div class="time-section"><div class="time-section-title">Selecione um horário</div><div class="time-grid" id="timeSlotsGrid"></div></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(3)">← Voltar</button></div>
+      </div>
+      <div class="booking-panel" id="panel5">
+        <div class="panel-title">Seus <em>Dados</em></div>
+        <p class="panel-subtitle">Preencha para confirmar</p>
+        <div class="form-group"><label class="form-label">Nome completo *</label><input class="form-input" id="clientName" type="text" placeholder="Digite seu nome completo..."></div>
+        <div class="form-group"><label class="form-label">WhatsApp (opcional)</label><input class="form-input" id="clientPhone" type="text" placeholder="(41) 9 9999-9999"></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(4)">← Voltar</button><button class="btn-next" onclick="proceedToConfirm()">Revisar →</button></div>
+      </div>
+      <div class="booking-panel" id="panel6">
+        <div class="panel-title">Confirmar <em>Agendamento</em></div>
+        <p class="panel-subtitle">Revise os detalhes</p>
+        <div class="confirm-summary" id="confirmSummaryBox"></div>
+        <div class="panel-nav"><button class="btn-back" onclick="goStep(5)">← Voltar</button><button class="btn-next" onclick="finalizeBooking()"><i class="fas fa-check"></i> Confirmar</button></div>
+      </div>
+      <div class="booking-panel" id="panel7">
+        <div class="success-panel">
+          <div class="success-ring"><i class="fas fa-check"></i></div>
+          <div class="success-title">Agendado com <em>Sucesso!</em></div>
+          <p style="color:var(--muted);font-size:0.82rem;margin-bottom:24px;line-height:1.7" id="successMessage"></p>
+          <a class="btn-full wa" id="successWaBtn" href="#" target="_blank"><i class="fab fa-whatsapp"></i> Confirmar no WhatsApp</a>
+          <button class="btn-full ghost" onclick="closeBooking()">Fechar</button>
         </div>
       </div>
-      <aside class="bk-summary" id="bkSummary" aria-label="Resumo do agendamento">
-        <button class="bk-sum-toggle" type="button" onclick="this.parentElement.classList.toggle('open')"><span>Resumo do agendamento</span><span id="bkSumTotal"></span></button>
-        <div class="bk-sum-body" id="bkSumBody"></div>
-      </aside>
     </div>
   </div>
 </div>
@@ -2000,27 +1805,18 @@ const revealObs = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 function renderServicesGrid(){
-  const cats = [];
-  SERVICES.forEach(s => { if (!cats.includes(s.cat)) cats.push(s.cat); });
-  document.getElementById('servicesGrid').innerHTML = cats.map(cat => `
-    <div class="svc-group">
-      <h3 class="svc-cat">${cat}</h3>
-      <ol class="svc-list">
-        ${SERVICES.map((s,i) => s.cat !== cat ? '' : `
-        <li class="svc-row">
-          <span class="svc-num">${String(i+1).padStart(2,'0')}</span>
-          <div class="svc-info">
-            <h4 class="svc-name">${s.name}</h4>
-            <div class="svc-meta"><i class="fas fa-clock"></i>${s.time}</div>
-          </div>
-          <span class="svc-price">R$ ${s.price.toFixed(2).replace('.',',')}</span>
-          <button class="svc-action" onclick="openBookingWithService(${s.id})">Reservar</button>
-        </li>`).join('')}
-      </ol>
+  document.getElementById('servicesGrid').innerHTML = SERVICES.map((s,i) => `
+    <div class="svc-card reveal">
+      <div class="svc-idx">0${i+1}</div>
+      <div class="svc-icon-wrap"><i class="fas ${s.icon}"></i></div>
+      <div class="svc-name">${s.name}</div>
+      <div class="svc-meta"><i class="fas fa-clock"></i> ${s.time} · ${s.cat}</div>
+      <span class="svc-price">R$ ${s.price.toFixed(2).replace('.',',')}</span>
+      <button class="svc-action" onclick="openBookingWithService(${s.id})">Agendar</button>
     </div>`).join('');
+  document.querySelectorAll('.svc-card').forEach(el => revealObs.observe(el));
   document.getElementById('footerServicesList').innerHTML = SERVICES.slice(0,5).map(s => `<li><a>${s.name}</a></li>`).join('');
 }
-
 
 function barberAvatarHTML(b){
   return b.photo
@@ -2029,18 +1825,16 @@ function barberAvatarHTML(b){
 }
 
 function renderPublicBarbers(){
-  document.getElementById('barbersGrid').innerHTML = BARBERS.map((b,i) => `
-    <article class="team-card">
-      <div class="team-media">
-        ${b.photo
-          ? `<img src="${b.photo}" alt="${b.name}" loading="lazy">`
-          : `<div class="team-type"><span class="team-ini">${b.ini}</span><span class="team-ini-line"></span><small>Barbeiro</small></div>`}
+  document.getElementById('barbersGrid').innerHTML = BARBERS.map(b => `
+    <div class="barber-card reveal">
+      <div class="barber-card-head"><div class="barber-avatar">${barberAvatarHTML(b)}</div></div>
+      <div class="barber-card-body">
+        <div class="barber-name">${b.name}</div>
+        <div class="barber-spec">${b.spec}</div>
+        <button class="barber-btn" onclick="openBookingWithBarber(${b.id})"><i class="fas fa-calendar-alt"></i> Agendar</button>
       </div>
-      <span class="team-no">${String(i+1).padStart(2,'0')}</span>
-      <h3>${b.name}</h3>
-      <p class="team-spec">${b.spec}</p>
-      <button class="team-btn" onclick="openBookingWithBarber(${b.id})">Agendar com ${b.name.split(' ')[0]}</button>
-    </article>`).join('');
+    </div>`).join('');
+  document.querySelectorAll('.barber-card').forEach(el => revealObs.observe(el));
 }
 
 /* BOOKING */
@@ -2090,30 +1884,14 @@ function goStep(n, silent){
   }
 }
 
-/* Permite voltar a uma etapa já concluída, sem perder as escolhas anteriores */
-function goTo(n){
-  const ok = n === 1
-    || (n === 2 && bk.service)
-    || (n === 3 && bk.service && bk.barber)
-    || (n === 4 && bk.service && bk.barber && bk.date)
-    || (n === 5 && bk.service && bk.barber && bk.date && bk.time);
-  if (ok) goStep(n);
-}
-
 function updateChips(){
-  const price = bk.service ? 'R$ ' + bk.service.price.toFixed(2).replace('.',',') : '';
-  const rows = [
-    ['Serviço', bk.service ? bk.service.name : '—'],
-    ['Barbeiro', bk.barber ? bk.barber.name : '—'],
-    ['Data', bk.date ? formatDate(bk.date) : '—'],
-    ['Horário', bk.time || '—'],
-    ['Duração', bk.service ? bk.service.time : '—']
-  ];
-  const body = document.getElementById('bkSumBody');
-  if (body) body.innerHTML = rows.map(([k,v]) => `<div class="bk-sum-row"><span>${k}</span><strong>${v}</strong></div>`).join('')
-    + `<div class="bk-sum-total"><span>Total</span><strong>${price || '—'}</strong></div>`;
-  const tot = document.getElementById('bkSumTotal');
-  if (tot) tot.textContent = price;
+  const c = document.getElementById('bookingChips');
+  const items = [];
+  if (bk.service) items.push(`<span class="chip"><i class="fas fa-cut"></i>${bk.service.name}</span>`);
+  if (bk.barber) items.push(`<span class="chip"><i class="fas fa-user"></i>${bk.barber.name}</span>`);
+  if (bk.date) items.push(`<span class="chip"><i class="fas fa-calendar"></i>${formatDate(bk.date)}</span>`);
+  if (bk.time) items.push(`<span class="chip"><i class="fas fa-clock"></i>${bk.time}</span>`);
+  c.innerHTML = items.join('');
 }
 
 function renderServiceList(){
@@ -2135,7 +1913,7 @@ function renderBarberList(){
       <div class="pick-row-selected-mark">${bk.barber && bk.barber.id===b.id ? '✓':''}</div>
     </div>`).join('');
 }
-function selectBarber(id, noAdvance){ bk.barber = BARBERS.find(b=>b.id===id); renderBarberList(); if (!noAdvance) goStep(3); else updateChips(); }
+function selectBarber(id, noAdvance){ bk.barber = BARBERS.find(b=>b.id===id); renderBarberList(); if (!noAdvance) goStep(3); }
 
 function buildCalendar(){
   const now = new Date(), y=now.getFullYear(), m=now.getMonth();
